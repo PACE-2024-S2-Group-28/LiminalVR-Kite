@@ -30,14 +30,19 @@ public class Wind : MonoBehaviour
 
     static Vector2 noiseTimeCoord = Vector2.zero;
 
+    [SerializeField]
+    private float timeFactor = .2f;
     private void Update()
     {
-        noiseTimeCoord -= new Vector2(windDir.x, windDir.z) * Time.deltaTime;
+        noiseTimeCoord -= new Vector2(windDir.x, windDir.z) * Time.deltaTime * timeFactor;
     }
 
-
+    [SerializeField]
+    private float positionFactor = .15f;
     public static Vector3 GetLocalWind(Vector3 pos)
     {
+        pos *= instance.positionFactor;
+
         Vector2 coord = new Vector2(pos.x, pos.z) + noiseTimeCoord;
         float xAmount = Mathf.PerlinNoise(coord.x, coord.y)*2f-1f;
         float zAmount = Mathf.PerlinNoise(1f + coord.x, 1f + coord.y)*2f-1f;
