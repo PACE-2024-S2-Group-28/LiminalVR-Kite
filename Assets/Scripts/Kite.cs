@@ -7,6 +7,8 @@ public class Kite : MonoBehaviour
     [SerializeField]
     private Rope rope;
     private float lastRopeLength;
+    private Vector3 lastAnchorPos;
+    private Vector3 lastAnchorBPos;
 
     [SerializeField]
     [Range(0f, 1f)]
@@ -15,6 +17,8 @@ public class Kite : MonoBehaviour
     private void Start()
     {
         lastRopeLength = rope.ropeLength;
+        lastAnchorPos = rope.AnchorA.position;
+        lastAnchorBPos = rope.AnchorB.position;
 
         Vector3 dirToKite = (transform.position - rope.AnchorA.position).normalized;
         transform.position = rope.AnchorA.position + dirToKite * rope.ropeLength;
@@ -44,10 +48,22 @@ public class Kite : MonoBehaviour
         Vector3 windForce = transform.forward * wind.magnitude * liftPercent * windToForward;
         Vector3 windPush = wind * (1f - windToForward);
 
-        //tug
+        //rope length tug
         float tugDist = Mathf.Max(0f, lastRopeLength - rope.ropeLength);
         lastRopeLength = rope.ropeLength;
         Vector3 tugForce = transform.forward * tugDist * tugForwardStrength;
+
+        //moveing tug
+        float sqrDist = (rope.AnchorA.position - lastAnchorBPos).sqrMagnitude;
+        float sqrPrevDist = (lastAnchorPos - lastAnchorBPos).sqrMagnitude;
+        if (sqrDist > sqrPrevDist && sqrDist > rope.ropeLength*rope.ropeLength)
+        {
+            tugDist = Vector3.Distance(lastAnchorPos, rope.AnchorA.position);
+            Debug.Log("new tug: " + Vector3.Distance(lastAnchorPos, rope.AnchorA.position));
+            tugForce += transform.forward * tugDist * tugForwardStrength;
+        }
+        lastAnchorPos = rope.AnchorA.position;
+        lastAnchorBPos = rope.AnchorB.position;
 
         velocity += (windForce + windPush) * Time.deltaTime;
         velocity += Physics.gravity * Time.deltaTime * gravMult;
@@ -65,7 +81,7 @@ public class Kite : MonoBehaviour
 
             //stop velocity from building up after snap, project orthaganally
             float velocityAlongRope = Mathf.Max(0f, Vector3.Dot(dirToKiteN, velocity.normalized));
-            //velocityAlongRope *= velocityAlongRope;
+            velocityAlongRope = Mathf.Pow(velocityAlongRope, 1.5f);
             velocity = Vector3.ProjectOnPlane(velocity, dirToKiteN) * (1f-velocityAlongRope);
         }
 

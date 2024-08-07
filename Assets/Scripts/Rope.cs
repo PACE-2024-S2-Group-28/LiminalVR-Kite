@@ -10,6 +10,7 @@ public class Rope : MonoBehaviour
         anchorB;
 
     public Transform AnchorA => anchorA;
+    public Transform AnchorB => anchorB;
 
     [SerializeField]
     public float ropeLength = 10f;
@@ -40,9 +41,14 @@ public class Rope : MonoBehaviour
     private float stiffness = 2f;
     [SerializeField]
     [Range(0f, 10f)]
-    private float 
-        damping = .5f,
-        gravMult = .5f;
+    private float
+        damping = .5f;
+    [SerializeField]
+    [Range(0f,1f)]
+    private float gravMult = .5f;
+    [SerializeField]
+    [Range(0f, 6f)]
+    private float windMult = 4f;
 
     private Vector3 springVel;
 
@@ -53,8 +59,9 @@ public class Rope : MonoBehaviour
         Vector3 dampingForce = -damping * springVel;
         
         Vector3 gravForce = Physics.gravity * gravMult * (1f - taughtness);
+        Vector3 windForce = Wind.Instance.GetTotalWind(hangPoint) * windMult;
 
-        Vector3 totalForce = springForce + dampingForce + gravForce;
+        Vector3 totalForce = springForce + dampingForce + gravForce + windForce;
 
         springVel += totalForce * Time.deltaTime;
         hangPoint += springVel * Time.deltaTime;
