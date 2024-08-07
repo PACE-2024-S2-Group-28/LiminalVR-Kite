@@ -261,8 +261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rope: {fileID: 1577074595}
   windToForward: 0.42
-  damping: 0.663
-  tugForwardStrength: 10
+  damping: 0.73
+  tugForwardStrength: 44.6
   gravMult: -0.15
 --- !u!1001 &13927951
 PrefabInstance:
@@ -944,6 +944,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1260162968871696497, guid: 22276a8657744e04cba8ad0a2caf4195,
+        type: 3}
+      propertyPath: m_AnchorAttachments.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260162968871696497, guid: 22276a8657744e04cba8ad0a2caf4195,
+        type: 3}
+      propertyPath: m_AnchorAttachments.Array.data[0]
+      value: 
+      objectReference: {fileID: 448013111}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22276a8657744e04cba8ad0a2caf4195, type: 3}
 --- !u!4 &134685770 stripped
@@ -2518,10 +2528,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448013111}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 0, z: 2.04}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: -1.5, y: 0, z: -20.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1261046579}
+  m_Father: {fileID: 1577074594}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &452783848 stripped
@@ -3404,7 +3414,7 @@ MeshCollider:
   m_GameObject: {fileID: 624932631}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -4272,7 +4282,7 @@ MeshCollider:
   m_GameObject: {fileID: 782003647}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -4284,7 +4294,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782003647}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5221,7 +5231,7 @@ MeshCollider:
   m_GameObject: {fileID: 958600570}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -5233,7 +5243,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958600570}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5969,7 +5979,7 @@ MeshCollider:
   m_GameObject: {fileID: 1070728109}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -7020,12 +7030,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c89607ce4c884f4f8f6850ac0a6dd8c, type: 3}
---- !u!4 &1261046579 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1260162968871696498, guid: 22276a8657744e04cba8ad0a2caf4195,
-    type: 3}
-  m_PrefabInstance: {fileID: 134685769}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1267368005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8894,6 +8898,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 899627530}
+  - {fileID: 448013114}
   m_Father: {fileID: 1739982508}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8914,10 +8919,10 @@ MonoBehaviour:
   ropeLength: 25
   numLinePoints: 15
   lineR: {fileID: 899627531}
-  stiffness: 40
-  damping: 4
-  gravMult: -0.1
-  windMult: 5
+  stiffness: 26.35
+  damping: 2.23
+  gravMult: 0.277
+  windMult: 6
 --- !u!1 &1588424953 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 1c89607ce4c884f4f8f6850ac0a6dd8c,

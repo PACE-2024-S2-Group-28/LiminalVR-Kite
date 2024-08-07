@@ -56,8 +56,7 @@ public class Kite : MonoBehaviour
         //moveing tug
         float sqrDist = (rope.AnchorA.position - lastAnchorBPos).sqrMagnitude;
         float sqrPrevDist = (lastAnchorPos - lastAnchorBPos).sqrMagnitude;
-        if (sqrDist > sqrPrevDist && sqrDist > rope.ropeLength*rope.ropeLength)
-        {
+        if (sqrDist > sqrPrevDist) { //&& sqrDist > rope.ropeLength*rope.ropeLength
             tugDist = Vector3.Distance(lastAnchorPos, rope.AnchorA.position);
             Debug.Log("new tug: " + Vector3.Distance(lastAnchorPos, rope.AnchorA.position));
             tugForce += transform.forward * tugDist * tugForwardStrength;
@@ -81,7 +80,7 @@ public class Kite : MonoBehaviour
 
             //stop velocity from building up after snap, project orthaganally
             float velocityAlongRope = Mathf.Max(0f, Vector3.Dot(dirToKiteN, velocity.normalized));
-            velocityAlongRope = Mathf.Pow(velocityAlongRope, 1.5f);
+            velocityAlongRope = Mathf.Pow(velocityAlongRope, 2f);
             velocity = Vector3.ProjectOnPlane(velocity, dirToKiteN) * (1f-velocityAlongRope);
         }
 
