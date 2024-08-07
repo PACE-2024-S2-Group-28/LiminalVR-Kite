@@ -65,7 +65,7 @@ public class Kite : MonoBehaviour
 
             //stop velocity from building up after snap, project orthaganally
             float velocityAlongRope = Mathf.Max(0f, Vector3.Dot(dirToKiteN, velocity.normalized));
-            velocityAlongRope *= velocityAlongRope;
+            //velocityAlongRope *= velocityAlongRope;
             velocity = Vector3.ProjectOnPlane(velocity, dirToKiteN) * (1f-velocityAlongRope);
         }
 
