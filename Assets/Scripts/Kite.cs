@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Liminal.SDK.VR.Pointers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,6 +65,11 @@ public class Kite : MonoBehaviour
         lastAnchorPos = rope.AnchorA.position;
         lastAnchorBPos = rope.AnchorB.position;
 
+        //bounds force
+        float y = transform.position.y;
+        float boundsForce = Mathf.Max(0, y - maxHeight, minHeight - y);
+        velocity += Mathf.Sign(centerHeight - y) * Vector3.up * boundsForce * Time.deltaTime;
+
         velocity += (windForce + windPush) * Time.deltaTime;
         velocity += Physics.gravity * Time.deltaTime * gravMult;
         velocity *= Mathf.Pow(damping, Time.deltaTime);
@@ -85,7 +91,7 @@ public class Kite : MonoBehaviour
         }
 
         Quaternion targetRotation = LookRotationWithFixedUp(velocity.normalized, dirToKiteN);
-        float maxDegrees = velocity.magnitude * 5f;
+        float maxDegrees = velocity.magnitude;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxDegrees);
     }
 
@@ -99,10 +105,21 @@ public class Kite : MonoBehaviour
         return Quaternion.LookRotation(adjustedForward, fixedUp);
     }
 
+    [SerializeField]
+    [Range(0f, 50f)]
+    private float
+        minHeight = 5,
+        maxHeight = 15f;
+    private float centerHeight => (minHeight+maxHeight)/2f;
+
     private void OnDrawGizmos()
     {
         Vector3 colorVec = velocity / Mathf.Max(velocity.x, velocity.y, velocity.z);
         Gizmos.color = new Color(colorVec.x, colorVec.y, colorVec.z);
         Gizmos.DrawLine(transform.position, transform.position + velocity);
+
+        Gizmos.color = Color.grey;
+        float height = maxHeight - minHeight;
+        Gizmos.DrawCube(Vector3.up * (minHeight + maxHeight) / 2f, Vector3.up*(height-1f)+Vector3.one); 
     }
 }

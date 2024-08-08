@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using Liminal.SDK.VR;
+using Liminal.SDK.VR.Avatars;
+using Liminal.SDK.VR.Input;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,8 +50,8 @@ public class Rope : MonoBehaviour
     [Range(0f,1f)]
     private float gravMult = .5f;
     [SerializeField]
-    [Range(0f, 6f)]
-    private float windMult = 4f;
+    [Range(0f, 2f)]
+    private float windMult = .25f;
 
     private Vector3 springVel;
 
@@ -59,7 +62,7 @@ public class Rope : MonoBehaviour
         Vector3 dampingForce = -damping * springVel;
         
         Vector3 gravForce = Physics.gravity * gravMult * (1f - taughtness);
-        Vector3 windForce = Wind.Instance.GetTotalWind(hangPoint) * windMult;
+        Vector3 windForce = Wind.Instance.GetTotalWind(hangPoint) * windMult * ropeLength * (1f - taughtness);
 
         Vector3 totalForce = springForce + dampingForce + gravForce + windForce;
 
@@ -68,9 +71,15 @@ public class Rope : MonoBehaviour
     }
     #endregion
 
+    [SerializeField]
+    private float reelSpeed = 1f;
+
     // Update is called once per frame
     void Update()
     {
+        var joystickR = VRDevice.Device.PrimaryInputDevice.GetAxis2D(VRAxis.One);
+        ropeLength += joystickR.y * reelSpeed * Time.deltaTime;
+
         //get hangpoint
         float dist = Vector3.Distance(anchorA.position, anchorB.position);
         midPoint = Vector3.Lerp(anchorA.position, anchorB.position, .5f);
@@ -105,6 +114,11 @@ public class Rope : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if(anchorA == null || anchorB == null) return;
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(anchorA.position, anchorB.position);
+
         Gizmos.color = Color.green;
         Gizmos.DrawCube(anchorA.position, Vector3.one*anchorSize);
         Gizmos.DrawCube(anchorB.position, Vector3.one * anchorSize);
