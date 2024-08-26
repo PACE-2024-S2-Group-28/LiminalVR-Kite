@@ -48,6 +48,8 @@ MonoBehaviour:
   fracturedRock: {fileID: 6911895162699298039}
   rock: {fileID: 7268447682887004510}
   fadeSpeed: 1
+  rockLifetime: 3
+  rockFadeTime: 6
   rockRbs:
   - {fileID: 5992767002399749001}
   - {fileID: 5992767002317846096}
@@ -74,7 +76,9 @@ MonoBehaviour:
   - {fileID: 5992767001693119500}
   - {fileID: 5992767001139767724}
   rockBreakSFX: {fileID: 11400000, guid: cbb532c8b54d5524d94f95773131eced, type: 2}
-  rockBreakParticlesObj: {fileID: 0}
+  rockBreakParticlesObj: {fileID: 6882774427324749779, guid: 95fafc9492bb86940ad59d4df6ebc134,
+    type: 3}
+  outwardBreakForce: 3
 --- !u!54 &1820020344
 Rigidbody:
   m_ObjectHideFlags: 0

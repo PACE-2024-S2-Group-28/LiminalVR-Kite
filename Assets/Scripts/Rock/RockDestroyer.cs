@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using UnityEngine.Events;
 
 public class RockDestroyer : MonoBehaviour
 {
@@ -74,6 +75,7 @@ public class RockDestroyer : MonoBehaviour
         // Health Pack dropping logic
         float randomNumber = Random.Range(0f, 100f);
 
+        fracturedRock.transform.rotation = rock.transform.rotation;
         rock.SetActive(false);
         fracturedRock.SetActive(true);
 
@@ -125,6 +127,9 @@ public class RockDestroyer : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f/(float)tickRate);
         }
 
+        SEvent_RockDestroyed?.Invoke();
         GameObject.Destroy(this.gameObject);
     }
+
+    public static UnityEvent SEvent_RockDestroyed = new UnityEvent();
 }
