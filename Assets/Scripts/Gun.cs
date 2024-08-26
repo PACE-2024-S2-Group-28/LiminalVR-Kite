@@ -22,7 +22,7 @@ public class Gun : MonoBehaviour
     
     private enum InputHand {Primary, Secondary}
     [SerializeField]
-    private InputHand controller = InputHand.Primary;
+    private InputHand controllerHand = InputHand.Primary;
     private IVRInputDevice inputDevice;
 
     [SerializeField]
@@ -37,7 +37,8 @@ public class Gun : MonoBehaviour
     void Start()
     {
         //Get the primaryInput
-        inputDevice = VRDevice.Device?.PrimaryInputDevice;
+        
+        inputDevice = (controllerHand == InputHand.Primary) ? VRDevice.Device?.PrimaryInputDevice : VRDevice.Device?.SecondaryInputDevice;
 
         //parent so bullets dont flood scene heirarchy
         if (bulletParent == null)
