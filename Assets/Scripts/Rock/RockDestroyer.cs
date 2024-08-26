@@ -105,7 +105,6 @@ public class RockDestroyer : MonoBehaviour
     private float fadeStartTime = 0;
     private IEnumerator RockFadingSinking()
     {
-        //yield return null to space out loops over multiple frames
         int count = rockRbs.Length;
         foreach(var rb in rockRbs) {
             rb.transform.GetComponentInChildren<Collider>().enabled = false;
@@ -118,43 +117,14 @@ public class RockDestroyer : MonoBehaviour
             //loop through all rock pieces
             foreach (Rigidbody rb in rockRbs)
             {
-                if (rb == null || rb.isKinematic) continue;
-
-                /*
-                //check if rock has settled
-                if (rb.velocity.magnitude > .5f)
-                {
-                    //float decay = Mathf.Pow(.5f, 1f/tickRate);
-                    //rb.transform.localScale *= decay;
-                    
-                    //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(decay, decay, decay));
-                    //rb.velocity *= decay;
-                    //yield return null;
-                    continue;
-                }
-                */
-
+                //if (rb == null || rb.isKinematic) continue;
                 rb.transform.localScale = Vector3.one * 100f * (1f - t);
-
-                //set to kinematic and tween under ground before destroying
-                //rb.isKinematic = true;
-                //count--;
-                /*
-                rb.transform.DOMoveY(-10f, rockFadeTime).SetRelative().SetEase(Ease.InSine)
-                    .OnComplete(() => { Destroy(rb.transform.gameObject, rockFadeTime); });
-                */
-                //yield return null;
             }
 
-            //if (count == 0) break;
             if (t >= 1f) break;
             yield return new WaitForSecondsRealtime(1f/(float)tickRate);
         }
 
         GameObject.Destroy(this.gameObject);
-        //int rockChildren = fractRock.transform.childCount;
-        //for (int i = 0; i < rockChildren; i++) {
-        //    Destroy(fractRock.transform.GetChild(i).gameObject);
-        //}
     }
 }
