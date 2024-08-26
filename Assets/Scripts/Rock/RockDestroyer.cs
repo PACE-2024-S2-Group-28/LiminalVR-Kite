@@ -3,6 +3,7 @@ using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class RockDestroyer : MonoBehaviour
 {
@@ -14,12 +15,16 @@ public class RockDestroyer : MonoBehaviour
     [SerializeField]
     private GameObject rock;
 
-    Vector3 scale;
-    private Color alphaColor;
-
-    private float timer = rockLifetime;
     public float fadeSpeed = 1.0f;
     private bool fadeOut = false;
+
+    [SerializeField]
+    private float 
+        rockLifetime = 3,
+        rockFadeTime = 6;
+
+    [SerializeField]
+    private Rigidbody[] rockRbs;
 
     [SerializeField]
     private SoundScripObj rockBreakSFX;
@@ -27,111 +32,126 @@ public class RockDestroyer : MonoBehaviour
     [SerializeField]
     private GameObject rockBreakParticlesObj;
 
-    [SerializeField]
-    private GameObject healthPackPrefab;
-
-    [SerializeField]
-    private float healthDropChance;
-
     // Start is called before the first frame update
     void Start()
     {
-        fracturedRock.SetActive(true);
+        if (rockRbs == null) GetRigidBodies();
+    }
+
+    [Button]
+    private void GetRigidBodies()
+    {
         //loop through rock pieces, build list of rigidbodies so i dont have to get them more than once
-        //this could be serialized reference
-        foreach (Transform t in fracturedRock.transform)
-            rockRBs.Add(t.GetComponent<Rigidbody>());
-        fracturedRock.SetActive(false);
+        fracturedRock.SetActive(true);
 
-
-
-        //scale = this.transform.localScale;
-        //fractRock = Instantiate(fracturedRock, this.transform.position, this.transform.rotation);
-        //fractRock.transform.parent = this.transform;
-        //fractRock.transform.localScale = scale;
-        //fractRock.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (fadeOut)
-        {
-
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                StartCoroutine(RockFading());
-                fadeOut = false;
-            }
+        var rockRBList = new List<Rigidbody>();
+        foreach (Transform t in fracturedRock.transform) {
+            rockRBList.Add(t.GetComponent<Rigidbody>());
         }
+        rockRbs = rockRBList.ToArray();
+
+        fracturedRock.SetActive(false);
     }
 
-    public void ChangeRock()
+    public void StartRockFade()
     {
+        fadeStartTime = Time.time;
+        StartCoroutine(RockFadingSinking());
+    }
+
+    [SerializeField]
+    private float outwardBreakForce = 3f;
+
+    [Button]
+    public void ChangeRock(Vector3? forceDir = null, float forceMag = 1f, Vector3? hitPos = null)
+    {
+        #if UNITY_EDITOR
+            if (!Application.isPlaying) return;
+        #endif 
+
         rockBreakSFX?.Play(wPos: transform.position);
 
         // Health Pack dropping logic
         float randomNumber = Random.Range(0f, 100f);
-        if (randomNumber < healthDropChance)
-        {
-            Debug.Log("spawned healthpack");
-            GameObject healthPack = Instantiate(healthPackPrefab);
-            healthPack.transform.position = this.transform.position;
-        }
 
-
-
+        rock.SetActive(false);
         fracturedRock.SetActive(true);
 
-        if (rockBreakParticlesObj != null)
-        {
+        //force optional checks
+        if (!forceDir.HasValue) forceDir = Vector3.zero;
+        if (!hitPos.HasValue) hitPos = transform.position;
+        forceDir = forceDir.Value.normalized;
+
+        //apply force
+        foreach(var rb in rockRbs) {
+            Vector3 finalForce = Vector3.zero;
+            finalForce += forceDir.Value * forceMag * Vector3.Dot(forceDir.Value, rb.transform.position - hitPos.Value);
+            finalForce += (rb.transform.position - transform.position).normalized * outwardBreakForce;
+            rb.AddForce(finalForce, ForceMode.Impulse);
+        }
+
+        if (rockBreakParticlesObj != null) {
             Transform particles = GameObject.Instantiate(rockBreakParticlesObj).transform;
             particles.position = transform.position;
             particles.parent = transform;
         }
 
-        CameraShake.camShake?.StartShake(transform.position, 10f, 1f, 0.5f, true);
-        fadeOut = true;
+        //fadeOut = true;
+        Invoke(nameof(StartRockFade), rockLifetime);
     }
 
+    const int tickRate = 30;
 
-    const float rockLifetime = 6;
-    const float rockFadeTime = 10;
-    private List<Rigidbody> rockRBs = new List<Rigidbody>();
-
-    private IEnumerator RockFading()
+    private float fadeStartTime = 0;
+    private IEnumerator RockFadingSinking()
     {
         //yield return null to space out loops over multiple frames
-        int count = rockRBs.Count;
+        int count = rockRbs.Length;
+        foreach(var rb in rockRbs) {
+            rb.transform.GetComponentInChildren<Collider>().enabled = false;
+        }
+
         while (true)
         {
+            float t = (Time.time - fadeStartTime) / rockFadeTime;
+
             //loop through all rock pieces
-            foreach (Rigidbody rb in rockRBs)
+            foreach (Rigidbody rb in rockRbs)
             {
                 if (rb == null || rb.isKinematic) continue;
 
+                /*
                 //check if rock has settled
                 if (rb.velocity.magnitude > .5f)
                 {
-                    float decay = Mathf.Pow(.5f, Time.deltaTime);
-                    rb.velocity = Vector3.Scale(rb.velocity, new Vector3(decay, 1, decay));
-                    yield return null;
+                    //float decay = Mathf.Pow(.5f, 1f/tickRate);
+                    //rb.transform.localScale *= decay;
+                    
+                    //rb.velocity = Vector3.Scale(rb.velocity, new Vector3(decay, decay, decay));
+                    //rb.velocity *= decay;
+                    //yield return null;
                     continue;
                 }
+                */
+
+                rb.transform.localScale = Vector3.one * 100f * (1f - t);
 
                 //set to kinematic and tween under ground before destroying
-                rb.isKinematic = true;
-                rb.transform.GetComponentInChildren<Collider>().enabled = false;
-                count--;
+                //rb.isKinematic = true;
+                //count--;
+                /*
                 rb.transform.DOMoveY(-10f, rockFadeTime).SetRelative().SetEase(Ease.InSine)
                     .OnComplete(() => { Destroy(rb.transform.gameObject, rockFadeTime); });
-                yield return null;
+                */
+                //yield return null;
             }
 
-            if (count == 0) break;
-            yield return null;
+            //if (count == 0) break;
+            if (t >= 1f) break;
+            yield return new WaitForSecondsRealtime(1f/(float)tickRate);
         }
+
+        GameObject.Destroy(this.gameObject);
         //int rockChildren = fractRock.transform.childCount;
         //for (int i = 0; i < rockChildren; i++) {
         //    Destroy(fractRock.transform.GetChild(i).gameObject);

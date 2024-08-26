@@ -84,6 +84,7 @@ public class Gun : MonoBehaviour
         shotBullet.gameObject.SetActive(true);
         shotBullet.transform.position = transform.TransformPoint(localFirePos);
         shotBullet.transform.rotation = Quaternion.LookRotation(transform.forward, transform.up);
+        shotBullet.StartVelocity();
         shotBullet.ResetTimer();
         bulletsShot.Push(shotBullet);
 

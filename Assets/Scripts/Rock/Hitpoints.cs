@@ -12,9 +12,9 @@ public class Hitpoints : MonoBehaviour
     [SerializeField]
     private UnityEvent onDeath;
 
-    public UnityEvent<float> event_UpdateHealth = new UnityEvent<float>();
+    public UnityEvent<float> event_UpdateHealth;
 
-    public UnityEvent<float> onDamageReceived = new UnityEvent<float>();
+    public UnityEvent<float> onDamageReceived;
 
     void Start()
     {

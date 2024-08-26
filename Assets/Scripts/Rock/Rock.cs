@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 using UnityEngine;
 
 public class Rock : MonoBehaviour
@@ -10,14 +10,6 @@ public class Rock : MonoBehaviour
 
     [SerializeField]
     private Hitpoints hitpoints;
-    
-    void Start() {
-
-    }
-
-    void Update() {
-
-    }
 
     public void RayCastMadeContact () {
         hitpoints.Damage();
