@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 5;
     [SerializeField] private float timeAlive = 3; 
+    private float timer;
     private Transform gun;
     public Transform Gun {
         set {
@@ -19,8 +20,8 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime); //move it
 
         //after a certain time, the bullet fades out and retuns to the gun's list of bullets to fire
-        timeAlive -= Time.deltaTime;
-        if (timeAlive <= 0) {
+        timer -= Time.deltaTime;
+        if (timer <= 0) {
             Miss();
         }
     }
@@ -28,6 +29,10 @@ public class Bullet : MonoBehaviour
     private void Miss() {
         //fading out still to come
         ReturnToGun();
+    }
+
+    public void ResetTimer() {
+        timer = timeAlive;
     }
 
     private void OnCollisionEnter(Collision collision) { 
@@ -38,5 +43,6 @@ public class Bullet : MonoBehaviour
     private void ReturnToGun() {
         transform.position = gun.position; 
         gameObject.SetActive(false); //disable the bullet
+        gun.gameObject.GetComponent<Gun>().BulletReturned(gameObject); //let gun know this bullet is available
     }
 }

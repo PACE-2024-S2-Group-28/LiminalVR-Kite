@@ -1147,6 +1147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 5791656535382712687, guid: 3248ae5e5e4d1b6429dedd86d772fe98, type: 3}
+  shootCooldown: 2
+  rechargeTimer: 0
 --- !u!1001 &138418155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10573,8 +10575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8066ed3b2e9e4c64f9c11142d910e9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildType: 3
-  EditorType: 3
+  BuildType: 1
+  EditorType: 1
 --- !u!114 &1739982507
 MonoBehaviour:
   m_ObjectHideFlags: 0

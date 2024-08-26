@@ -59,7 +59,7 @@ public class Kite : MonoBehaviour
         float sqrPrevDist = (lastAnchorPos - lastAnchorBPos).sqrMagnitude;
         if (sqrDist > sqrPrevDist) { //&& sqrDist > rope.ropeLength*rope.ropeLength
             tugDist = Vector3.Distance(lastAnchorPos, rope.AnchorA.position);
-            Debug.Log("new tug: " + Vector3.Distance(lastAnchorPos, rope.AnchorA.position));
+            //Debug.Log("new tug: " + Vector3.Distance(lastAnchorPos, rope.AnchorA.position));
             tugForce += transform.forward * tugDist * tugForwardStrength;
         }
         lastAnchorPos = rope.AnchorA.position;
