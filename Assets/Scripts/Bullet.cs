@@ -7,8 +7,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed = 5;
     [SerializeField] private float timeAlive = 3; 
     private float timer;
-    private Transform gun;
-    public Transform Gun {
+    private Gun gun;
+    public Gun Gun {
         set {
             gun = value;
         }
@@ -41,8 +41,8 @@ public class Bullet : MonoBehaviour
     }
 
     private void ReturnToGun() {
-        transform.position = gun.position; 
+        transform.position = gun.transform.position; 
         gameObject.SetActive(false); //disable the bullet
-        gun.gameObject.GetComponent<Gun>().BulletReturned(gameObject); //let gun know this bullet is available
+        gun.BulletReturned(this); //let gun know this bullet is available
     }
 }

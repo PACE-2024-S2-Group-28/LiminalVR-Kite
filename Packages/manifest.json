@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm",
     "com.liminal.sdk": "https://github.com/LiminalVR/Liminal-SDK-Unity-Package.git",
     "com.unity.ads": "2.0.8",
     "com.unity.analytics": "3.3.2",
@@ -46,6 +47,10 @@
     "com.unity.modules.xr": "1.0.0"
   },
   "lock": {
+    "com.dbrizov.naughtyattributes": {
+      "hash": "8a8fa5a9659a6d63f196391c71e06c4286c8acd7",
+      "revision": "upm"
+    },
     "com.liminal.sdk": {
       "hash": "bd3dc698fa98a38f708b0cacc83d3cbba5a61846",
       "revision": "HEAD"
