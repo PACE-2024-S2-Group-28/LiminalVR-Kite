@@ -32,7 +32,7 @@ public class SunTexture : MonoBehaviour
     public void PositionSunQuad()
     {
         var mainCam = Camera.main;
-        transform.position = mainCam.transform.position - sunLightT.forward * (mainCam.farClipPlane-Mathf.Epsilon);
+        transform.position = mainCam.transform.position - sunLightT.forward * (mainCam.farClipPlane*.9f);
     }
 
     public void RotateSunQuad()
