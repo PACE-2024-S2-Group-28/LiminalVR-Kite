@@ -63,7 +63,7 @@ public class Gun : MonoBehaviour
 
 
         rechargeTimer -= Time.deltaTime;
-        if (inputDevice.GetButtonDown(VRButton.One)) {
+        if (inputDevice.GetButtonDown(VRButton.One) && rechargeTimer <= 0) {
             TryFire();
         }
     }
