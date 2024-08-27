@@ -381,10 +381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 0}
   shootCooldown: 2
-  totalBullets: 3
   rechargeTimer: 0
-  controllerHand: 0
-  localFirePos: {x: 0, y: 0, z: 0}
 --- !u!4 &365820717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2285997284023648131, guid: d54a76ae86e737c4eafeb3a7005eeb07,
@@ -1414,8 +1411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8066ed3b2e9e4c64f9c11142d910e9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildType: 1
-  EditorType: 1
+  BuildType: 3
+  EditorType: 3
 --- !u!114 &1739982507
 MonoBehaviour:
   m_ObjectHideFlags: 0
