@@ -5,19 +5,36 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 5;
-    [SerializeField] private float timeAlive = 3; 
+    [SerializeField] private float timeAlive = 3;
+
+    [SerializeField]
+    private float hitForceMagnitude = 3f;
+
+    [SerializeField]
+    private Rigidbody rb;
+    
     private float timer;
-    private Transform gun;
-    public Transform Gun {
+    private Gun gun;
+    public Gun Gun {
         set {
             gun = value;
         }
     }
 
+    private void Start()
+    {
+        if (rb == null) rb = GetComponent<Rigidbody>();
+    }
+
+    public void StartVelocity()
+    {
+        rb.velocity = transform.forward * speed;
+    }
+
     // Update is called once per frame
     void Update() //move the bullet
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime); //move it
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime); //move it
 
         //after a certain time, the bullet fades out and retuns to the gun's list of bullets to fire
         timer -= Time.deltaTime;
@@ -35,14 +52,24 @@ public class Bullet : MonoBehaviour
         timer = timeAlive;
     }
 
-    private void OnCollisionEnter(Collision collision) { 
+    private void OnCollisionEnter(Collision collision) {
         //play some particle effect, and destroy meteors
+        var rockScript = collision.collider.GetComponent<RockDestroyer>();
+        if(rockScript==null && collision.transform.parent!=null) {
+            rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
+        }
+
+        if(rockScript!=null) {
+            rockScript.ChangeRock(forceDir: transform.forward, forceMag: collision.impulse.magnitude * hitForceMagnitude, hitPos: transform.position);
+        }
+
         ReturnToGun();
     }
 
     private void ReturnToGun() {
-        transform.position = gun.position; 
+        rb.velocity = Vector3.zero;
+        transform.position = gun.transform.position; 
         gameObject.SetActive(false); //disable the bullet
-        gun.gameObject.GetComponent<Gun>().BulletReturned(gameObject); //let gun know this bullet is available
+        gun.BulletReturned(this); //let gun know this bullet is available
     }
 }
