@@ -150,8 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnBox: {x: 32.8, y: 25.7, z: 37.88}
-  asteroidFab: {fileID: 3134788589252300270, guid: ecbc8adf1b4cf884eb91f8362ca94d5f,
-    type: 3}
+  asteroidFab:
+  - {fileID: 3134788589252300270, guid: ecbc8adf1b4cf884eb91f8362ca94d5f, type: 3}
+  - {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32, type: 3}
   maxAsteroids: 7
   spawnChance: 0.2
   spawnMinTime: 0.3
@@ -381,7 +382,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 0}
   shootCooldown: 2
+  totalBullets: 3
   rechargeTimer: 0
+  controllerHand: 0
+  localFirePos: {x: 0, y: 0, z: 0}
 --- !u!4 &365820717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2285997284023648131, guid: d54a76ae86e737c4eafeb3a7005eeb07,

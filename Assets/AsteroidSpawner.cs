@@ -9,7 +9,7 @@ public class AsteroidSpawner : MonoBehaviour
     private Vector3 spawnBox = Vector3.one;
 
     [SerializeField]
-    private GameObject asteroidFab;
+    private GameObject[] asteroidFab;
 
     [SerializeField]
     private int maxAsteroids = 7;
@@ -26,6 +26,7 @@ public class AsteroidSpawner : MonoBehaviour
 
     private float timer;
     private int activeAsteroids = 0;
+    private int goldenAsteroidsCount = 0;
 
     private void Start()
     {
@@ -76,6 +77,10 @@ public class AsteroidSpawner : MonoBehaviour
         if (!Application.isPlaying) return;
         #endif
 
+        int prefabIndex = (goldenAsteroidsCount < 1 && activeAsteroids >= 6) ? 1 : 0;
+        if (prefabIndex == 1) goldenAsteroidsCount++;
+        GameObject asteroid = asteroidFab[prefabIndex];
+        
         activeAsteroids++;
         timer = 0f;
 
@@ -86,9 +91,18 @@ public class AsteroidSpawner : MonoBehaviour
         var spawnVec = new Vector3(x, y, z) * 2f - Vector3.one;
         spawnVec = Vector3.Scale(spawnVec, spawnBox);
 
-        var asteroidT = GameObject.Instantiate(asteroidFab).transform;
+        var asteroidT = GameObject.Instantiate(asteroidFab[prefabIndex]).transform;
         asteroidT.parent = this.transform;
         asteroidT.position = transform.position + spawnVec;
+
+
+        Color asteroidColor = (prefabIndex == 0) ? Color.red : Color.yellow; 
+        // Assuming index 0 is red, 1 is golden
+        MeshRenderer renderer = asteroidT.GetComponentInChildren<MeshRenderer>();
+        if (renderer != null)
+        {
+            renderer.material.color = asteroidColor;
+        }
 
         //spawn rot random
         x = Mathf.PerlinNoise(3, Time.time);

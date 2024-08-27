@@ -15,8 +15,13 @@ public class Rock : MonoBehaviour
         hitpoints.Damage();
     }
 
+
     void OnCollisionEnter (Collision other) {
-        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy") {
+        if (other.gameObject.tag == "Bullet"){
+            hitpoints.Damage();
+        }
+
+        else if(other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy") {
         ReplaceRock();   
         }
     }
