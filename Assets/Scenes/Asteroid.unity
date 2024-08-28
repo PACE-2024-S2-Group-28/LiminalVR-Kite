@@ -152,7 +152,7 @@ MonoBehaviour:
   spawnBox: {x: 32.8, y: 25.7, z: 37.88}
   asteroidFab:
   - {fileID: 3134788589252300270, guid: ecbc8adf1b4cf884eb91f8362ca94d5f, type: 3}
-  - {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32, type: 3}
+  - {fileID: 8774119488492757891, guid: 63bd91fa717d2d84db24781bae2c9791, type: 3}
   maxAsteroids: 7
   spawnChance: 0.2
   spawnMinTime: 0.3

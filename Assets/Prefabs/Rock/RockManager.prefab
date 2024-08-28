@@ -168,6 +168,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5309100522183281565}
     m_Modifications:
+    - target: {fileID: -1646603139882480607, guid: 63bd91fa717d2d84db24781bae2c9791,
+        type: 3}
+      propertyPath: fracturedRock
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8774119488492757891, guid: 63bd91fa717d2d84db24781bae2c9791,
         type: 3}
       propertyPath: m_Name
