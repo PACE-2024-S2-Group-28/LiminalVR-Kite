@@ -15,11 +15,15 @@ public class AsteroidSpawner : MonoBehaviour
     private int maxAsteroids = 7;
 
     [SerializeField]
+    private Vector3 startingDefaultVel = Vector3.zero;
+
+    [SerializeField]
     private float
         spawnChance = .2f,
         spawnMinTime = .3f,
         spawnMaxTime = 2f,
-        spawnRotationStrength = 5f;
+        spawnRotationStrength = 5f,
+        spawnExtraVelocityStrength = 2f;
 
     [SerializeField]
     private int spawnTickRate = 30;
@@ -85,16 +89,12 @@ public class AsteroidSpawner : MonoBehaviour
         timer = 0f;
 
         //spawn pos random
-        float x = Mathf.PerlinNoise(0, Time.time);
-        float y = Mathf.PerlinNoise(1, Time.time);
-        float z = Mathf.PerlinNoise(2, Time.time);
-        var spawnVec = new Vector3(x, y, z) * 2f - Vector3.one;
+        var spawnVec = Random.insideUnitSphere;
         spawnVec = Vector3.Scale(spawnVec, spawnBox);
 
         var asteroidT = GameObject.Instantiate(asteroidFab[prefabIndex]).transform;
         asteroidT.parent = this.transform;
-        asteroidT.position = transform.position + spawnVec;
-
+        asteroidT.position = transform.position + spawnVec * .5f;
 
         Color asteroidColor = (prefabIndex == 0) ? Color.red : Color.yellow; 
         // Assuming index 0 is red, 1 is golden
@@ -104,22 +104,17 @@ public class AsteroidSpawner : MonoBehaviour
             renderer.material.color = asteroidColor;
         }
 
-        //spawn rot random
-        x = Mathf.PerlinNoise(3, Time.time);
-        y = Mathf.PerlinNoise(4, Time.time);
-        z = Mathf.PerlinNoise(5, Time.time);
-        spawnVec = new Vector3(x, y, z) * 360f;
-
+        //random rotation
+        spawnVec = Random.insideUnitSphere * 360f;
         asteroidT.rotation = Quaternion.Euler(spawnVec);
 
         //angular velocity random
         var rb = asteroidT.GetComponentInChildren<Rigidbody>();
-        x = Mathf.PerlinNoise(6, Time.time);
-        y = Mathf.PerlinNoise(7, Time.time);
-        z = Mathf.PerlinNoise(8, Time.time);
-        spawnVec = new Vector3(x, y, z) * 2f - Vector3.one;
-
+        spawnVec = Random.insideUnitSphere;
         rb.angularVelocity = spawnVec * spawnRotationStrength;
+
+        //random rb velocity
+        rb.velocity = startingDefaultVel + Random.insideUnitSphere * spawnExtraVelocityStrength;
     }
 
     private void OnDrawGizmosSelected()

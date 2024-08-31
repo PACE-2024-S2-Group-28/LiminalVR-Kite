@@ -33,6 +33,8 @@ public class RockDestroyer : MonoBehaviour
     [SerializeField]
     private GameObject rockBreakParticlesObj;
 
+    private bool calledDestroyEvent = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,10 +74,10 @@ public class RockDestroyer : MonoBehaviour
 
         rockBreakSFX?.Play(wPos: transform.position);
 
-        // Health Pack dropping logic
-        float randomNumber = Random.Range(0f, 100f);
+        var ogRB = rock.GetComponent<Rigidbody>();
 
-        fracturedRock.transform.rotation = rock.transform.rotation;
+        fracturedRock.transform.position = rock.transform.position;
+        fracturedRock.transform.rotation = Quaternion.Euler(rock.transform.rotation.eulerAngles + Vector3.right*90f);
         rock.SetActive(false);
         fracturedRock.SetActive(true);
 
@@ -86,9 +88,10 @@ public class RockDestroyer : MonoBehaviour
 
         //apply force
         foreach(var rb in rockRbs) {
-            Vector3 finalForce = Vector3.zero;
-            finalForce += forceDir.Value * forceMag * Vector3.Dot(forceDir.Value, rb.transform.position - hitPos.Value);
-            finalForce += (rb.transform.position - transform.position).normalized * outwardBreakForce;
+            Vector3 finalForce = ogRB.velocity;
+            //finalForce += forceDir.Value * forceMag * Vector3.Dot(forceDir.Value, rb.transform.position - hitPos.Value);
+            finalForce += (rb.transform.position - fracturedRock.transform.position).normalized * outwardBreakForce;
+            //finalForce += (rb.transform.position - hitPos.Value).normalized * outwardBreakForce;
             rb.AddForce(finalForce, ForceMode.Impulse);
         }
 
@@ -128,6 +131,7 @@ public class RockDestroyer : MonoBehaviour
         }
 
         SEvent_RockDestroyed?.Invoke();
+        //calledDestroyEvent = true;
         GameObject.Destroy(this.gameObject);
     }
 

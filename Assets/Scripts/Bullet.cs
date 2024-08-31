@@ -54,10 +54,10 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision) {
         //play some particle effect, and destroy meteors
-        var rockScript = collision.collider.GetComponent<RockDestroyer>();
-        if(rockScript==null && collision.transform.parent!=null) {
-            rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
-        }
+        var rockScript = collision.collider.transform.parent.GetComponent<RockDestroyer>();
+        //if(rockScript==null && collision.transform.parent!=null) {
+        //    rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
+        //}
 
         if(rockScript!=null) {
             rockScript.ChangeRock(forceDir: transform.forward, forceMag: collision.impulse.magnitude * hitForceMagnitude, hitPos: transform.position);
