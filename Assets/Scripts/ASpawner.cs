@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
-public class AsteroidSpawner : MonoBehaviour
+public class ASpawner : MonoBehaviour
 {
     [SerializeField]
     private Vector3 spawnBox = Vector3.one;

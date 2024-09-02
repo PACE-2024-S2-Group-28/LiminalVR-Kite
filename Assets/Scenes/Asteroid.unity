@@ -161,6 +161,7 @@ MonoBehaviour:
   spawnRotationStrength: 1.5
   spawnExtraVelocityStrength: 2
   spawnTickRate: 30
+  goldenAsteroidSpawningTime: 10
 --- !u!4 &9427852
 Transform:
   m_ObjectHideFlags: 0

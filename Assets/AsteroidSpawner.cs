@@ -31,7 +31,9 @@ public class AsteroidSpawner : MonoBehaviour
     private float timer;
     private int activeAsteroids = 0;
     private int goldenAsteroidsCount = 0;
-
+    private float goldenTimer = 0;
+    [SerializeField] private float goldenAsteroidSpawningTime = 15;
+    [SerializeField] private Vector3 goldenAsteroidFixedPosition = new Vector3(0, 5, 0);
     private void Start()
     {
         InvokeRepeating(nameof(TrySpawn), 0f, 1f / (float)spawnTickRate);
@@ -53,6 +55,7 @@ public class AsteroidSpawner : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        goldenTimer += Time.deltaTime;
     }
 
     private void TrySpawn()
@@ -62,7 +65,7 @@ public class AsteroidSpawner : MonoBehaviour
             return;
         }
 
-        if (timer >= spawnMaxTime) {
+        if (timer >= spawnMaxTime || (goldenTimer > goldenAsteroidSpawningTime && timer > spawnMinTime)) {
             SpawnAsteroid();
             return;
         }
@@ -81,16 +84,24 @@ public class AsteroidSpawner : MonoBehaviour
         if (!Application.isPlaying) return;
         #endif
 
-        int prefabIndex = (goldenAsteroidsCount < 1 && activeAsteroids >= 6) ? 1 : 0;
-        if (prefabIndex == 1) goldenAsteroidsCount++;
+        int prefabIndex = (goldenTimer > goldenAsteroidSpawningTime) ? 1 : 0;
+        if (prefabIndex == 1){ 
+            goldenAsteroidsCount++;
+            goldenTimer = 0;
+        }
         GameObject asteroid = asteroidFab[prefabIndex];
         
         activeAsteroids++;
         timer = 0f;
 
-        //spawn pos random
-        var spawnVec = Random.insideUnitSphere;
+         Vector3 spawnVec;
+        if (prefabIndex == 1) {
+            spawnVec = goldenAsteroidFixedPosition;
+        } else {
+            //spawn pos random
+        spawnVec = Random.insideUnitSphere;
         spawnVec = Vector3.Scale(spawnVec, spawnBox);
+        }
 
         var asteroidT = GameObject.Instantiate(asteroidFab[prefabIndex]).transform;
         asteroidT.parent = this.transform;
