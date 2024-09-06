@@ -17,6 +17,15 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField]
     private Vector3 startingDefaultVel = Vector3.zero;
 
+    [SerializeField, MinMaxSlider(0.1f, 10f)]
+    private Vector2 asteroidSizeRange = new Vector2(1f, 5f);
+
+    [SerializeField, MinMaxSlider(0f, 10f)]
+    private Vector2 asteroidSpeedRange = new Vector2(1f, 5f);
+
+    [SerializeField, MinMaxSlider(0f, 50f)]
+    private Vector2 spawnDistanceRange = new Vector2(10f, 20f);
+
     [SerializeField]
     private float
         spawnChance = .2f,
@@ -51,7 +60,6 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void CountRockDestroyed() { activeAsteroids--; }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
@@ -94,21 +102,27 @@ public class AsteroidSpawner : MonoBehaviour
         activeAsteroids++;
         timer = 0f;
 
-         Vector3 spawnVec;
+        Vector3 spawnVec;
         if (prefabIndex == 1) {
             spawnVec = goldenAsteroidFixedPosition;
         } else {
-            //spawn pos random
-        spawnVec = Random.insideUnitSphere;
-        spawnVec = Vector3.Scale(spawnVec, spawnBox);
+            spawnVec = Random.insideUnitSphere;
+            spawnVec = Vector3.Scale(spawnVec, spawnBox);
         }
 
         var asteroidT = GameObject.Instantiate(asteroidFab[prefabIndex]).transform;
         asteroidT.parent = this.transform;
-        asteroidT.position = transform.position + spawnVec * .5f;
+        
+        
+        float spawnDistance = Random.Range(spawnDistanceRange.x, spawnDistanceRange.y);
+        asteroidT.position = transform.position + spawnVec.normalized * spawnDistance;
+        //Calculate spawn distance from player
 
-        Color asteroidColor = (prefabIndex == 0) ? Color.red : Color.yellow; 
-        // Assuming index 0 is red, 1 is golden
+        
+        float size = Random.Range(asteroidSizeRange.x, asteroidSizeRange.y);
+        asteroidT.localScale = Vector3.one * size;
+        //Randomize asteroid size
+        Color asteroidColor = (prefabIndex == 0) ? Color.red : Color.yellow;
         MeshRenderer renderer = asteroidT.GetComponentInChildren<MeshRenderer>();
         if (renderer != null)
         {
@@ -124,8 +138,9 @@ public class AsteroidSpawner : MonoBehaviour
         spawnVec = Random.insideUnitSphere;
         rb.angularVelocity = spawnVec * spawnRotationStrength;
 
-        //random rb velocity
-        rb.velocity = startingDefaultVel + Random.insideUnitSphere * spawnExtraVelocityStrength;
+        //random rb velocity based on speed range
+        float speed = Random.Range(asteroidSpeedRange.x, asteroidSpeedRange.y);
+        rb.velocity = startingDefaultVel + Random.insideUnitSphere.normalized * speed;
     }
 
     private void OnDrawGizmosSelected()
