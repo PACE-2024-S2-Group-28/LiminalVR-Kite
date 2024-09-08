@@ -39,7 +39,7 @@ public class Gun : MonoBehaviour
         //Get the primaryInput        
         inputDevice = (controllerHand == InputHand.Primary) ? VRDevice.Device?.PrimaryInputDevice : VRDevice.Device?.SecondaryInputDevice;
 
-        totalBullets =  Mathf.CeilToInt(bulletLife/shootCooldown);
+        totalBullets =  Mathf.CeilToInt(bulletLife/shootCooldown) + 1;
         //parent so bullets dont flood scene heirarchy
         if (bulletParent == null)
             bulletParent = new GameObject("Bullet_Parent");
