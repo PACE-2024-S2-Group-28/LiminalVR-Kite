@@ -81,6 +81,8 @@ public class RockDestroyer : MonoBehaviour
         rock.SetActive(false);
         fracturedRock.SetActive(true);
 
+        GameManager.Instance.HandleAsteroidDestruction(fracturedRock.CompareTag("GoldAsteroid"));
+        
         //force optional checks
         if (!forceDir.HasValue) forceDir = Vector3.zero;
         if (!hitPos.HasValue) hitPos = transform.position;

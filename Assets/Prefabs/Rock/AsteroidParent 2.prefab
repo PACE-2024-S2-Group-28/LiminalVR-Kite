@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7447546660915199106}
   m_Layer: 8
   m_Name: AsteroidParent 2
-  m_TagString: Rock
+  m_TagString: GoldAsteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
