@@ -6,6 +6,11 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 5;
     [SerializeField] private float timeAlive = 3;
+    public float TimeAlive {
+        set {
+            timeAlive = value;
+        }
+    }
 
     [SerializeField]
     private float hitForceMagnitude = 3f;

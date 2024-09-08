@@ -12,9 +12,9 @@ public class Gun : MonoBehaviour
 
     [SerializeField] private Bullet bullet;
     [SerializeField] private float shootCooldown = 2; //how long between each shot
+    [SerializeField] private float bulletLife = 3; //how many seconds a bullet exists before it returns to the gun
     
-    [SerializeField]
-    private int totalBullets = 3; //how many bullets to put into the stack of available bullets
+    private int totalBullets; //how many bullets to put into the stack of available bullets
     private Stack<Bullet> bulletsShot = new Stack<Bullet>();
     private Stack<Bullet> bulletsAvailable = new Stack<Bullet>();
     
@@ -36,10 +36,10 @@ public class Gun : MonoBehaviour
 
     void Start()
     {
-        //Get the primaryInput
-        
+        //Get the primaryInput        
         inputDevice = (controllerHand == InputHand.Primary) ? VRDevice.Device?.PrimaryInputDevice : VRDevice.Device?.SecondaryInputDevice;
 
+        totalBullets =  Mathf.CeilToInt(bulletLife/shootCooldown);
         //parent so bullets dont flood scene heirarchy
         if (bulletParent == null)
             bulletParent = new GameObject("Bullet_Parent");
@@ -49,6 +49,7 @@ public class Gun : MonoBehaviour
             Bullet newBullet = Instantiate(bullet, transform.position, Quaternion.LookRotation(transform.forward, transform.up)); //make the bullet go forward
             newBullet.transform.parent = bulletParent.transform;
             newBullet.Gun = this;
+            newBullet.TimeAlive = bulletLife;
             newBullet.gameObject.SetActive(false);
             bulletsAvailable.Push(newBullet);
         }

@@ -424,7 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 0}
   shootCooldown: 2
-  totalBullets: 3
+  bulletLife: 3
   rechargeTimer: 0
   controllerHand: 0
   localFirePos: {x: 0, y: 0, z: 0}
