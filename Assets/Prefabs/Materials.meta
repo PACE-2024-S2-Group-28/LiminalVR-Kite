@@ -1,16 +1,7 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Prefabs/Materials/Materials.meta
-<<<<<<<< HEAD:Assets/Prefabs/Turret.prefab.meta
-guid: 9df9af185da3f2649a1c4d5a31e65261
-PrefabImporter:
-========
-guid: 36e58f50e9b99d04690c6602ab9ea234
-========
-guid: b8138858abcc4f347a74059ef68d36a7
->>>>>>>> main:Assets/Prefabs/Materials.meta
+guid: c7f51ee9b95c29646b8ca51ce95a58d2
 folderAsset: yes
 DefaultImporter:
->>>>>>>> main:Assets/Prefabs/Materials/Materials.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
