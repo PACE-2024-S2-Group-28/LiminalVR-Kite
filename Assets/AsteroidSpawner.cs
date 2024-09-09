@@ -17,6 +17,15 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField]
     private Vector3 startingDefaultVel = Vector3.zero;
 
+    [SerializeField, MinMaxSlider(0.1f, 10f)]
+    private Vector2 asteroidSizeRange = new Vector2(1f, 5f);
+
+    [SerializeField, MinMaxSlider(0f, 10f)]
+    private Vector2 asteroidSpeedRange = new Vector2(1f, 5f);
+
+    [SerializeField, MinMaxSlider(0f, 50f)]
+    private Vector2 spawnDistanceRange = new Vector2(10f, 20f);
+
     [SerializeField]
     private float
         spawnChance = .2f,
@@ -31,7 +40,9 @@ public class AsteroidSpawner : MonoBehaviour
     private float timer;
     private int activeAsteroids = 0;
     private int goldenAsteroidsCount = 0;
-
+    private float goldenTimer = 0;
+    [SerializeField] private float goldenAsteroidSpawningTime = 15;
+    [SerializeField] private Vector3 goldenAsteroidFixedPosition = new Vector3(0, 5, 0);
     private void Start()
     {
         InvokeRepeating(nameof(TrySpawn), 0f, 1f / (float)spawnTickRate);
@@ -49,10 +60,10 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void CountRockDestroyed() { activeAsteroids--; }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
+        goldenTimer += Time.deltaTime;
     }
 
     private void TrySpawn()
@@ -62,7 +73,7 @@ public class AsteroidSpawner : MonoBehaviour
             return;
         }
 
-        if (timer >= spawnMaxTime) {
+        if (timer >= spawnMaxTime || (goldenTimer > goldenAsteroidSpawningTime && timer > spawnMinTime)) {
             SpawnAsteroid();
             return;
         }
@@ -81,23 +92,37 @@ public class AsteroidSpawner : MonoBehaviour
         if (!Application.isPlaying) return;
         #endif
 
-        int prefabIndex = (goldenAsteroidsCount < 1 && activeAsteroids >= 6) ? 1 : 0;
-        if (prefabIndex == 1) goldenAsteroidsCount++;
+        int prefabIndex = (goldenTimer > goldenAsteroidSpawningTime) ? 1 : 0;
+        if (prefabIndex == 1){ 
+            goldenAsteroidsCount++;
+            goldenTimer = 0;
+        }
         GameObject asteroid = asteroidFab[prefabIndex];
         
         activeAsteroids++;
         timer = 0f;
 
-        //spawn pos random
-        var spawnVec = Random.insideUnitSphere;
-        spawnVec = Vector3.Scale(spawnVec, spawnBox);
+        Vector3 spawnVec;
+        if (prefabIndex == 1) {
+            spawnVec = goldenAsteroidFixedPosition;
+        } else {
+            spawnVec = Random.insideUnitSphere;
+            spawnVec = Vector3.Scale(spawnVec, spawnBox);
+        }
 
         var asteroidT = GameObject.Instantiate(asteroidFab[prefabIndex]).transform;
         asteroidT.parent = this.transform;
-        asteroidT.position = transform.position + spawnVec * .5f;
+        
+        
+        float spawnDistance = Random.Range(spawnDistanceRange.x, spawnDistanceRange.y);
+        asteroidT.position = transform.position + spawnVec.normalized * spawnDistance;
+        //Calculate spawn distance from player
 
-        Color asteroidColor = (prefabIndex == 0) ? Color.red : Color.yellow; 
-        // Assuming index 0 is red, 1 is golden
+        
+        float size = Random.Range(asteroidSizeRange.x, asteroidSizeRange.y);
+        asteroidT.localScale = Vector3.one * size;
+        //Randomize asteroid size
+        Color asteroidColor = (prefabIndex == 0) ? Color.red : Color.yellow;
         MeshRenderer renderer = asteroidT.GetComponentInChildren<MeshRenderer>();
         if (renderer != null)
         {
@@ -113,8 +138,9 @@ public class AsteroidSpawner : MonoBehaviour
         spawnVec = Random.insideUnitSphere;
         rb.angularVelocity = spawnVec * spawnRotationStrength;
 
-        //random rb velocity
-        rb.velocity = startingDefaultVel + Random.insideUnitSphere * spawnExtraVelocityStrength;
+        //random rb velocity based on speed range
+        float speed = Random.Range(asteroidSpeedRange.x, asteroidSpeedRange.y);
+        rb.velocity = startingDefaultVel + Random.insideUnitSphere.normalized * speed;
     }
 
     private void OnDrawGizmosSelected()
