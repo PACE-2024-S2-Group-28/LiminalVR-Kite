@@ -1,53 +1,57 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using NaughtyAttributes;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    private static GameManager instance;
+    public static GameManager Instance => instance;
 
-    [SerializeField] private int score = 0;
-    [SerializeField, ReadOnly] private int highScore = 0;
-    
-    [SerializeField, MinMaxSlider(0.5f, 2f)]
-    private Vector2 difficultySpeedMultiplierRange = new Vector2(1f, 1.5f);
-    
-    public UnityEvent<int> OnScoreChange = new UnityEvent<int>();
+    private static int score;
+    public static int Score => score;
 
-    private const int RedAsteroidScore = 5;
-    private const int GoldAsteroidScore = 200;
+    [SerializeField]
+    private AsteroidSpawner asteroidSpawner;
+    public AsteroidSpawner Spawner => asteroidSpawner;
 
-    private void Awake()
+    // Events
+    public Action<int> Action_OnScoreChanged;
+
+    void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this.gameObject);
+        if (instance == null) {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+        else {
+            Destroy(gameObject);
         }
     }
 
-    public void AddScore(int amount)
+    void Start()
     {
-        score += amount;
-        if (score > highScore)
-        {
-            highScore = score;
-        }
-        OnScoreChange.Invoke(score);
+        //RockDestroyer.SEvent_RockDestroyed.AddListener(HandleAsteroidDestruction); //this function needs to change or have seperate function to trigger on event, or new event
     }
 
-    public void AdjustDifficulty(float level)
-    {
-        float multiplier = Mathf.Lerp(difficultySpeedMultiplierRange.x, difficultySpeedMultiplierRange.y, level);
-        AsteroidSpawner.Instance.UpdateSpeedMultiplier(multiplier);
-    }
     public void HandleAsteroidDestruction(bool isGoldAsteroid)
     {
-        int scoreBonus = isGoldAsteroid ? GoldAsteroidScore : RedAsteroidScore;
-        AddScore(scoreBonus);
+        if (isGoldAsteroid) {
+            UpdateScore(200);
+        }
+        else {
+            UpdateScore(5);
+        }
+    }
+
+    void UpdateScore(int scoreAdd)
+    {
+        score += scoreAdd;
+        Action_OnScoreChanged?.Invoke(score);
+        Debug.Log($"Score updated: {score}");
+    }
+
+    public void AdjustAsteroidSpeed(float multiplier)
+    {
+        asteroidSpawner.AsteroidSpeedRange = new Vector2(asteroidSpawner.AsteroidSpeedRange.x * multiplier, asteroidSpawner.AsteroidSpeedRange.y * multiplier);
     }
 }

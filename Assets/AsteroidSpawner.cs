@@ -19,9 +19,11 @@ public class AsteroidSpawner : MonoBehaviour
 
     [SerializeField, MinMaxSlider(0.1f, 10f)]
     private Vector2 asteroidSizeRange = new Vector2(1f, 5f);
+    
 
     [SerializeField, MinMaxSlider(0f, 10f)]
     private Vector2 asteroidSpeedRange = new Vector2(1f, 5f);
+    public Vector2 AsteroidSpeedRange { get => asteroidSpeedRange; set => asteroidSpeedRange = value; }
 
     [SerializeField, MinMaxSlider(0f, 50f)]
     private Vector2 spawnDistanceRange = new Vector2(10f, 20f);
@@ -141,6 +143,11 @@ public class AsteroidSpawner : MonoBehaviour
         //random rb velocity based on speed range
         float speed = Random.Range(asteroidSpeedRange.x, asteroidSpeedRange.y);
         rb.velocity = startingDefaultVel + Random.insideUnitSphere.normalized * speed;
+    }
+
+    public void DestroyAsteroid(bool isGoldAsteroid)
+    {
+    GameManager.Instance.HandleAsteroidDestruction(isGoldAsteroid);
     }
 
     private void OnDrawGizmosSelected()
