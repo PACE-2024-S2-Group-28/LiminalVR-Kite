@@ -155,12 +155,17 @@ MonoBehaviour:
   - {fileID: 8774119488492757891, guid: 63bd91fa717d2d84db24781bae2c9791, type: 3}
   maxAsteroids: 35
   startingDefaultVel: {x: 0, y: 0, z: -30}
+  asteroidSizeRange: {x: 1, y: 5}
+  asteroidSpeedRange: {x: 1, y: 5}
+  spawnDistanceRange: {x: 10, y: 20}
   spawnChance: 0.2
   spawnMinTime: 0.3
   spawnMaxTime: 2
   spawnRotationStrength: 1.5
   spawnExtraVelocityStrength: 2
   spawnTickRate: 30
+  goldenAsteroidSpawningTime: 15
+  goldenAsteroidFixedPosition: {x: 0, y: 5, z: 0}
 --- !u!4 &9427852
 Transform:
   m_ObjectHideFlags: 0
@@ -6235,7 +6240,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965075359}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 232e4ab8893e1d840b1db20c9de8a8d2, type: 3}
   m_Name: 
@@ -6689,7 +6694,7 @@ Transform:
   m_LocalScale: {x: 0.20103338, y: 0.20103292, z: 0.20103298}
   m_Children: []
   m_Father: {fileID: 782179278841982545}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1443259512
 SphereCollider:
@@ -7842,8 +7847,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -1.0482004, z: 0}
   m_LocalScale: {x: 100.00007, y: 100.00006, z: 100.00006}
   m_Children:
-  - {fileID: 134685770}
   - {fileID: 1443259511}
+  - {fileID: 134685770}
   - {fileID: 8804744096457686737}
   - {fileID: 1796680511}
   - {fileID: 8284360590646356796}
