@@ -143,6 +143,11 @@ public class AsteroidSpawner : MonoBehaviour
         rb.velocity = startingDefaultVel + Random.insideUnitSphere.normalized * speed;
     }
 
+    public void DestroyAsteroid(bool isGoldAsteroid)
+    {
+    GameManager.Instance.HandleAsteroidDestruction(isGoldAsteroid);
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
