@@ -76,12 +76,12 @@ public class RockDestroyer : MonoBehaviour
 
         var ogRB = rock.GetComponent<Rigidbody>();
 
+        //GameManager.Instance.HandleAsteroidDestruction(gameObject.CompareTag("GoldAsteroid"));
         fracturedRock.transform.position = rock.transform.position;
         fracturedRock.transform.rotation = Quaternion.Euler(rock.transform.rotation.eulerAngles + Vector3.right*90f);
         rock.SetActive(false);
         fracturedRock.SetActive(true);
 
-        GameManager.Instance.HandleAsteroidDestruction(fracturedRock.CompareTag("GoldAsteroid"));
         
         //force optional checks
         if (!forceDir.HasValue) forceDir = Vector3.zero;

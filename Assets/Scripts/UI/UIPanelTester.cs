@@ -11,6 +11,11 @@ public class UIPanelTester : MonoBehaviour
     [SerializeField]
     private ScoreDisplayTMPro scoreDisplay;
 
+    private void OnEnable()
+    {
+        
+    }
+
     void Update()
     {
         scoreDisplay.UpdateScore(Mathf.FloorToInt(Time.time));
