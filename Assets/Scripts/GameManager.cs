@@ -1,46 +1,44 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance => instance;
 
-    private static float score;
-    public static float Score => score;
+    private static int score;
+    public static int Score => score;
 
     [SerializeField]
-    public AsteroidSpawner asteroidSpawner;
+    private AsteroidSpawner asteroidSpawner;
+    public AsteroidSpawner Spawner => asteroidSpawner;
 
     // Events
-    public UnityEvent<int> OnScoreChanged = new UnityEvent<int>();
+    public Action<int> Action_OnScoreChanged;
 
     void Awake()
     {
-        if (instance == null)
-        {
+        if (instance == null) {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
+        else {
             Destroy(gameObject);
         }
     }
 
     void Start()
     {
-        RockDestroyer.SEvent_RockDestroyed.AddListener(HandleAsteroidDestruction);
+        //RockDestroyer.SEvent_RockDestroyed.AddListener(HandleAsteroidDestruction); //this function needs to change or have seperate function to trigger on event, or new event
     }
 
     public void HandleAsteroidDestruction(bool isGoldAsteroid)
     {
-        if (isGoldAsteroid)
-        {
+        if (isGoldAsteroid) {
             UpdateScore(200);
         }
-        else
-        {
+        else {
             UpdateScore(5);
         }
     }
@@ -48,12 +46,12 @@ public class GameManager : MonoBehaviour
     void UpdateScore(int scoreAdd)
     {
         score += scoreAdd;
-        OnScoreChanged.Invoke(score);
+        Action_OnScoreChanged?.Invoke(score);
         Debug.Log($"Score updated: {score}");
     }
 
     public void AdjustAsteroidSpeed(float multiplier)
     {
-        asteroidSpawner.asteroidSpeedRange = new Vector2(asteroidSpawner.asteroidSpeedRange.x * multiplier, asteroidSpawner.asteroidSpeedRange.y * multiplier);
+        asteroidSpawner.AsteroidSpeedRange = new Vector2(asteroidSpawner.AsteroidSpeedRange.x * multiplier, asteroidSpawner.AsteroidSpeedRange.y * multiplier);
     }
 }
