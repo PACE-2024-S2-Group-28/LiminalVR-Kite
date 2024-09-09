@@ -16,28 +16,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-1646603139882480607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8774119488492757891}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b483cb62c9c6640b45361ff99e2674, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fracturedRock: {fileID: 3134788589252300270, guid: ecbc8adf1b4cf884eb91f8362ca94d5f,
-    type: 3}
-  rock: {fileID: 8774119488492757891}
-  fadeSpeed: 1
-  rockLifetime: 3
-  rockFadeTime: 6
-  rockRbs: []
-  rockBreakSFX: {fileID: 0}
-  rockBreakParticlesObj: {fileID: 0}
-  outwardBreakForce: 3
 --- !u!1001 &784191649201666698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,6 +32,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32,
+        type: 3}
+      propertyPath: m_Name
+      value: Rock_Model
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 434500c8232750246b90641a73e0bc32,
         type: 3}
