@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b483cb62c9c6640b45361ff99e2674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fracturedRock: {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32,
+  fracturedRock: {fileID: 1891379949519674387, guid: 5fc747bc26a4d62408bf8f246be38329,
     type: 3}
-  rock: {fileID: 7268447682887004510}
+  rock: {fileID: 8774119488492757891, guid: 0019b5eb78179804b80917125cba710f, type: 3}
   fadeSpeed: 1
   rockLifetime: 3
   rockFadeTime: 6
@@ -88,7 +88,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3134788589252300270}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -98,7 +98,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: d5ccbfea3a44a9e45bb24781680919b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

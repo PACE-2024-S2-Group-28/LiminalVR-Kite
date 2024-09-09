@@ -155,6 +155,9 @@ MonoBehaviour:
   - {fileID: 3134788589252300270, guid: 1de33675fe809a44ea78efe283ef95a2, type: 3}
   maxAsteroids: 35
   startingDefaultVel: {x: 0, y: 0, z: -30}
+  asteroidSizeRange: {x: 1, y: 5}
+  asteroidSpeedRange: {x: 1, y: 5}
+  spawnDistanceRange: {x: 10, y: 20}
   spawnChance: 0.2
   spawnMinTime: 0.3
   spawnMaxTime: 2
@@ -163,6 +166,7 @@ MonoBehaviour:
   spawnTickRate: 30
   goldenAsteroidSpawningTime: 10
   goldenAsteroidFixedPosition: {x: 0, y: 5, z: 0}
+  goldMaterial: {fileID: 2100000, guid: d5ccbfea3a44a9e45bb24781680919b4, type: 2}
 --- !u!4 &9427852
 Transform:
   m_ObjectHideFlags: 0
