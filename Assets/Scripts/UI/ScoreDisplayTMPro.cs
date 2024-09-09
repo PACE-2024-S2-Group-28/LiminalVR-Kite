@@ -14,10 +14,9 @@ public class ScoreDisplayTMPro : MonoBehaviour
 
     private int displayScore;
 
-    void Update()
+    public void UpdateScore(int score)
     {
-        displayScore = Mathf.FloorToInt(Time.time);
-
+        displayScore = score;
         scoreText.text = scorePrefix + displayScore;
     }
 }

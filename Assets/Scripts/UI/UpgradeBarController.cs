@@ -13,8 +13,9 @@ public class UpgradeBarController : MonoBehaviour
     [SerializeField]
     private Transform barFillTransform;
 
-    void Update()
+    public void UpdateBarFill(float fill)
     {
+        fillAmount = Mathf.Clamp01(fill);
         fillV3 = new Vector3(fillAmount, 1, 1);
         barFillTransform.localScale = fillV3;
     }
