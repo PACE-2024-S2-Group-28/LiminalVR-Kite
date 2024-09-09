@@ -3,9 +3,11 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    private static GameManager instance;
+    public static GameManager Instance => instance;
 
-    public int Score { get; private set; }
+    private static float score;
+    public static float Score => score;
 
     [SerializeField]
     public AsteroidSpawner asteroidSpawner;
@@ -15,9 +17,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -45,9 +47,9 @@ public class GameManager : MonoBehaviour
 
     void UpdateScore(int scoreAdd)
     {
-        Score += scoreAdd;
-        OnScoreChanged.Invoke(Score);
-        Debug.Log($"Score updated: {Score}");
+        score += scoreAdd;
+        OnScoreChanged.Invoke(score);
+        Debug.Log($"Score updated: {score}");
     }
 
     public void AdjustAsteroidSpeed(float multiplier)
