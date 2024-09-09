@@ -1,5 +1,6 @@
 using DG.Tweening;
 using ScriptableObjects;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,10 +36,19 @@ public class RockDestroyer : MonoBehaviour
 
     private bool calledDestroyEvent = false;
 
+    private Action<bool> asteroidDestroyed;
+
     // Start is called before the first frame update
     void Start()
     {
         if (rockRbs == null) GetRigidBodies();
+
+        asteroidDestroyed = DestroyAsteroid;
+    }
+
+    void DestroyAsteroid(bool b)
+    {
+        GameManager.Instance.HandleAsteroidDestruction(b);
     }
 
     [Button]
@@ -70,7 +80,9 @@ public class RockDestroyer : MonoBehaviour
     {
         #if UNITY_EDITOR
             if (!Application.isPlaying) return;
-        #endif 
+        #endif
+
+        DestroyAsteroid(false);
 
         rockBreakSFX?.Play(wPos: transform.position);
 

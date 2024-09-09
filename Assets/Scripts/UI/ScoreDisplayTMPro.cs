@@ -14,7 +14,14 @@ public class ScoreDisplayTMPro : MonoBehaviour
 
     private int displayScore;
 
-    public void UpdateScore(int score)
+    void Start()
+    {
+        GameManager.Instance.Action_OnScoreChanged = UpdateScoreDisplay;
+        UpdateScoreDisplay(0);
+    }
+
+
+    public void UpdateScoreDisplay(int score)
     {
         displayScore = score;
         scoreText.text = scorePrefix + displayScore;

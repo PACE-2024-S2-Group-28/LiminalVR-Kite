@@ -18,7 +18,7 @@ public class UIPanelTester : MonoBehaviour
 
     void Update()
     {
-        scoreDisplay.UpdateScore(Mathf.FloorToInt(Time.time));
+        scoreDisplay.UpdateScoreDisplay(Mathf.FloorToInt(Time.time));
         barController.UpdateBarFill(Time.time%1);
     }
 }
