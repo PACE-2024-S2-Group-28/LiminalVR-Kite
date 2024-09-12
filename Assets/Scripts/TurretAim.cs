@@ -60,7 +60,7 @@ public class TurretAim : MonoBehaviour
             float timeToHit = closestDistance/bulletSpeed; //time until intercept
             Vector3 targetSpeed = closestTarget.attachedRigidbody.velocity; //speed of asteroid
             Vector3 targetPoint = closestTarget.transform.position + (targetSpeed * timeToHit); //position asteroid moves to during that time
-            transform.GetChild(0).rotation = Quaternion.LookRotation(targetPoint - transform.position, bulletSpawnPoint.TransformDirection(Vector3.up));
+            transform.rotation = Quaternion.LookRotation(targetPoint - transform.position, bulletSpawnPoint.TransformDirection(Vector3.up));
             Debug.DrawRay(transform.position, targetPoint - transform.position, Color.yellow, shootCooldown);
             Debug.DrawRay(transform.position, closestTarget.transform.position - transform.position, Color.red, shootCooldown);
             Fire();
@@ -74,7 +74,7 @@ public class TurretAim : MonoBehaviour
         Bullet shotBullet = bulletsAvailable.Pop();
         shotBullet.gameObject.SetActive(true);
         shotBullet.transform.position = bulletSpawnPoint.position;
-        shotBullet.transform.rotation = Quaternion.LookRotation(transform.GetChild(0).forward, transform.up);
+        shotBullet.transform.rotation = Quaternion.LookRotation(transform.forward, transform.up);
         shotBullet.StartVelocity();
         shotBullet.ResetTimer();
     }

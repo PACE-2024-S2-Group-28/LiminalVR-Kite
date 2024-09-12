@@ -6437,8 +6437,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e9154e5b3a66f48b7e1dec783eb92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeThreshold: 100
+  upgradeThreshold: 20
   asteroidSpawner: {fileID: 9427851}
+  UpgradeUnlocked:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1664490292
 GameObject:
   m_ObjectHideFlags: 0
@@ -7710,6 +7715,81 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8806359125915789048, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 55.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806359125915789048, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806359125915789048, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -30.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806359125915789048, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806359125915789048, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806359125915789048, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613721756014741787, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -30.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613721756014741787, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613721756014741787, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -55.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613721756014741787, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613721756014741787, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7613721756014741787, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806359127345328419, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806359127345328419, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806359127345328419, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.173
+      objectReference: {fileID: 0}
     - target: {fileID: 7613721756014741788, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: bulletParent
@@ -7720,6 +7800,11 @@ PrefabInstance:
       propertyPath: bulletSpeed
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 7613721757269696207, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8806359125915789055, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: bulletParent
@@ -7729,6 +7814,26 @@ PrefabInstance:
         type: 3}
       propertyPath: bulletSpeed
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806359127345328428, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2178094604272606684, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: bulletParent
+      value: 
+      objectReference: {fileID: 538242687}
+    - target: {fileID: 983195315472167487, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: bulletParent
+      value: 
+      objectReference: {fileID: 538242687}
+    - target: {fileID: 6402759439501327819, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: upgradesRequired
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private int upgradeThreshold;
+    private int upgradeCount = 0; //so it knows how many you've unlocked, thus the next threshold to cross
 
     [SerializeField]
     private AsteroidSpawner asteroidSpawner;
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     // Events
     public Action<int> Action_OnScoreChanged;
+
+    public UnityEvent UpgradeUnlocked;
 
     public Action<float> Action_IncrementUpgradeProgress;
 
@@ -54,7 +57,12 @@ public class GameManager : MonoBehaviour
     {
         score += scoreAdd;
         Action_OnScoreChanged?.Invoke(score);
-        Debug.Log($"Score updated: {score}");
+
+        if (score >= upgradeThreshold * (upgradeCount + 1)) {
+            print("Reached an upgrade");
+            upgradeCount++;
+            UpgradeUnlocked.Invoke();
+        }
 
         UpdateUpgradeProgress(score);
     }

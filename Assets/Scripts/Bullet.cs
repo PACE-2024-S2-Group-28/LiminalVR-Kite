@@ -108,7 +108,6 @@ public class Bullet : MonoBehaviour
     }
 
     private void ReturnToTurret() {
-        print("Bullet missed");
         rb.velocity = Vector3.zero;
         transform.position = turret.transform.position; 
         gameObject.SetActive(false); //disable the bullet
