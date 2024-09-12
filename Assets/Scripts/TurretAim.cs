@@ -11,6 +11,7 @@ public class TurretAim : MonoBehaviour
     [SerializeField] private float bulletSpeed = 5;
     [SerializeField] private float range;
     [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private Transform bulletParent; //where they appear in hierarchy
     
     private int totalBullets; //how many bullets to put into the stack of available bullets
     private Stack<Bullet> bulletsAvailable = new Stack<Bullet>();
@@ -23,7 +24,7 @@ public class TurretAim : MonoBehaviour
 
         //make the bullet stacks
         for (int i = 0; i < totalBullets; i++) {
-            Bullet newBullet = Instantiate(bullet, transform); //make the bullet go forward
+            Bullet newBullet = Instantiate(bullet, bulletParent); //make the bullet go forward
             newBullet.Turret = this;
             newBullet.TimeAlive = bulletLife;
             newBullet.Speed = bulletSpeed;
@@ -58,7 +59,6 @@ public class TurretAim : MonoBehaviour
         if (closestTarget != null) { //if you found something to shoot, work out the angle based on where the target is heading
             float timeToHit = closestDistance/bulletSpeed; //time until intercept
             Vector3 targetSpeed = closestTarget.attachedRigidbody.velocity; //speed of asteroid
-            print("Intercept time: " + timeToHit + ", asteroid speed: " + targetSpeed + ", asteroid pos: " + closestTarget.transform.position);
             Vector3 targetPoint = closestTarget.transform.position + (targetSpeed * timeToHit); //position asteroid moves to during that time
             transform.GetChild(0).rotation = Quaternion.LookRotation(targetPoint - transform.position, bulletSpawnPoint.TransformDirection(Vector3.up));
             Debug.DrawRay(transform.position, targetPoint - transform.position, Color.yellow, shootCooldown);
@@ -66,7 +66,7 @@ public class TurretAim : MonoBehaviour
             Fire();
         }
         else {
-            print("No target within range");
+            Debug.Log("No target within range");
         }
     }
 

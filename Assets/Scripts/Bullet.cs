@@ -28,14 +28,17 @@ public class Bullet : MonoBehaviour
     public Gun Gun {
         set {
             gun = value;
+            firedBy = gun.transform;
         }
     }
     private TurretAim turret; //this is terrible. Need to do inheritance on gun properly
     public TurretAim Turret{
         set {
             turret = value;
+            firedBy = turret.transform;
         }
     }
+    private Transform firedBy;
 
     private void Start()
     {
@@ -75,22 +78,26 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        //play some particle effect, and destroy meteors
-        var rockScript = collision.collider.transform.parent.GetComponent<RockDestroyer>();
-        //if(rockScript==null && collision.transform.parent!=null) {
-        //    rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
-        //}
+        if (!firedBy.IsChildOf(collision.transform)) { //don't collide with what fired you
+            //play some particle effect, and destroy meteors
+            var rockScript = collision.collider.transform.parent.GetComponent<RockDestroyer>();
+            //if(rockScript==null && collision.transform.parent!=null) {
+            //    rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
+            //}
+            if(rockScript!=null) {
+                rockScript.ChangeRock(forceDir: transform.forward, forceMag: collision.impulse.magnitude * hitForceMagnitude, hitPos: transform.position);
+                //only collide with rocks. Pass through ship (otherwise turret bullets collide with the turret)
 
-        if(rockScript!=null) {
-            rockScript.ChangeRock(forceDir: transform.forward, forceMag: collision.impulse.magnitude * hitForceMagnitude, hitPos: transform.position);
-        }
+            }
 
-        if (gun != null) {
+            if (gun != null) {
             ReturnToGun();
+            }
+            else {
+                ReturnToTurret();
+            }
         }
-        else {
-            ReturnToTurret();
-        }
+        
     }
 
     private void ReturnToGun() {
@@ -101,6 +108,7 @@ public class Bullet : MonoBehaviour
     }
 
     private void ReturnToTurret() {
+        print("Bullet missed");
         rb.velocity = Vector3.zero;
         transform.position = turret.transform.position; 
         gameObject.SetActive(false); //disable the bullet
