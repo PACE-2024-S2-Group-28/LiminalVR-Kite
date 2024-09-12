@@ -29,6 +29,9 @@ public class AsteroidSpawner : MonoBehaviour
     private Vector2 spawnDistanceRange = new Vector2(10f, 20f);
 
     [SerializeField]
+    private AnimationCurve spawnFrequencyCurve = new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 0.1f));
+
+    [SerializeField]
     private float
         spawnChance = .2f,
         spawnMinTime = .3f,
@@ -46,6 +49,7 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private float goldenAsteroidSpawningTime = 15;
     [SerializeField] private Vector3 goldenAsteroidFixedPosition = new Vector3(0, 5, 0);
     [SerializeField] private Material goldMaterial;
+    private float gameTimer = 0;
     private void Start()
     {
         InvokeRepeating(nameof(TrySpawn), 0f, 1f / (float)spawnTickRate);
@@ -67,6 +71,7 @@ public class AsteroidSpawner : MonoBehaviour
     {
         timer += Time.deltaTime;
         goldenTimer += Time.deltaTime;
+        gameTimer += Time.deltaTime;
     }
 
     private void TrySpawn()
@@ -80,7 +85,7 @@ public class AsteroidSpawner : MonoBehaviour
             SpawnAsteroid();
             return;
         }
-        
+        float spawnChance = spawnFrequencyCurve.Evaluate(gameTimer);
         if (timer > spawnMinTime) {
             if(Random.Range(0f, 1f)<=spawnChance) {
                 SpawnAsteroid();
