@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System;
+using NaughtyAttributes;
 
-public class GameManager : MonoBehaviour
+public class AsteroidGameManager : MonoBehaviour
 {
-    private static GameManager instance;
-    public static GameManager Instance => instance;
+    private static AsteroidGameManager instance;
+    public static AsteroidGameManager Instance => instance;
 
     private static int score;
     public static int Score => score;
@@ -13,6 +14,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private AsteroidSpawner asteroidSpawner;
     public AsteroidSpawner Spawner => asteroidSpawner;
+
+    [SerializeField]
+    private float totalGameTime = 300;
+    [SerializeField]
+    [MinMaxSlider(0f, 20f)]
+    private Vector2 minMaxSpawnRate;
+    [SerializeField]
+    private AnimationCurve spawnCurve;
 
     // Events
     public Action<int> Action_OnScoreChanged;
@@ -26,6 +35,12 @@ public class GameManager : MonoBehaviour
         else {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        Debug.Log("percentage through game " + Time.time / totalGameTime);
+        Debug.Log("Spawn rate to set " + Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, spawnCurve.Evaluate(Time.time / totalGameTime)));
     }
 
     void Start()
