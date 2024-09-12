@@ -29,8 +29,11 @@ public class AsteroidSpawner : MonoBehaviour
     private Vector2 spawnDistanceRange = new Vector2(10f, 20f);
 
     [SerializeField]
-    private AnimationCurve spawnFrequencyCurve = new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 0.1f));
-
+    private AnimationCurve spawnFrequencyCurve = new AnimationCurve(
+        new Keyframe(0, 1),
+        new Keyframe(30f, 0.5f),
+        new Keyframe(60f, 0.1f)
+    );
     [SerializeField]
     private float
         spawnChance = .2f,
@@ -50,8 +53,13 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private Vector3 goldenAsteroidFixedPosition = new Vector3(0, 5, 0);
     [SerializeField] private Material goldMaterial;
     private float gameTimer = 0;
+    private float maxSpawnTime; //to store the max spawning time in the curve
     private void Start()
     {
+        if (spawnFrequencyCurve.length > 0) {
+        maxSpawnTime = spawnFrequencyCurve.keys[spawnFrequencyCurve.length - 1].time;
+        //track the last points position in curve
+        }
         InvokeRepeating(nameof(TrySpawn), 0f, 1f / (float)spawnTickRate);
     }
 
@@ -76,6 +84,10 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void TrySpawn()
     {
+         if (gameTimer > maxSpawnTime) {
+            return; // if we passed the max spawning time then stop spawning 
+        }
+
         if (activeAsteroids >= maxAsteroids) {
             timer = 0;
             return;
@@ -157,7 +169,7 @@ public class AsteroidSpawner : MonoBehaviour
 
     public void DestroyAsteroid(bool isGoldAsteroid)
     {
-    GameManager.Instance.HandleAsteroidDestruction(isGoldAsteroid);
+        GameManager.Instance.HandleAsteroidDestruction(isGoldAsteroid);
     }
 
     private void OnDrawGizmosSelected()
