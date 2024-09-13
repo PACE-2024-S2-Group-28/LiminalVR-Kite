@@ -7303,12 +7303,40 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7354029769871235986}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2137536387 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4242216128402544697, guid: d54a76ae86e737c4eafeb3a7005eeb07,
+    type: 3}
+  m_PrefabInstance: {fileID: 7354029769871235986}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137536386}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49914e89de957ea4d91a034e32308986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2137536388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2285997284023648131, guid: d54a76ae86e737c4eafeb3a7005eeb07,
     type: 3}
   m_PrefabInstance: {fileID: 7354029769871235986}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2137536389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137536386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40f4b76854e186488e0c77f35497bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradesRequired: 1
+  gun: {fileID: 2137536387}
+  multiBulletCount: 5
+  multiBulletSpreadAngle: 15
 --- !u!4 &2145463656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5309100522183281565, guid: ecbc8adf1b4cf884eb91f8362ca94d5f,
