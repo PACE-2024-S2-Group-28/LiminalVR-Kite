@@ -24,6 +24,7 @@ public class AsteroidGameManager : MonoBehaviour
     [SerializeField]
     private AnimationCurve spawnCurve;
 
+    [System.Serializable]
     public class GoldenAsteroidData {
         public float gameProgress;
         public Vector3 position;
