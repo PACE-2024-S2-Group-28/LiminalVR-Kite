@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using System;
 using NaughtyAttributes;
+using System.Collections.Generic;
 
 public class AsteroidGameManager : MonoBehaviour
 {
@@ -23,6 +24,18 @@ public class AsteroidGameManager : MonoBehaviour
     [SerializeField]
     private AnimationCurve spawnCurve;
 
+    public class GoldenAsteroidData {
+        public float gameProgress;
+        public Vector3 position;
+
+        public GoldenAsteroidData(float progress, Vector3 pos) {
+            gameProgress = progress;
+            position = pos;
+        }
+    }
+
+    public List<GoldenAsteroidData> goldenAsteroidData = new List<GoldenAsteroidData>();
+
     // Events
     public Action<int> Action_OnScoreChanged;
 
@@ -39,8 +52,16 @@ public class AsteroidGameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("percentage through game " + Time.time / totalGameTime);
-        Debug.Log("Spawn rate to set " + Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, spawnCurve.Evaluate(Time.time / totalGameTime)));
+        float gameProgress = Time.time / totalGameTime;
+        float spawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, spawnCurve.Evaluate(gameProgress));
+        asteroidSpawner.AdjustSpawnTickRate(spawnRate);
+    }
+
+    public void RecordGoldenAsteroidSpawn(Vector3 position)
+    {
+        float gameProgress = Time.time / totalGameTime;
+        goldenAsteroidData.Add(new GoldenAsteroidData(gameProgress, position));
+        Debug.Log($"Golden Asteroid spawned at {position} - {gameProgress * 100}% through game.");
     }
 
     void Start()

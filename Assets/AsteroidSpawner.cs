@@ -29,12 +29,6 @@ public class AsteroidSpawner : MonoBehaviour
     private Vector2 spawnDistanceRange = new Vector2(10f, 20f);
 
     [SerializeField]
-    private AnimationCurve spawnFrequencyCurve = new AnimationCurve(
-        new Keyframe(0, 1),
-        new Keyframe(30f, 0.5f),
-        new Keyframe(60f, 0.1f)
-    );
-    [SerializeField]
     private float
         spawnChance = .2f,
         spawnMinTime = .3f,
@@ -43,7 +37,7 @@ public class AsteroidSpawner : MonoBehaviour
         spawnExtraVelocityStrength = 2f;
 
     [SerializeField]
-    private int spawnTickRate = 30;
+    private float spawnTickRate = 30;
 
     private float timer;
     private int activeAsteroids = 0;
@@ -53,14 +47,10 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private Vector3 goldenAsteroidFixedPosition = new Vector3(0, 5, 0);
     [SerializeField] private Material goldMaterial;
     private float gameTimer = 0;
-    private float maxSpawnTime; //to store the max spawning time in the curve
     private void Start()
     {
-        if (spawnFrequencyCurve.length > 0) {
-        maxSpawnTime = spawnFrequencyCurve.keys[spawnFrequencyCurve.length - 1].time;
-        //track the last points position in curve
-        }
         InvokeRepeating(nameof(TrySpawn), 0f, 1f / (float)spawnTickRate);
+        UpdateSpawn();
     }
 
     private void OnEnable()
@@ -75,19 +65,26 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void CountRockDestroyed() { activeAsteroids--; }
 
+    public void AdjustSpawnTickRate(float rate)
+    {
+        spawnTickRate = Mathf.Clamp(rate, 1, 30); 
+        UpdateSpawn();
+    }
+
+    private void UpdateSpawn()
+    {
+        CancelInvoke(nameof(TrySpawn));
+        InvokeRepeating(nameof(TrySpawn), 0f, 1f / spawnTickRate);
+    }
     void Update()
     {
         timer += Time.deltaTime;
         goldenTimer += Time.deltaTime;
-        gameTimer += Time.deltaTime;
     }
 
     private void TrySpawn()
     {
-         if (gameTimer > maxSpawnTime) {
-            return; // if we passed the max spawning time then stop spawning 
-        }
-
+         
         if (activeAsteroids >= maxAsteroids) {
             timer = 0;
             return;
@@ -97,7 +94,6 @@ public class AsteroidSpawner : MonoBehaviour
             SpawnAsteroid();
             return;
         }
-        float spawnChance = spawnFrequencyCurve.Evaluate(gameTimer);
         if (timer > spawnMinTime) {
             if(Random.Range(0f, 1f)<=spawnChance) {
                 SpawnAsteroid();
@@ -111,18 +107,19 @@ public class AsteroidSpawner : MonoBehaviour
         #if UNITY_EDITOR
         if (!Application.isPlaying) return;
         #endif
-
+        Vector3 spawnVec = Vector3.zero; 
         int prefabIndex = (goldenTimer > goldenAsteroidSpawningTime) ? 1 : 0;
         if (prefabIndex == 1){ 
             goldenAsteroidsCount++;
             goldenTimer = 0;
+            AsteroidGameManager.Instance.RecordGoldenAsteroidSpawn(spawnVec);
         }
         GameObject asteroid = asteroidFab[prefabIndex];
         
         activeAsteroids++;
         timer = 0f;
 
-        Vector3 spawnVec;
+        //Vector3 spawnVec;
         if (prefabIndex == 1) {
             spawnVec = goldenAsteroidFixedPosition;
         } else {
@@ -169,7 +166,7 @@ public class AsteroidSpawner : MonoBehaviour
 
     public void DestroyAsteroid(bool isGoldAsteroid)
     {
-        GameManager.Instance.HandleAsteroidDestruction(isGoldAsteroid);
+        AsteroidGameManager.Instance.HandleAsteroidDestruction(isGoldAsteroid);
     }
 
     private void OnDrawGizmosSelected()
