@@ -18,11 +18,15 @@ public class AsteroidGameManager : MonoBehaviour
 
     [SerializeField]
     private float totalGameTime = 300;
+    public float GameLength => totalGameTime;
+
     [SerializeField]
     [MinMaxSlider(0f, 20f)]
     private Vector2 minMaxSpawnRate;
+
     [SerializeField]
     private AnimationCurve spawnCurve;
+    public AnimationCurve DifficultyCurve => spawnCurve;
 
     [System.Serializable]
     public class GoldenAsteroidData {
@@ -35,7 +39,9 @@ public class AsteroidGameManager : MonoBehaviour
         }
     }
 
-    public List<GoldenAsteroidData> goldenAsteroidData = new List<GoldenAsteroidData>();
+    [SerializeField]
+    private List<GoldenAsteroidData> goldenAsteroidData = new List<GoldenAsteroidData>();
+    public GoldenAsteroidData[] GoldSpawns => goldenAsteroidData.ToArray();
 
     // Events
     public Action<int> Action_OnScoreChanged;

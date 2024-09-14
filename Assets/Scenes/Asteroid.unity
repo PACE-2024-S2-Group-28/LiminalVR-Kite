@@ -7540,10 +7540,88 @@ MonoBehaviour:
   minMaxSpawnRate: {x: 0, y: 0}
   spawnCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.24998474
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25444388
+      value: 0.5907238
+      inSlope: -1.3526427
+      outSlope: -1.3526427
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.24430811
+    - serializedVersion: 3
+      time: 0.3968715
+      value: 0.43115014
+      inSlope: 0.3018101
+      outSlope: 0.3018101
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.600011
+      value: 0.82178545
+      inSlope: 0.963751
+      outSlope: 0.963751
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7153903
+      value: 0.66963816
+      inSlope: 0.09768546
+      outSlope: 0.09768546
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8055986
+      value: 0.93904036
+      inSlope: 1.7343248
+      outSlope: 1.7343248
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9634465
+      value: 0.00067362655
+      inSlope: -11.735038
+      outSlope: -11.735038
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.20644554
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  goldenAsteroidData:
+  - gameProgress: 10
+    position: {x: 0, y: 0, z: 0}
+  - gameProgress: 25
+    position: {x: 0, y: 0, z: 0}
+  - gameProgress: 30
+    position: {x: 0, y: 0, z: 0}
+  - gameProgress: 190
+    position: {x: 0, y: 0, z: 0}
+  - gameProgress: 200
+    position: {x: 0, y: 0, z: 0}
+  - gameProgress: 235
+    position: {x: 0, y: 0, z: 0}
+  - gameProgress: 250
+    position: {x: 0, y: 0, z: 0}
 --- !u!1 &2065533816
 GameObject:
   m_ObjectHideFlags: 0
