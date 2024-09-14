@@ -7609,19 +7609,19 @@ MonoBehaviour:
     m_RotationOrder: 4
   goldenAsteroidData:
   - gameProgress: 10
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 1.31, y: 1.35, z: 0}
   - gameProgress: 25
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 0, y: 2.34, z: 0}
   - gameProgress: 30
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 0, y: 11.55, z: 0}
   - gameProgress: 190
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 8.64, y: 14.52, z: 0}
   - gameProgress: 200
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 0, y: 14.24, z: 0}
   - gameProgress: 235
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 0, y: 17.53, z: 0}
   - gameProgress: 250
-    position: {x: 0, y: 0, z: 0}
+    position: {x: 0, y: 7.86, z: 0}
 --- !u!1 &2065533816
 GameObject:
   m_ObjectHideFlags: 0

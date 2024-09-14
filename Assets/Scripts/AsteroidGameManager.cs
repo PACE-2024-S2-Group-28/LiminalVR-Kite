@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using System;
 using NaughtyAttributes;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class AsteroidGameManager : MonoBehaviour
 {
@@ -96,5 +97,22 @@ public class AsteroidGameManager : MonoBehaviour
     public void AdjustAsteroidSpeed(float multiplier)
     {
         asteroidSpawner.AsteroidSpeedRange = new Vector2(asteroidSpawner.AsteroidSpeedRange.x * multiplier, asteroidSpawner.AsteroidSpeedRange.y * multiplier);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (goldenAsteroidData == null || goldenAsteroidData.Count <= 0) return;
+
+        GUIStyle style = new GUIStyle();
+        style.fontSize = 18;
+        style.normal.textColor = Color.white;
+        style.fontStyle = FontStyle.Bold;
+        style.alignment = TextAnchor.MiddleCenter;
+
+        Gizmos.color = Color.yellow;
+        foreach (var spawn in goldenAsteroidData) {
+            Gizmos.DrawWireSphere(spawn.position, 1f);
+            Handles.Label(spawn.position, "" + spawn.gameProgress, style);
+        }
     }
 }
