@@ -111,7 +111,7 @@ public class AsteroidGameManager : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         foreach (var spawn in goldenAsteroidData) {
-            Gizmos.DrawWireSphere(spawn.position, 1f);
+            Gizmos.DrawWireSphere(spawn.position, 3.5f);
             Handles.Label(spawn.position, "" + spawn.gameProgress, style);
         }
     }
