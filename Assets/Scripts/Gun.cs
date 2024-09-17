@@ -48,27 +48,30 @@ public class Gun : MonoBehaviour
         inputDevice = (controllerHand == InputHand.Primary) ? VRDevice.Device?.PrimaryInputDevice : VRDevice.Device?.SecondaryInputDevice;
 
         totalBullets = Mathf.CeilToInt(bulletLife / shootCooldown) + 1;
-        //parent so bullets dont flood scene heirarchy
-        if (bulletParent == null)
-            bulletParent = new GameObject("Bullet_Parent");
 
-        //make the bullet stacks
-        for (int i = 0; i < totalBullets; i++)
+        InitializeBullets(totalBullets);
+    }
+
+    private void InitializeBullets(int bulletAmount)
+    {
+        if (bulletParent == null)
+            bulletParent = new GameObject("Bullet_Parent"); // So the bullets don't flood the hierarchy
+
+        for (int i = 0; i < bulletAmount; i++)
         {
-            Bullet newBullet = Instantiate(bullet, transform.position, Quaternion.LookRotation(transform.forward, transform.up)); //make the bullet go forward
+            Bullet newBullet = Instantiate(bullet, transform.position, Quaternion.LookRotation(transform.forward, transform.up)); // Makes the bullet go forward
             newBullet.transform.parent = bulletParent.transform;
             newBullet.Gun = this;
             newBullet.TimeAlive = bulletLife;
             newBullet.gameObject.SetActive(false);
             bulletsAvailable.Push(newBullet);
         }
-        Debug.Log("stack count = " + bulletsAvailable.Count);
+
     }
 
     // Handle shooting the gun and managing the cooldown
     void Update()
     {
-        // Debug.Log("stack count = " + bulletsAvailable.Count);
         if (inputDevice == null) return;
 
 
@@ -88,7 +91,7 @@ public class Gun : MonoBehaviour
         event_tryFire?.Invoke(this);
 
         // Cbeck recharge and ammo
-        if (bulletsAvailable.Count < (multiBulletUpgradeActive ? bulletCount : 1))
+        if (bulletsAvailable.Count <= 0)
         {
             event_outOfAmmo?.Invoke(this);
             return;
@@ -126,9 +129,8 @@ public class Gun : MonoBehaviour
 
     private void FireMultipleBullets()
     {
-        // Calculate the angle between each bullet in the spread
         float angleStep = 360f / bulletCount; // Full circle divided by number of bullets
-        float radius = 1f; // Distance from the center of the circular pattern to the spawn position of the bullets
+        float radius = 1f; // Distance from the center of the circular pattern
 
         for (int i = 0; i < bulletCount; i++)
         {
@@ -137,24 +139,16 @@ public class Gun : MonoBehaviour
 
             // Position the bullet in a circular pattern
             float currentAngle = angleStep * i;
-
-            // Convert the angle to radians for trigonometric calculations
             float angleRad = Mathf.Deg2Rad * currentAngle;
 
-            // Calculate the position of the bullet in the circular pattern
             Vector3 offset = new Vector3(
                 Mathf.Cos(angleRad) * radius,  // x
-                Mathf.Sin(angleRad) * radius,  // y (assuming horizontal circle)
-                0                             // z (assuming horizontal circle)
+                Mathf.Sin(angleRad) * radius,  // y 
+                0                             // z 
             );
 
-            // Position the bullet
             shotBullet.transform.position = transform.TransformPoint(localFirePos + offset);
-
-            // Set the bullet's forward direction to point in the same direction as the gun
             shotBullet.transform.forward = transform.forward;
-
-            // Set the bullet's velocity in the forward direction
             shotBullet.Rb.velocity = transform.forward * shotBullet.Speed;
 
             shotBullet.ResetTimer();
@@ -165,11 +159,16 @@ public class Gun : MonoBehaviour
 
 
 
-
+    // If the multibullet spawns 4 bullets, the bullet stack will be factored by 4
     public void ActivateMultiBulletUpgrade(int newBulletCount)
     {
         multiBulletUpgradeActive = true;
         bulletCount = newBulletCount;
+
+        int additionalBullets = totalBullets * (bulletCount - 1);
+
+
+        InitializeBullets(additionalBullets); // Add extra bullets to the stack
     }
 
 
