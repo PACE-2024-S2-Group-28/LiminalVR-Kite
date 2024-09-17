@@ -7,11 +7,10 @@ public class MultiBulletUpgrade : UpgradeListener
 {
     [SerializeField] private Gun gun;
     [SerializeField] private int multiBulletCount = 5;
-    [SerializeField] private float multiBulletSpreadAngle = 15f;
 
     public override void DoUpgrade()
     {
-        gun.ActivateMultiBulletUpgrade(multiBulletCount, multiBulletSpreadAngle);
+        gun.ActivateMultiBulletUpgrade(multiBulletCount);
         DestroyThis();
     }
 }

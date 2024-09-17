@@ -32,7 +32,6 @@ public class Gun : MonoBehaviour
     [Header("Multi-Bullet Upgrade Properties")]
     private bool multiBulletUpgradeActive = false;
     [SerializeField] private int bulletCount = 1;
-    [SerializeField] private float spreadAngle = 10; // Spread angle for multi-shot
 
     //events to subscribe vfx or sfx or any related behaviour
     public UnityEvent<Gun> event_tryFire;
@@ -69,12 +68,6 @@ public class Gun : MonoBehaviour
     // Handle shooting the gun and managing the cooldown
     void Update()
     {
-
-        Debug.Log(multiBulletUpgradeActive + " " + bulletCount + " " + spreadAngle);
-
-
-
-
         // Debug.Log("stack count = " + bulletsAvailable.Count);
         if (inputDevice == null) return;
 
@@ -133,37 +126,50 @@ public class Gun : MonoBehaviour
 
     private void FireMultipleBullets()
     {
-        float halfSpread = spreadAngle * (bulletCount - 1) / 2;
+        // Calculate the angle between each bullet in the spread
+        float angleStep = 360f / bulletCount; // Full circle divided by number of bullets
+        float radius = 1f; // Distance from the center of the circular pattern to the spawn position of the bullets
 
         for (int i = 0; i < bulletCount; i++)
         {
             Bullet shotBullet = bulletsAvailable.Pop();
             shotBullet.gameObject.SetActive(true);
 
-            // Calculate bullet direcito nwith spread
-            float currentAngle = -halfSpread + (spreadAngle * i);
-            Quaternion bulletRotation = Quaternion.Euler(0, currentAngle, 0);
-            Vector3 bulletDirection = bulletRotation * transform.forward;
+            // Position the bullet in a circular pattern
+            float currentAngle = angleStep * i;
 
-            shotBullet.transform.position = transform.TransformPoint(localFirePos);
-            shotBullet.transform.rotation = Quaternion.LookRotation(bulletDirection, transform.up);
+            // Convert the angle to radians for trigonometric calculations
+            float angleRad = Mathf.Deg2Rad * currentAngle;
 
-            shotBullet.StartVelocity();
+            // Calculate the position of the bullet in the circular pattern
+            Vector3 offset = new Vector3(
+                Mathf.Cos(angleRad) * radius,  // x
+                Mathf.Sin(angleRad) * radius,  // y (assuming horizontal circle)
+                0                             // z (assuming horizontal circle)
+            );
+
+            // Position the bullet
+            shotBullet.transform.position = transform.TransformPoint(localFirePos + offset);
+
+            // Set the bullet's forward direction to point in the same direction as the gun
+            shotBullet.transform.forward = transform.forward;
+
+            // Set the bullet's velocity in the forward direction
+            shotBullet.Rb.velocity = transform.forward * shotBullet.Speed;
+
             shotBullet.ResetTimer();
             bulletsShot.Push(shotBullet);
         }
     }
 
-    private bool thing = true;
 
-    public void ActivateMultiBulletUpgrade(int newBulletCount, float newSpreadAngle)
+
+
+
+    public void ActivateMultiBulletUpgrade(int newBulletCount)
     {
         multiBulletUpgradeActive = true;
         bulletCount = newBulletCount;
-        spreadAngle = newSpreadAngle;
-
-
-        Debug.Log("should only be logged once");
     }
 
 
