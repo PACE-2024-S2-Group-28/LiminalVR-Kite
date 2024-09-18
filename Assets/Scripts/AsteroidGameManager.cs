@@ -5,6 +5,9 @@ using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEditor;
 
+using Liminal.SDK.Core;
+using Liminal.Core.Fader;
+
 public class AsteroidGameManager : MonoBehaviour
 {
     private static AsteroidGameManager instance;
@@ -114,5 +117,12 @@ public class AsteroidGameManager : MonoBehaviour
             Gizmos.DrawWireSphere(spawn.position, 3.5f);
             Handles.Label(spawn.position, "" + spawn.gameProgress, style);
         }
+    }
+
+    public void EndExperience()
+    {
+        var fader = ScreenFader.Instance;
+        fader.FadeTo(Color.black, 2f); // fade to "black out" after 2 sec
+        ExperienceApp.End();
     }
 }
