@@ -19,7 +19,7 @@ public class AsteroidSpawner : MonoBehaviour
 
     [SerializeField, MinMaxSlider(0.1f, 10f)]
     private Vector2 asteroidSizeRange = new Vector2(1f, 5f);
-    
+
 
     [SerializeField, MinMaxSlider(0f, 10f)]
     private Vector2 asteroidSpeedRange = new Vector2(1f, 5f);
@@ -70,18 +70,22 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void TrySpawn()
     {
-        if (activeAsteroids >= maxAsteroids) {
+        if (activeAsteroids >= maxAsteroids)
+        {
             timer = 0;
             return;
         }
 
-        if (timer >= spawnMaxTime || (goldenTimer > goldenAsteroidSpawningTime && timer > spawnMinTime)) {
+        if (timer >= spawnMaxTime || (goldenTimer > goldenAsteroidSpawningTime && timer > spawnMinTime))
+        {
             SpawnAsteroid();
             return;
         }
-        
-        if (timer > spawnMinTime) {
-            if(Random.Range(0f, 1f)<=spawnChance) {
+
+        if (timer > spawnMinTime)
+        {
+            if (Random.Range(0f, 1f) <= spawnChance)
+            {
                 SpawnAsteroid();
             }
         }
@@ -90,37 +94,41 @@ public class AsteroidSpawner : MonoBehaviour
     [Button]
     private void SpawnAsteroid()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (!Application.isPlaying) return;
-        #endif
+#endif
 
         int prefabIndex = (goldenTimer > goldenAsteroidSpawningTime) ? 1 : 0;
-        if (prefabIndex == 1){ 
+        if (prefabIndex == 1)
+        {
             goldenAsteroidsCount++;
             goldenTimer = 0;
         }
         GameObject asteroid = asteroidFab[prefabIndex];
-        
+
         activeAsteroids++;
         timer = 0f;
 
         Vector3 spawnVec;
-        if (prefabIndex == 1) {
+        if (prefabIndex == 1)
+        {
             spawnVec = goldenAsteroidFixedPosition;
-        } else {
+        }
+        else
+        {
             spawnVec = Random.insideUnitSphere;
             spawnVec = Vector3.Scale(spawnVec, spawnBox);
         }
 
         var asteroidT = GameObject.Instantiate(asteroidFab[prefabIndex]).transform;
         asteroidT.parent = this.transform;
-        
-        
+
+
         float spawnDistance = Random.Range(spawnDistanceRange.x, spawnDistanceRange.y);
         asteroidT.position = transform.position + spawnVec.normalized * spawnDistance;
         //Calculate spawn distance from player
 
-        
+
         float size = Random.Range(asteroidSizeRange.x, asteroidSizeRange.y);
         asteroidT.localScale = Vector3.one * size;
         //Randomize asteroid size
@@ -140,14 +148,17 @@ public class AsteroidSpawner : MonoBehaviour
         spawnVec = Random.insideUnitSphere;
         rb.angularVelocity = spawnVec * spawnRotationStrength;
 
+        GameObject playerShip = GameObject.FindWithTag("Player");
+        Vector3 directionToShip = (playerShip.transform.position - asteroidT.position).normalized;
+
         //random rb velocity based on speed range
         float speed = Random.Range(asteroidSpeedRange.x, asteroidSpeedRange.y);
-        rb.velocity = startingDefaultVel + Random.insideUnitSphere.normalized * speed;
+        rb.velocity = startingDefaultVel + (directionToShip * speed) + (Random.insideUnitSphere.normalized * speed);
     }
 
     public void DestroyAsteroid(bool isGoldAsteroid)
     {
-    GameManager.Instance.HandleAsteroidDestruction(isGoldAsteroid);
+        GameManager.Instance.HandleAsteroidDestruction(isGoldAsteroid);
     }
 
     private void OnDrawGizmosSelected()
