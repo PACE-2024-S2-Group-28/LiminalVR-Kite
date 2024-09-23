@@ -13,6 +13,12 @@ public class UpgradeBarController : MonoBehaviour
     [SerializeField]
     private Transform barFillTransform;
 
+    void Start()
+    {
+        GameManager.Instance.Action_IncrementUpgradeProgress = UpdateBarFill;
+
+        UpdateBarFill(0);
+    }
     public void UpdateBarFill(float fill)
     {
         fillAmount = Mathf.Clamp01(fill);

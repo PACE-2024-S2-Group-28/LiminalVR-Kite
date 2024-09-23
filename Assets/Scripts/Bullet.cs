@@ -5,21 +5,50 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 5;
+    public float Speed
+    {
+        set
+        {
+            speed = value;
+        }
+        get { return speed; }
+    }
     [SerializeField] private float timeAlive = 3;
+    public float TimeAlive
+    {
+        set
+        {
+            timeAlive = value;
+        }
+    }
 
     [SerializeField]
     private float hitForceMagnitude = 3f;
 
     [SerializeField]
     private Rigidbody rb;
-    
+    public Rigidbody Rb { get { return rb; } }
+
     private float timer;
-    private Gun gun;
-    public Gun Gun {
-        set {
+    private Gun gun = null;
+    public Gun Gun
+    {
+        set
+        {
             gun = value;
+            firedBy = gun.transform;
         }
     }
+    private TurretAim turret; //this is terrible. Need to do inheritance on gun properly
+    public TurretAim Turret
+    {
+        set
+        {
+            turret = value;
+            firedBy = turret.transform;
+        }
+    }
+    private Transform firedBy;
 
     private void Start()
     {
@@ -38,38 +67,72 @@ public class Bullet : MonoBehaviour
 
         //after a certain time, the bullet fades out and retuns to the gun's list of bullets to fire
         timer -= Time.deltaTime;
-        if (timer <= 0) {
+        if (timer <= 0)
+        {
             Miss();
         }
     }
 
-    private void Miss() {
+    private void Miss()
+    {
         //fading out still to come
-        ReturnToGun();
+        if (gun != null)
+        {
+            ReturnToGun();
+        }
+        else
+        {
+            ReturnToTurret();
+        }
+
     }
 
-    public void ResetTimer() {
+    public void ResetTimer()
+    {
         timer = timeAlive;
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        //play some particle effect, and destroy meteors
-        var rockScript = collision.collider.transform.parent.GetComponent<RockDestroyer>();
-        //if(rockScript==null && collision.transform.parent!=null) {
-        //    rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
-        //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!firedBy.IsChildOf(collision.transform))
+        { //don't collide with what fired you
+            //play some particle effect, and destroy meteors
+            var rockScript = collision.collider.transform.parent.GetComponent<RockDestroyer>();
+            //if(rockScript==null && collision.transform.parent!=null) {
+            //    rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
+            //}
+            if (rockScript != null)
+            {
+                rockScript.ChangeRock(forceDir: transform.forward, forceMag: collision.impulse.magnitude * hitForceMagnitude, hitPos: transform.position);
+                //only collide with rocks. Pass through ship (otherwise turret bullets collide with the turret)
 
-        if(rockScript!=null) {
-            rockScript.ChangeRock(forceDir: transform.forward, forceMag: collision.impulse.magnitude * hitForceMagnitude, hitPos: transform.position);
+            }
+
+            if (gun != null)
+            {
+                ReturnToGun();
+            }
+            else
+            {
+                ReturnToTurret();
+            }
         }
 
-        ReturnToGun();
     }
 
-    private void ReturnToGun() {
+    private void ReturnToGun()
+    {
         rb.velocity = Vector3.zero;
-        transform.position = gun.transform.position; 
+        transform.position = gun.transform.position;
         gameObject.SetActive(false); //disable the bullet
         gun.BulletReturned(this); //let gun know this bullet is available
+    }
+
+    private void ReturnToTurret()
+    {
+        rb.velocity = Vector3.zero;
+        transform.position = turret.transform.position;
+        gameObject.SetActive(false); //disable the bullet
+        turret.BulletReturned(this); //let turret know this bullet is available
     }
 }

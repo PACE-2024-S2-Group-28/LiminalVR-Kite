@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 561869649960658156, guid: 3248ae5e5e4d1b6429dedd86d772fe98, type: 3}
-  shootCooldown: 0.3
-  totalBullets: 10
+  shootCooldown: 3
+  bulletLife: 3
   rechargeTimer: 0
   controllerHand: 0
   localFirePos: {x: 0, y: 0.0535, z: 0.135}
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 561869649960658156, guid: 3248ae5e5e4d1b6429dedd86d772fe98, type: 3}
   shootCooldown: 0.3
-  totalBullets: 10
+  bulletLife: 3
   rechargeTimer: 0
   controllerHand: 0
   localFirePos: {x: 0, y: 0.0535, z: 0.135}
