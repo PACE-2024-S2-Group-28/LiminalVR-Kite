@@ -137,7 +137,7 @@ public class AsteroidSpawner : MonoBehaviour
         
         
         float spawnDistance = Random.Range(spawnDistanceRange.x, spawnDistanceRange.y);
-        asteroidT.position = transform.position + spawnVec.normalized * spawnDistance;
+        asteroidT.position = transform.position + spawnVec;
         //Calculate spawn distance from player
 
         
@@ -164,9 +164,11 @@ public class AsteroidSpawner : MonoBehaviour
         spawnVec = Random.insideUnitSphere;
         rb.angularVelocity = spawnVec * spawnRotationStrength;
 
-        //random rb velocity based on speed range
+        //set starting velocity + random component based on speed range, lerped towards a direction to player
         float speed = Random.Range(asteroidSpeedRange.x, asteroidSpeedRange.y);
-        rb.velocity = startingDefaultVel + Random.insideUnitSphere.normalized * speed;
+        Vector3 velToPlayer = -asteroidT.position.normalized * startingDefaultVel.magnitude;
+        Vector3 lerpedVel = Vector3.Lerp(startingDefaultVel, velToPlayer, .8f);
+        rb.velocity = lerpedVel + Random.insideUnitSphere.normalized * speed;
     }
 
     public void DestroyAsteroid(bool isGoldAsteroid)

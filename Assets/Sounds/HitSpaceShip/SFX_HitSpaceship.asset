@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5a7a86357ace7bd4a96f0cc896f110dc, type: 3}
   - {fileID: 8300000, guid: a7d3dd486b312f845bf815d7613c488b, type: 3}
   - {fileID: 8300000, guid: 5db45a70d775b2749a37a8d2f0d5f665, type: 3}
-  volumeSlider: {x: 0.3426115, y: 0.70402217}
+  volumeSlider: {x: 0.7038697, y: 1}
   playOrder: 2
   useSemitones: 1
   pitchSlider: {x: 0.8409037, y: 1.1891968}
