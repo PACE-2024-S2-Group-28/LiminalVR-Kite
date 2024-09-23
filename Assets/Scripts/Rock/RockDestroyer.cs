@@ -1,6 +1,5 @@
 using DG.Tweening;
 using ScriptableObjects;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,19 +35,10 @@ public class RockDestroyer : MonoBehaviour
 
     private bool calledDestroyEvent = false;
 
-    private Action<bool> asteroidDestroyed;
-
     // Start is called before the first frame update
     void Start()
     {
         if (rockRbs == null) GetRigidBodies();
-
-        asteroidDestroyed = DestroyAsteroid;
-    }
-
-    void DestroyAsteroid(bool b)
-    {
-        GameManager.Instance.HandleAsteroidDestruction(b);
     }
 
     [Button]
@@ -80,20 +70,18 @@ public class RockDestroyer : MonoBehaviour
     {
         #if UNITY_EDITOR
             if (!Application.isPlaying) return;
-        #endif
-
-        DestroyAsteroid(false);
+        #endif 
 
         rockBreakSFX?.Play(wPos: transform.position);
 
         var ogRB = rock.GetComponent<Rigidbody>();
 
-        //GameManager.Instance.HandleAsteroidDestruction(gameObject.CompareTag("GoldAsteroid"));
         fracturedRock.transform.position = rock.transform.position;
         fracturedRock.transform.rotation = Quaternion.Euler(rock.transform.rotation.eulerAngles + Vector3.right*90f);
         rock.SetActive(false);
         fracturedRock.SetActive(true);
 
+        AsteroidGameManager.Instance.HandleAsteroidDestruction(fracturedRock.CompareTag("GoldAsteroid"));
         
         //force optional checks
         if (!forceDir.HasValue) forceDir = Vector3.zero;

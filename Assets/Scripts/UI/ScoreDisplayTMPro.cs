@@ -16,7 +16,7 @@ public class ScoreDisplayTMPro : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.Action_OnScoreChanged = UpdateScoreDisplay;
+        AsteroidGameManager.Instance.Action_OnScoreChanged = UpdateScoreDisplay;
         UpdateScoreDisplay(0);
     }
 

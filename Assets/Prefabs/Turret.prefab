@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1413892163976906540}
-  - component: {fileID: 1413892163976906539}
+  - component: {fileID: 2516759296291648508}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -110,7 +110,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 179.99998}
---- !u!114 &1413892163976906539
+--- !u!114 &2516759296291648508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,15 +119,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1413892163976906541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38a363e352e5a2b419d4c55cf0411284, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fe9cd6358e90fa4d9ce3603cbad88b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 561869649960658156, guid: 3248ae5e5e4d1b6429dedd86d772fe98, type: 3}
-  shootCooldown: 3
-  bulletLife: 6
-  bulletSpeed: 60
-  range: 300
-  bulletSpawnPoint: {fileID: 2709401218575632730}
+  upgradesRequired: 1
+  turret: {fileID: 1413892164871016696}
 --- !u!1 &1413892164871016696
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,13 +135,14 @@ GameObject:
   - component: {fileID: 1413892164871016695}
   - component: {fileID: 1413892164871016693}
   - component: {fileID: 1413892164871016694}
+  - component: {fileID: 8616364762951498760}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1413892164871016695
 Transform:
   m_ObjectHideFlags: 0
@@ -206,6 +203,25 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &8616364762951498760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413892164871016696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a363e352e5a2b419d4c55cf0411284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 561869649960658156, guid: 3248ae5e5e4d1b6429dedd86d772fe98, type: 3}
+  shootCooldown: 3
+  bulletLife: 6
+  bulletSpeed: 60
+  range: 300
+  bulletSpawnPoint: {fileID: 2709401218575632730}
+  bulletParent: {fileID: 0}
 --- !u!1 &7615858291391411898
 GameObject:
   m_ObjectHideFlags: 0
