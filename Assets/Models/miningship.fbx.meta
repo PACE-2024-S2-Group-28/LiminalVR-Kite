@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: EnginePanels
+    second: {fileID: 2100000, guid: e74e20a90dddf394487a5d67f3cc0bc1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: InnerPanels
     second: {fileID: 2100000, guid: f07ec367306e1ce4f8e35002278e5fc1, type: 2}
   - first:
