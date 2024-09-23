@@ -429,7 +429,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9083063109698938334}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 232e4ab8893e1d840b1db20c9de8a8d2, type: 3}
   m_Name: 
@@ -443,11 +443,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 790810950067927340}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 810004cb455856e47848d2b132db6411,
-        type: 3}
-      propertyPath: m_Name
-      value: screen
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 810004cb455856e47848d2b132db6411,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -517,6 +512,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 810004cb455856e47848d2b132db6411,
+        type: 3}
+      propertyPath: m_Name
+      value: screen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 810004cb455856e47848d2b132db6411, type: 3}
