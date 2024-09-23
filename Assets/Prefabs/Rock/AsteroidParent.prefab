@@ -49,8 +49,8 @@ MonoBehaviour:
   fracturedRock: {fileID: 6911895162699298039}
   rock: {fileID: 7268447682887004510}
   fadeSpeed: 1
-  rockLifetime: 3
-  rockFadeTime: 6
+  rockLifetime: 0.5
+  rockFadeTime: 1
   rockRbs:
   - {fileID: 5992767002399749001}
   - {fileID: 5992767002317846096}
