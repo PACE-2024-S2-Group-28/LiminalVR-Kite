@@ -16,7 +16,7 @@ public class ShipCollision : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if(traumaLayers == (traumaLayers | (1 << other.gameObject.layer)))
+        if(other.gameObject != null && traumaLayers == (traumaLayers | (1 << other.gameObject.layer)))
         {
             spaceshipNoise.AddTrauma(collisionTraumaAmount);
         }
