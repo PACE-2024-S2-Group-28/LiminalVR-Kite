@@ -47,10 +47,11 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private Vector3 goldenAsteroidFixedPosition = new Vector3(0, 5, 0);
     [SerializeField] private Material goldMaterial;
     private float gameTimer = 0;
+
     private void Start()
     {
         InvokeRepeating(nameof(TrySpawn), 0f, 1f / (float)spawnTickRate);
-        UpdateSpawn();
+        //UpdateSpawn();
     }
 
     private void OnEnable()
@@ -67,8 +68,12 @@ public class AsteroidSpawner : MonoBehaviour
 
     public void AdjustSpawnTickRate(float rate)
     {
-        spawnTickRate = Mathf.Clamp(rate, 1, 30); 
-        UpdateSpawn();
+        rate = Mathf.Max(Mathf.Epsilon, rate);
+
+        //spawnTickRate = Mathf.Clamp(rate, 1, 30); 
+        spawnMinTime = 1f / (rate*1.2f);
+        spawnMaxTime = 1f / (rate*.8f);
+        //UpdateSpawn();
     }
 
     private void UpdateSpawn()

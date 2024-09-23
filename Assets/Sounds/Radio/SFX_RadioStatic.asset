@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20c2dad7835d4e04d8a376b5de7d2b2a, type: 3}
-  m_Name: SFX_LaserFire
+  m_Name: SFX_RadioStatic
   m_EditorClassIdentifier: 
-  mixGroup: {fileID: 8781418876680147640, guid: 1040c02797a1975429124a69cb02059d,
+  mixGroup: {fileID: 3144637675215373259, guid: 1040c02797a1975429124a69cb02059d,
     type: 2}
   clips:
-  - {fileID: 8300000, guid: cb485f1a0ab4b504a86d0d09a54782d5, type: 3}
-  volumeSlider: {x: 0.5681603, y: 0.86111104}
-  playOrder: 0
+  - {fileID: 8300000, guid: ebc10ca56cd1dbd4db54a4f6daf63b35, type: 3}
+  - {fileID: 8300000, guid: f431820d2cc815a4d9148d232205b3dd, type: 3}
+  volumeSlider: {x: 0.58517885, y: 0.80238503}
+  playOrder: 2
   useSemitones: 1
-  pitchSlider: {x: 0.56124717, y: 0.7937097}
-  semitoneMin: -10
-  semitoneMax: -4
+  pitchSlider: {x: 0.74916434, y: 1.05946}
+  semitoneMin: -5
+  semitoneMax: 1
   rolloffMode: 0
   rolloffDistance: {x: 1, y: 500}

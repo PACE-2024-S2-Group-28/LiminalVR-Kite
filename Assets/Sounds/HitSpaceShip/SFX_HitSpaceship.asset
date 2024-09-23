@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c2dad7835d4e04d8a376b5de7d2b2a, type: 3}
+  m_Name: SFX_HitSpaceship
+  m_EditorClassIdentifier: 
+  mixGroup: {fileID: -4108567216477369883, guid: 1040c02797a1975429124a69cb02059d,
+    type: 2}
+  clips:
+  - {fileID: 8300000, guid: 5a7a86357ace7bd4a96f0cc896f110dc, type: 3}
+  - {fileID: 8300000, guid: a7d3dd486b312f845bf815d7613c488b, type: 3}
+  - {fileID: 8300000, guid: 5db45a70d775b2749a37a8d2f0d5f665, type: 3}
+  volumeSlider: {x: 0.3426115, y: 0.70402217}
+  playOrder: 2
+  useSemitones: 1
+  pitchSlider: {x: 0.8409037, y: 1.1891968}
+  semitoneMin: -3
+  semitoneMax: 3
+  rolloffMode: 1
+  rolloffDistance: {x: 1, y: 500}
