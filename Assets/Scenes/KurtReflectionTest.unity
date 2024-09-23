@@ -394,6 +394,16 @@ PrefabInstance:
       objectReference: {fileID: 4464225964493584865}
     - target: {fileID: 5630824728858761098, guid: 43471b8065970734d8f9d0aa55207858,
         type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630824728858761098, guid: 43471b8065970734d8f9d0aa55207858,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630824728858761098, guid: 43471b8065970734d8f9d0aa55207858,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
@@ -402,16 +412,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5630824728858761098, guid: 43471b8065970734d8f9d0aa55207858,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3651207381710338907, guid: 43471b8065970734d8f9d0aa55207858,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 932c254a6ee7ccd498050b4d16b0f0b3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43471b8065970734d8f9d0aa55207858, type: 3}
 --- !u!4 &365820717 stripped
@@ -686,29 +686,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638610144}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &679863050 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2465178961720393690, guid: 43471b8065970734d8f9d0aa55207858,
-    type: 3}
-  m_PrefabInstance: {fileID: 240474057}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &679863051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 679863050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c40fd5885bbd804988fc753867c0540, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionTraumaAmount: 0.3
-  traumaLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  spaceshipNoise: {fileID: 1555136776}
 --- !u!1 &761762259
 GameObject:
   m_ObjectHideFlags: 0
@@ -6771,18 +6748,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeThreshold: 100
   asteroidSpawner: {fileID: 9427851}
---- !u!114 &1555136776 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8744093706356187091, guid: 43471b8065970734d8f9d0aa55207858,
-    type: 3}
-  m_PrefabInstance: {fileID: 240474057}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f1b256e6d63738488e1868d192841ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1664490292
 GameObject:
   m_ObjectHideFlags: 0
