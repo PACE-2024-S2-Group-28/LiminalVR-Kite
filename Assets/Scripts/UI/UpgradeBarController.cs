@@ -15,7 +15,7 @@ public class UpgradeBarController : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.Action_IncrementUpgradeProgress = UpdateBarFill;
+        AsteroidGameManager.Instance.Action_IncrementUpgradeProgress = UpdateBarFill;
 
         UpdateBarFill(0);
     }

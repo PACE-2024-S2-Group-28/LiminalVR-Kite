@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System;
+using NaughtyAttributes;
+using System.Collections.Generic;
+using UnityEditor;
+
+using Liminal.SDK.Core;
+using Liminal.Core.Fader;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +31,33 @@ public class GameManager : MonoBehaviour
 
     public Action<float> Action_IncrementUpgradeProgress;
 
+        [SerializeField]
+    private float totalGameTime = 300;
+    public float GameLength => totalGameTime;
+
+    [SerializeField]
+    [MinMaxSlider(0f, 20f)]
+    private Vector2 minMaxSpawnRate;
+
+    [SerializeField]
+    private AnimationCurve spawnCurve;
+    public AnimationCurve DifficultyCurve => spawnCurve;
+
+    [System.Serializable]
+    public class GoldenAsteroidData {
+        public float gameProgress;
+        public Vector3 position;
+
+        public GoldenAsteroidData(float progress, Vector3 pos) {
+            gameProgress = progress;
+            position = pos;
+        }
+    }
+
+    [SerializeField]
+    private List<GoldenAsteroidData> goldenAsteroidData = new List<GoldenAsteroidData>();
+    public GoldenAsteroidData[] GoldSpawns => goldenAsteroidData.ToArray();
+
     void Awake()
     {
         if (instance == null) {
@@ -36,11 +69,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        float gameProgress = Time.time / totalGameTime;
+        float spawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, spawnCurve.Evaluate(gameProgress));
+        asteroidSpawner.AdjustSpawnTickRate(spawnRate);
+    }
+
+    public void RecordGoldenAsteroidSpawn(Vector3 position)
+    {
+        float gameProgress = Time.time / totalGameTime;
+        goldenAsteroidData.Add(new GoldenAsteroidData(gameProgress, position));
+        Debug.Log($"Golden Asteroid spawned at {position} - {gameProgress * 100}% through game.");
+    }
+    
     void Start()
     {
         //RockDestroyer.SEvent_RockDestroyed.AddListener(HandleAsteroidDestruction); //this function needs to change or have seperate function to trigger on event, or new event
-
-        
     }
 
     public void HandleAsteroidDestruction(bool isGoldAsteroid)

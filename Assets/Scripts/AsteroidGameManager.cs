@@ -17,8 +17,19 @@ public class AsteroidGameManager : MonoBehaviour
     public static int Score => score;
 
     [SerializeField]
+    private int upgradeThreshold;
+    private int upgradeCount = 0; //so it knows how many you've unlocked, thus the next threshold to cross 
+    
+    [SerializeField]
     private AsteroidSpawner asteroidSpawner;
     public AsteroidSpawner Spawner => asteroidSpawner;
+
+    // Events
+    public Action<int> Action_OnScoreChanged;
+
+    public UnityEvent UpgradeUnlocked;
+
+    public Action<float> Action_IncrementUpgradeProgress;
 
     [SerializeField]
     private float totalGameTime = 300;
@@ -46,9 +57,6 @@ public class AsteroidGameManager : MonoBehaviour
     [SerializeField]
     private List<GoldenAsteroidData> goldenAsteroidData = new List<GoldenAsteroidData>();
     public GoldenAsteroidData[] GoldSpawns => goldenAsteroidData.ToArray();
-
-    // Events
-    public Action<int> Action_OnScoreChanged;
 
     void Awake()
     {
@@ -95,6 +103,20 @@ public class AsteroidGameManager : MonoBehaviour
         score += scoreAdd;
         Action_OnScoreChanged?.Invoke(score);
         Debug.Log($"Score updated: {score}");
+        if (score >= upgradeThreshold * (upgradeCount + 1)) {
+            print("Reached an upgrade");
+            upgradeCount++;
+            UpgradeUnlocked.Invoke();
+        }
+
+        UpdateUpgradeProgress(score);
+    }
+
+    void UpdateUpgradeProgress(int s)
+    {
+        float floatScore = s;
+        float floatThreshold = upgradeThreshold;
+        Action_IncrementUpgradeProgress?.Invoke((floatScore%floatThreshold)/floatThreshold);
     }
 
     public void AdjustAsteroidSpeed(float multiplier)

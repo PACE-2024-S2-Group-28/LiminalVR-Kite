@@ -8,7 +8,7 @@ public abstract class UpgradeListener : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.UpgradeUnlocked.AddListener(UpgradeHappened);
+        AsteroidGameManager.Instance.UpgradeUnlocked.AddListener(UpgradeHappened);
     }
 
     public virtual void UpgradeHappened() //count down until it's time to do an upgrade
@@ -22,7 +22,7 @@ public abstract class UpgradeListener : MonoBehaviour
     public virtual void DoUpgrade() {}
 
     public void DestroyThis() { //for when you've done all your upgrades and are no longer useful
-        GameManager.Instance.UpgradeUnlocked.RemoveListener(UpgradeHappened);
+        AsteroidGameManager.Instance.UpgradeUnlocked.RemoveListener(UpgradeHappened);
         Destroy(this);
     }
 }
