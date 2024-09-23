@@ -125,10 +125,9 @@ namespace ScriptableObjects
             bool destroySource = false;
             AudioSource source;
             //try parameter audio source
-            if (audioSourceParam != null)
-            {
+            if (audioSourceParam != null) {
                 source = audioSourceParam;
-                destroySource = true;
+                //destroySource = true;
             }
             //try audio manager obj pool audio source
             else if (!createNew && (source = AudioManagerScript.instance.GetAudioSource()) != null);

@@ -70,7 +70,7 @@ public class RockDestroyer : MonoBehaviour
     {
         #if UNITY_EDITOR
             if (!Application.isPlaying) return;
-        #endif 
+#endif
 
         rockBreakSFX?.Play(wPos: transform.position);
 

@@ -5,6 +5,7 @@ using Liminal.SDK.VR;
 using Liminal.SDK.VR.Input;
 using NaughtyAttributes;
 using UnityEngine.Events;
+using ScriptableObjects;
 
 public class Gun : MonoBehaviour
 {
@@ -32,6 +33,11 @@ public class Gun : MonoBehaviour
     [Header("Multi-Bullet Upgrade Properties")]
     private bool multiBulletUpgradeActive = false;
     [SerializeField] private int bulletCount = 1;
+
+    [SerializeField]
+    private AudioSource sfxSource;
+    [SerializeField]
+    private SoundScripObj fireSFX;
 
     //events to subscribe vfx or sfx or any related behaviour
     public UnityEvent<Gun> event_tryFire;
@@ -110,10 +116,16 @@ public class Gun : MonoBehaviour
         {
             Debug.Log("FireSingleBullet");
 
+            fireSFX?.Play(audioSourceParam: sfxSource);
             FireSingleBullet();
         }
 
         event_shotFired?.Invoke(this);
+    }
+
+    private void PlaySound()
+    {
+        fireSFX?.Play(sParent: transform);
     }
 
     private void FireSingleBullet()
@@ -153,6 +165,7 @@ public class Gun : MonoBehaviour
 
             shotBullet.ResetTimer();
             bulletsShot.Push(shotBullet);
+            Invoke(nameof(PlaySound), (float)i * 0.05f);
         }
     }
 

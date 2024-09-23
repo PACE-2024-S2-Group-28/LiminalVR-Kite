@@ -5,22 +5,9 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed = 5;
-    public float Speed
-    {
-        set
-        {
-            speed = value;
-        }
-        get { return speed; }
-    }
+    public float Speed { set{speed = value;} get { return speed; } }
     [SerializeField] private float timeAlive = 3;
-    public float TimeAlive
-    {
-        set
-        {
-            timeAlive = value;
-        }
-    }
+    public float TimeAlive { set {timeAlive = value;}}
 
     [SerializeField]
     private float hitForceMagnitude = 3f;
@@ -31,14 +18,7 @@ public class Bullet : MonoBehaviour
 
     private float timer;
     private Gun gun = null;
-    public Gun Gun
-    {
-        set
-        {
-            gun = value;
-            firedBy = gun.transform;
-        }
-    }
+    public Gun Gun { set{ gun = value; firedBy = gun.transform;}}
     private TurretAim turret; //this is terrible. Need to do inheritance on gun properly
     public TurretAim Turret
     {
@@ -92,6 +72,29 @@ public class Bullet : MonoBehaviour
         timer = timeAlive;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!firedBy.IsChildOf(other.transform)) { //don't collide with what fired you
+            //play some particle effect, and destroy meteors
+            var rockScript = other.transform.parent.GetComponent<RockDestroyer>();
+            //if(rockScript==null && collision.transform.parent!=null) {
+            //    rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
+            //}
+            if (rockScript != null) {
+                rockScript.ChangeRock(forceDir: transform.forward, hitPos: transform.position);
+                //only collide with rocks. Pass through ship (otherwise turret bullets collide with the turret)
+
+            }
+
+            if (gun != null) {
+                ReturnToGun();
+            }
+            else {
+                ReturnToTurret();
+            }
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (!firedBy.IsChildOf(collision.transform))
@@ -134,5 +137,18 @@ public class Bullet : MonoBehaviour
         transform.position = turret.transform.position;
         gameObject.SetActive(false); //disable the bullet
         turret.BulletReturned(this); //let turret know this bullet is available
+    }
+
+    [SerializeField]
+    private TrailRenderer trail;
+
+    private void OnDisable()
+    {
+        trail.Clear();    
+    }
+
+    private void OnEnable()
+    {
+        trail.Clear();
     }
 }
