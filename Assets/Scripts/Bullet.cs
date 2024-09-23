@@ -141,6 +141,8 @@ public class Bullet : MonoBehaviour
 
     [SerializeField]
     private TrailRenderer trail;
+    [SerializeField]
+    private float trailTime = .5f;
 
     private void OnDisable()
     {
@@ -149,6 +151,14 @@ public class Bullet : MonoBehaviour
 
     private void OnEnable()
     {
-        trail.Clear();
+        StopAllCoroutines();
+        StartCoroutine(ResetTrail());
+    }
+
+    private IEnumerator ResetTrail()
+    {
+        trail.time = 0;
+        yield return null;
+        trail.time = trailTime;
     }
 }
