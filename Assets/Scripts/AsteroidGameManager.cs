@@ -126,19 +126,21 @@ public class AsteroidGameManager : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (goldenAsteroidData == null || goldenAsteroidData.Count <= 0) return;
+        #if UNITY_EDITOR
+            if (goldenAsteroidData == null || goldenAsteroidData.Count <= 0) return;
 
-        GUIStyle style = new GUIStyle();
-        style.fontSize = 18;
-        style.normal.textColor = Color.white;
-        style.fontStyle = FontStyle.Bold;
-        style.alignment = TextAnchor.MiddleCenter;
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 18;
+            style.normal.textColor = Color.white;
+            style.fontStyle = FontStyle.Bold;
+            style.alignment = TextAnchor.MiddleCenter;
 
-        Gizmos.color = Color.yellow;
-        foreach (var spawn in goldenAsteroidData) {
-            Gizmos.DrawWireSphere(spawn.position, 3.5f);
-            Handles.Label(spawn.position, "" + spawn.gameProgress, style);
-        }
+            Gizmos.color = Color.yellow;
+            foreach (var spawn in goldenAsteroidData) {
+                Gizmos.DrawWireSphere(spawn.position, 3.5f);
+                Handles.Label(spawn.position, "" + spawn.gameProgress, style);
+            }
+        #endif
     }
 
     public void EndExperience()
