@@ -179,10 +179,6 @@ public class AsteroidSpawner : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, Vector3.one * spawnBox.x);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, Vector3.one * spawnBox.y);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position, Vector3.one * spawnBox.z);
+        Gizmos.DrawWireCube(transform.position, spawnBox);
     }
 }
