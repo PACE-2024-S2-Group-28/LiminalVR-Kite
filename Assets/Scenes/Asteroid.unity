@@ -12595,13 +12595,13 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   totalGameTime: 300
-  minMaxSpawnRate: {x: 0, y: 8}
+  minMaxSpawnRate: {x: 1, y: 8}
   spawnCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.24998474
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -12609,58 +12609,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.25444388
-      value: 0.5907238
-      inSlope: -1.3526427
-      outSlope: -1.3526427
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.24430811
-    - serializedVersion: 3
-      time: 0.3968715
-      value: 0.43115014
-      inSlope: 0.3018101
-      outSlope: 0.3018101
+      time: 0.6660223
+      value: 0.4226704
+      inSlope: 1.5518689
+      outSlope: 1.5518689
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.600011
-      value: 0.82178545
-      inSlope: 0.963751
-      outSlope: 0.963751
+      time: 0.84732056
+      value: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.7153903
-      value: 0.66963816
-      inSlope: 0.09768546
-      outSlope: 0.09768546
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8055986
-      value: 0.93904036
-      inSlope: 1.7343248
-      outSlope: 1.7343248
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9634465
-      value: 0.00067362655
-      inSlope: -11.735038
-      outSlope: -11.735038
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.20644554
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -12966,16 +12930,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7731140679889853283, guid: 21ca05847bc51dc49a9129aca110bda1,
-        type: 3}
-      propertyPath: m_AnchorAttachments.Array.data[0]
-      value: 
-      objectReference: {fileID: 2137536386}
-    - target: {fileID: 7731140680347121317, guid: 21ca05847bc51dc49a9129aca110bda1,
-        type: 3}
-      propertyPath: m_AnchorAttachments.Array.data[0]
-      value: 
-      objectReference: {fileID: 4464225964493584865}
     - target: {fileID: 7832495957198249651, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -12990,6 +12944,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 995429870759517987, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680612760108523958, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6516840330291437644, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: sfxShipHit
+      value: 
+      objectReference: {fileID: 11400000, guid: d7c40d8f94c8d0346a25b3b8568be4dc,
+        type: 2}
+    - target: {fileID: 6402759439501327819, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: upgradesRequired
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423473766696456744, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: upgradesRequired
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2181611450399967858, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
@@ -13011,32 +12991,16 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6402759439501327819, guid: 21ca05847bc51dc49a9129aca110bda1,
+    - target: {fileID: 7731140679889853283, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
-      propertyPath: upgradesRequired
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5423473766696456744, guid: 21ca05847bc51dc49a9129aca110bda1,
-        type: 3}
-      propertyPath: upgradesRequired
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 995429870759517987, guid: 21ca05847bc51dc49a9129aca110bda1,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6516840330291437644, guid: 21ca05847bc51dc49a9129aca110bda1,
-        type: 3}
-      propertyPath: sfxShipHit
+      propertyPath: m_AnchorAttachments.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: d7c40d8f94c8d0346a25b3b8568be4dc,
-        type: 2}
-    - target: {fileID: 1680612760108523958, guid: 21ca05847bc51dc49a9129aca110bda1,
+      objectReference: {fileID: 2137536386}
+    - target: {fileID: 7731140680347121317, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
+      propertyPath: m_AnchorAttachments.Array.data[0]
+      value: 
+      objectReference: {fileID: 4464225964493584865}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}
 --- !u!1 &2137536386 stripped
@@ -13198,17 +13162,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1718501725499783494, guid: d54a76ae86e737c4eafeb3a7005eeb07,
+        type: 3}
+      propertyPath: controllerHand
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4242216128402544697, guid: d54a76ae86e737c4eafeb3a7005eeb07,
         type: 3}
       propertyPath: controller
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4242216128402544697, guid: d54a76ae86e737c4eafeb3a7005eeb07,
-        type: 3}
-      propertyPath: controllerHand
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1718501725499783494, guid: d54a76ae86e737c4eafeb3a7005eeb07,
         type: 3}
       propertyPath: controllerHand
       value: 1
