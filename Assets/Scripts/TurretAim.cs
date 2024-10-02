@@ -49,16 +49,6 @@ public class TurretAim : MonoBehaviour
         }
     }
 
-    private void FaceTarget() {
-        transform.rotation = Quaternion.Slerp(startRotation, toRotation, rotateTimer/timeToRotate);
-        rotateTimer += Time.deltaTime;
-        if (rotateTimer >= timeToRotate) { //activate beam when facing asteroid
-            beamTimer = beamTime;
-            beam.enabled = true;
-            startRotation = toRotation; //for when it is rotating back
-        }
-    }
-
     private void FindFiringSolution() { //checks for nearby asteroids, then rotates to immediately face the nearest one
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range); //check all nearby collisions
         Collider closestTarget = null;
@@ -93,6 +83,15 @@ public class TurretAim : MonoBehaviour
         }
     }
 
+    private void FaceTarget() {
+        transform.rotation = Quaternion.Slerp(startRotation, toRotation, rotateTimer/timeToRotate);
+        rotateTimer += Time.deltaTime;
+        if (rotateTimer >= timeToRotate) { //activate beam when facing asteroid
+            beamTimer = beamTime;
+            beam.enabled = true;
+        }
+    }
+
     private void Fire() {
         beamTimer-= Time.deltaTime;
         if ((beamTimer > 0) && (target.gameObject.activeSelf == true)) { //move the laser beam and rotate to face the rock
@@ -108,6 +107,7 @@ public class TurretAim : MonoBehaviour
             }            
             target = null;
             rotateTimer = 0;
+            startRotation = transform.rotation;
             toRotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
         }
     }
