@@ -807,7 +807,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 0.104
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -12587,7 +12587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e9154e5b3a66f48b7e1dec783eb92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeThreshold: 100
+  upgradeThreshold: 10
   asteroidSpawner: {fileID: 9427851}
   UpgradeUnlocked:
     m_PersistentCalls:
