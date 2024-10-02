@@ -7,8 +7,8 @@ public class TurretAim : MonoBehaviour
     [SerializeField] private float shootCooldown = 2; //how long between each shot
     [SerializeField] private float beamTime = 2; //how many seconds it takes to destroy an asteroid
     [SerializeField] private float range;
-    [SerializeField] private float timeToRotate = 0.5f; //how many seconds it takes to rotate to face an asteroid before firing
-    private float rotateTimer;
+    [SerializeField] private float timeToRotate = 0.5f; //how many seconds it takes to rotate to face an asteroid before firing. Keep this lower than shootCooldown
+    private float rotateTimer; 
     private float rechargeTimer;
     private float beamTimer;
     private Transform target = null;
@@ -43,6 +43,10 @@ public class TurretAim : MonoBehaviour
                 }                
             }            
         }
+        else { //rotate back to face forward
+            transform.rotation = Quaternion.Slerp(startRotation, toRotation, rotateTimer/timeToRotate);
+            rotateTimer += Time.deltaTime;
+        }
     }
 
     private void FaceTarget() {
@@ -51,6 +55,7 @@ public class TurretAim : MonoBehaviour
         if (rotateTimer >= timeToRotate) { //activate beam when facing asteroid
             beamTimer = beamTime;
             beam.enabled = true;
+            startRotation = toRotation; //for when it is rotating back
         }
     }
 
@@ -80,6 +85,7 @@ public class TurretAim : MonoBehaviour
             startRotation = transform.rotation;
             targetPoint = target.position + (closestSpeed * timeToRotate); //position asteroid moves to while turret rotates
             toRotation = Quaternion.LookRotation(targetPoint - transform.position, Vector3.up); //direction to point to asteroid
+            rotateTimer = 0;
         }
         else { //nothing found in range
             Debug.Log("No target within range");
@@ -100,6 +106,7 @@ public class TurretAim : MonoBehaviour
             target.parent.gameObject.GetComponent<RockDestroyer>().ChangeRock(forceDir: transform.forward, hitPos: target.position);
             target = null;
             rotateTimer = 0;
+            toRotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
         }
     }
 
