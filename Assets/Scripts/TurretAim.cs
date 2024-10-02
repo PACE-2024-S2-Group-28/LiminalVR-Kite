@@ -95,7 +95,7 @@ public class TurretAim : MonoBehaviour
 
     private void Fire() {
         beamTimer-= Time.deltaTime;
-        if (beamTimer > 0) { //move the laser beam and rotate to face the rock
+        if ((beamTimer > 0) && (target.gameObject.activeSelf == true)) { //move the laser beam and rotate to face the rock
             transform.rotation = Quaternion.LookRotation(target.position-transform.position, Vector3.up);
             beam.SetPosition(0, transform.position);
             beam.SetPosition(1, target.position);
@@ -103,7 +103,9 @@ public class TurretAim : MonoBehaviour
         else { //destroy rock and disable beam
             beam.enabled = false;            
             rechargeTimer = shootCooldown;
-            target.parent.gameObject.GetComponent<RockDestroyer>().ChangeRock(forceDir: transform.forward, hitPos: target.position);
+            if (target.gameObject.activeSelf == true) { //if the gun shot it already, don't try destroying it again
+                target.parent.gameObject.GetComponent<RockDestroyer>().ChangeRock(forceDir: transform.forward, hitPos: target.position);
+            }            
             target = null;
             rotateTimer = 0;
             toRotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);

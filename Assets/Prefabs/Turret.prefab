@@ -219,6 +219,7 @@ MonoBehaviour:
   shootCooldown: 3
   beamTime: 2
   range: 300
+  timeToRotate: 0.5
 --- !u!120 &376231924540714823
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -236,7 +237,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 43f6b200276410c4888d5ceb1bc943c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -258,7 +259,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 20}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
