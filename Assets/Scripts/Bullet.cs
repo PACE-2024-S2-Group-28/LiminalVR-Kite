@@ -19,15 +19,6 @@ public class Bullet : MonoBehaviour
     private float timer;
     private Gun gun = null;
     public Gun Gun { set{ gun = value; firedBy = gun.transform;}}
-    private TurretAim turret; //this is terrible. Need to do inheritance on gun properly
-    public TurretAim Turret
-    {
-        set
-        {
-            turret = value;
-            firedBy = turret.transform;
-        }
-    }
     private Transform firedBy;
 
     private void Start()
@@ -60,11 +51,6 @@ public class Bullet : MonoBehaviour
         {
             ReturnToGun();
         }
-        else
-        {
-            ReturnToTurret();
-        }
-
     }
 
     public void ResetTimer()
@@ -89,9 +75,6 @@ public class Bullet : MonoBehaviour
             if (gun != null) {
                 ReturnToGun();
             }
-            else {
-                ReturnToTurret();
-            }
         }
     }
 
@@ -115,12 +98,7 @@ public class Bullet : MonoBehaviour
             {
                 ReturnToGun();
             }
-            else
-            {
-                ReturnToTurret();
-            }
         }
-
     }
 
     private void ReturnToGun()
@@ -129,14 +107,6 @@ public class Bullet : MonoBehaviour
         transform.position = gun.transform.position;
         gameObject.SetActive(false); //disable the bullet
         gun.BulletReturned(this); //let gun know this bullet is available
-    }
-
-    private void ReturnToTurret()
-    {
-        rb.velocity = Vector3.zero;
-        transform.position = turret.transform.position;
-        gameObject.SetActive(false); //disable the bullet
-        turret.BulletReturned(this); //let turret know this bullet is available
     }
 
     [SerializeField]

@@ -91,7 +91,7 @@ public class AsteroidGameManager : MonoBehaviour
     public void HandleAsteroidDestruction(bool isGoldAsteroid)
     {
         if (isGoldAsteroid) {
-            UpdateScore(200);
+            UpdateScore(90);
         }
         else {
             UpdateScore(5);
