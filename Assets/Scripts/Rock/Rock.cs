@@ -8,12 +8,64 @@ public class Rock : MonoBehaviour
     [SerializeField]
     private RockDestroyer manager;
 
+    
     [SerializeField]
     private Hitpoints hitpoints;
 
+    [SerializeField]
+    private float currentSpeed;
     public void RayCastMadeContact () {
         hitpoints.Damage();
     }
+
+
+    void Start()
+{
+    currentSpeed = Random.Range(AsteroidGameManager.Instance.Spawner.minSpeed, AsteroidGameManager.Instance.Spawner.maxSpeed); //set up a random speed between minSpeed and maxSpeed
+}
+
+void Update()
+{
+
+    if (currentSpeed < AsteroidGameManager.Instance.Spawner.maxSpeed)
+    {
+        
+        currentSpeed += AsteroidGameManager.Instance.Spawner.acceleration * Time.deltaTime; //increase the speed if below maxSpeed
+        currentSpeed = Mathf.Min(currentSpeed, AsteroidGameManager.Instance.Spawner.maxSpeed); //clamp to the maxSpeed
+    }
+
+
+    Rigidbody rb = GetComponent<Rigidbody>();
+    if (rb != null)
+    {
+        Vector3 direction = rb.velocity.normalized;
+        rb.velocity = direction * currentSpeed;
+    }
+}
+
+public void ReduceSpeed()
+{   
+    currentSpeed = Mathf.Max(currentSpeed - AsteroidGameManager.Instance.Spawner.slowAmount, AsteroidGameManager.Instance.Spawner.minSpeed); //decrease the speed by slowAmount but not below minSpeed
+}
+
+void OnEnable()
+{
+   
+    SpaceshipNoiseMovement spaceship = FindObjectOfType<SpaceshipNoiseMovement>();  //enable to the event on the spaceship
+    if (spaceship != null)
+    {
+        spaceship.OnShipHitByAsteroid.AddListener(ReduceSpeed);
+    }
+}
+
+void OnDisable()
+{
+    SpaceshipNoiseMovement spaceship = FindObjectOfType<SpaceshipNoiseMovement>();
+    if (spaceship != null)
+    {
+        spaceship.OnShipHitByAsteroid.RemoveListener(ReduceSpeed);
+    }
+}
 
 
     void OnCollisionEnter (Collision other) {

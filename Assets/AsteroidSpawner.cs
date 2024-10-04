@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
@@ -47,6 +47,12 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private Vector3 goldenAsteroidFixedPosition = new Vector3(0, 5, 0);
     [SerializeField] private Material goldMaterial;
     private float gameTimer = 0;
+
+    [SerializeField] public float maxSpeed = 10f;
+    [SerializeField] public float minSpeed = 1f;
+    [SerializeField] public float acceleration = 1f;
+    [SerializeField] public float slowAmount = 2f;
+    
 
     private void Start()
     {
