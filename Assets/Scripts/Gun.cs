@@ -45,7 +45,7 @@ public class Gun : MonoBehaviour
     public UnityEvent<Gun> event_outOfAmmo;
     //public UnityEvent<Gun> event_missFire;
 
-
+    private Animator gunAnimator;
 
 
     void Start()
@@ -54,6 +54,7 @@ public class Gun : MonoBehaviour
         inputDevice = (controllerHand == InputHand.Primary) ? VRDevice.Device?.PrimaryInputDevice : VRDevice.Device?.SecondaryInputDevice;
 
         totalBullets = Mathf.CeilToInt(bulletLife / shootCooldown) + 1;
+        gunAnimator = GetComponent<Animator>();
 
         InitializeBullets(totalBullets);
     }
@@ -105,7 +106,7 @@ public class Gun : MonoBehaviour
 
         rechargeTimer = shootCooldown;
 
-
+        gunAnimator.SetTrigger("Fire");
 
         Debug.Log(multiBulletUpgradeActive);
         if (multiBulletUpgradeActive)
