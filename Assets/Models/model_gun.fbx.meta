@@ -3,7 +3,27 @@ guid: ea105e130215e3b48a7daeaab47ecef2
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel
+    second: {fileID: 2100000, guid: de4fadba1840ec74e846856db0b9b28b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Inner
+    second: {fileID: 2100000, guid: de4fadba1840ec74e846856db0b9b28b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Meter
+    second: {fileID: 2100000, guid: ca5138990a40c5a45b752136ff8346a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plate
+    second: {fileID: 2100000, guid: 2d3104909d2b0b74a847785004a85c32, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

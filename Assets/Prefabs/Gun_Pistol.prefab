@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 1718501725499783494}
   - component: {fileID: 3445868166736892858}
   - component: {fileID: 2815765758716776101}
+  - component: {fileID: 2163517380987998097}
   m_Layer: 0
   m_Name: GunObject
   m_TagString: Untagged
@@ -201,6 +202,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2163517380987998097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9220238953253102096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c089e8222dced9488150c9393456ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meterRenderer: {fileID: 4762718847349290984}
+  meterOffsetMax: 0.4
 --- !u!1001 &4776178399317487391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -288,6 +303,12 @@ PrefabInstance:
 --- !u!4 &518705865007547397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ea105e130215e3b48a7daeaab47ecef2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4776178399317487391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4762718847349290984 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 22790110864578807, guid: ea105e130215e3b48a7daeaab47ecef2,
     type: 3}
   m_PrefabInstance: {fileID: 4776178399317487391}
   m_PrefabAsset: {fileID: 0}

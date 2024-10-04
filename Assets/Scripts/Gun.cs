@@ -29,6 +29,8 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private Vector3 localFirePos = Vector3.zero;
 
+    private MeterController meter;
+
 
     [Header("Multi-Bullet Upgrade Properties")]
     private bool multiBulletUpgradeActive = false;
@@ -55,6 +57,7 @@ public class Gun : MonoBehaviour
 
         totalBullets = Mathf.CeilToInt(bulletLife / shootCooldown) + 1;
         gunAnimator = GetComponent<Animator>();
+        meter = GetComponent<MeterController>();
 
         InitializeBullets(totalBullets);
     }
@@ -83,6 +86,7 @@ public class Gun : MonoBehaviour
 
 
         rechargeTimer -= Time.deltaTime;
+        meter.UpdateMeter(rechargeTimer/shootCooldown);
         if (inputDevice.GetButtonDown(VRButton.One) && rechargeTimer <= 0)
         {
             TryFire();
