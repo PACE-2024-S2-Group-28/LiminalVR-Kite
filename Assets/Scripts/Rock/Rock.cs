@@ -34,7 +34,7 @@ void Update()
         currentSpeed = Mathf.Min(currentSpeed, AsteroidGameManager.Instance.Spawner.maxSpeed); //clamp to the maxSpeed
     }
 
-
+    Debug.Log($"Current spawning speed: {currentSpeed}");
     Rigidbody rb = GetComponent<Rigidbody>();
     if (rb != null)
     {
@@ -51,7 +51,7 @@ public void ReduceSpeed()
 void OnEnable()
 {
    
-    SpaceshipNoiseMovement spaceship = FindObjectOfType<SpaceshipNoiseMovement>();  //enable to the event on the spaceship
+    ShipCollision spaceship = FindObjectOfType<ShipCollision>();  //enable to the event on the spaceship
     if (spaceship != null)
     {
         spaceship.OnShipHitByAsteroid.AddListener(ReduceSpeed);
@@ -60,7 +60,7 @@ void OnEnable()
 
 void OnDisable()
 {
-    SpaceshipNoiseMovement spaceship = FindObjectOfType<SpaceshipNoiseMovement>();
+    ShipCollision spaceship = FindObjectOfType<ShipCollision>();
     if (spaceship != null)
     {
         spaceship.OnShipHitByAsteroid.RemoveListener(ReduceSpeed);

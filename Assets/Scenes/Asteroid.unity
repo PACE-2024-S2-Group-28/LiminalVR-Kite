@@ -166,7 +166,11 @@ MonoBehaviour:
   spawnTickRate: 30
   goldenAsteroidSpawningTime: 10
   goldenAsteroidFixedPosition: {x: 0, y: 5, z: 0}
-  goldMaterial: {fileID: 0}
+  goldMaterial: {fileID: 2100000, guid: d5ccbfea3a44a9e45bb24781680919b4, type: 2}
+  maxSpeed: 10
+  minSpeed: 1
+  acceleration: 1
+  slowAmount: 2
 --- !u!4 &9427852
 Transform:
   m_ObjectHideFlags: 0

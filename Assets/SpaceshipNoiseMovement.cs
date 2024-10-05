@@ -30,22 +30,12 @@ public class SpaceshipNoiseMovement : MonoBehaviour
 
     private Vector3 startPos = Vector3.zero;
 
-    public UnityEvent OnShipHitByAsteroid;
+    //public UnityEvent OnShipHitByAsteroid;
     private void Start()
     {
         startPos = translateParent.position;
-
-        if (OnShipHitByAsteroid == null)
-        OnShipHitByAsteroid = new UnityEvent();
     }
 
-    void OnCollisionEnter(Collision collision)
-{
-    if (collision.gameObject.tag == "GoldAsteroid" || collision.gameObject.tag == "Rock")
-    {
-        OnShipHitByAsteroid.Invoke();
-    }
-}
     private void Update()
     {
         Vector3 translateNoise = Generate01Vec3Noise(0) * 2f - Vector3.one;
