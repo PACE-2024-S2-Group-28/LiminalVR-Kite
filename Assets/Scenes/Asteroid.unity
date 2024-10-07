@@ -13001,6 +13001,11 @@ PrefabInstance:
       propertyPath: m_AnchorAttachments.Array.data[0]
       value: 
       objectReference: {fileID: 4464225964493584865}
+    - target: {fileID: 8124006882787523231, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}
 --- !u!1 &2137536386 stripped
