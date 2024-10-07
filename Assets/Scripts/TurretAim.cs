@@ -21,6 +21,7 @@ public class TurretAim : MonoBehaviour
     // SFX
     [SerializeField] private SoundScripObj turretFireSFX;
     [SerializeField] private SoundScripObj chargeSFX;
+    [SerializeField] private AudioSource chargeAudioSource;
 
     void Awake()
     {
@@ -113,6 +114,8 @@ public class TurretAim : MonoBehaviour
         }
     }
 
+
+    private bool charging = false;
     private void Fire()
     {
         beamTimer -= Time.deltaTime;
@@ -121,11 +124,20 @@ public class TurretAim : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(target.position - transform.position, Vector3.up);
             beam.SetPosition(0, transform.position);
             beam.SetPosition(1, target.position);
+
+            if (charging)
+            {
+                chargeSFX.Play();
+                charging = false;
+            }
         }
         else
         { //destroy rock and disable beam
             // turretFireSFX.Play(wPos: target.position);
+            chargeSFX.Stop();
             turretFireSFX.Play();
+            charging = true;
+
             beam.enabled = false;
             rechargeTimer = shootCooldown;
             if (target.gameObject.activeSelf == true)
