@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mixGroup: {fileID: 0}
   clips:
-  - {fileID: 8300000, guid: 5b6c6da29597c92418d38f0642463428, type: 3}
-  volumeSlider: {x: 0.5, y: 0.5}
+  - {fileID: 8300000, guid: ed0926f7c669a3044a467666e594e2cb, type: 3}
+  volumeSlider: {x: 0.83666056, y: 1}
   playOrder: 0
-  useSemitones: 0
-  pitchSlider: {x: 1, y: 1}
-  semitoneMin: 0
-  semitoneMax: 0
+  useSemitones: 1
+  pitchSlider: {x: 0.7937097, y: 1.2599065}
+  semitoneMin: -4
+  semitoneMax: 4
   rolloffMode: 0
   rolloffDistance: {x: 1, y: 500}
