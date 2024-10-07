@@ -14,40 +14,59 @@ public class Rock : MonoBehaviour
 
     [SerializeField]
     private float currentSpeed;
+
+    [SerializeField]private Rigidbody rb;
+
     public void RayCastMadeContact () {
         hitpoints.Damage();
     }
 
 
     void Start()
-{
-    currentSpeed = Random.Range(AsteroidGameManager.Instance.Spawner.minSpeed, AsteroidGameManager.Instance.Spawner.maxSpeed); //set up a random speed between minSpeed and maxSpeed
-}
-
-void Update()
-{
-
-    if (currentSpeed < AsteroidGameManager.Instance.Spawner.maxSpeed)
     {
-        
-        currentSpeed += AsteroidGameManager.Instance.Spawner.acceleration * Time.deltaTime; //increase the speed if below maxSpeed
-        currentSpeed = Mathf.Min(currentSpeed, AsteroidGameManager.Instance.Spawner.maxSpeed); //clamp to the maxSpeed
+    AsteroidSpawner spawner = FindObjectOfType<AsteroidSpawner>();
+        if (spawner != null)
+        {
+            currentSpeed = Random.Range(spawner.minSpeed, spawner.maxSpeed);
+        } //set up a random speed between minSpeed and maxSpeed
     }
 
-    Rigidbody rb = GetComponent<Rigidbody>();
-    if (rb != null)
+    void Update()
     {
-        Vector3 direction = rb.velocity.normalized;
-        rb.velocity = direction * currentSpeed;
-    }
-    Debug.Log($"Asteroid current speed: {currentSpeed}");
-}
+        AsteroidSpawner spawner = FindObjectOfType<AsteroidSpawner>();
+        if (spawner != null)
+        {
+            if (currentSpeed < spawner.maxSpeed)
+            {
+                currentSpeed += spawner.acceleration * Time.deltaTime; //increase the speed if below maxSpeed
+                currentSpeed = Mathf.Min(currentSpeed, spawner.maxSpeed); //clamp to the maxSpeed
+            }
 
-public void ReduceSpeed()
-{   
-    currentSpeed = Mathf.Max(currentSpeed - AsteroidGameManager.Instance.Spawner.slowAmount, AsteroidGameManager.Instance.Spawner.minSpeed); //decrease the speed by slowAmount but not below minSpeed
-    Debug.Log($"Asteroid current speed after reduction: {currentSpeed}");
-}
+        rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            Vector3 direction = rb.velocity.normalized;
+            rb.velocity = direction * currentSpeed;
+        }
+        Debug.Log($"Asteroid current speed: {currentSpeed}");
+        }
+    }
+
+    void ReduceSpeed()
+    {   
+    AsteroidSpawner spawner = FindObjectOfType<AsteroidSpawner>();
+        if (spawner != null)
+        {
+            currentSpeed = Mathf.Max(currentSpeed - spawner.slowAmount, spawner.minSpeed); //decrease the speed by slowAmount but not below minSpeed
+            if (rb != null)
+            {
+                Vector3 oppositeForce = -rb.velocity.normalized * spawner.slowAmount;
+                rb.AddForce(oppositeForce, ForceMode.VelocityChange);
+            }
+            Debug.Log($"Asteroid current speed after reduction: {currentSpeed}");
+            
+        }
+    }
 
 void OnEnable()
 {
@@ -77,16 +96,16 @@ void OnDisable()
        else if (other.gameObject.CompareTag("Player"))
     {    
         //onDeath();
+        hitpoints.Damage();
         ReplaceRock();
     }
     else if (other.gameObject.CompareTag("Enemy"))
     {
-        hitpoints.Damage();
         ReplaceRock();
     }
     }
 
-    public void ReplaceRock () {
+    void ReplaceRock () {
         this.gameObject.SetActive(false);
         manager.ChangeRock();
         /*foreach(Rigidbody body in rigidbodies) {
@@ -144,3 +163,4 @@ void OnDisable()
         return Rigidbody.GetComponent<Renderer>();
     }*/
 }
+
