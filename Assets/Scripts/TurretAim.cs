@@ -20,6 +20,7 @@ public class TurretAim : MonoBehaviour
 
     // SFX
     [SerializeField] private SoundScripObj turretFireSFX;
+    [SerializeField] private SoundScripObj chargeSFX;
 
     void Awake()
     {
@@ -123,6 +124,8 @@ public class TurretAim : MonoBehaviour
         }
         else
         { //destroy rock and disable beam
+            // turretFireSFX.Play(wPos: target.position);
+            turretFireSFX.Play();
             beam.enabled = false;
             rechargeTimer = shootCooldown;
             if (target.gameObject.activeSelf == true)
