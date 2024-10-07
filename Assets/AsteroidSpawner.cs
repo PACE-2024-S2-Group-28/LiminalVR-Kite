@@ -45,7 +45,6 @@ public class AsteroidSpawner : MonoBehaviour
     private float goldenTimer = 0;
     [SerializeField] private float goldenAsteroidSpawningTime = 15;
     [SerializeField] private Vector3 goldenAsteroidFixedPosition = new Vector3(0, 5, 0);
-    [SerializeField] private Material goldMaterial;
     private float gameTimer = 0;
 
     private void Start()
@@ -146,14 +145,6 @@ public class AsteroidSpawner : MonoBehaviour
         //Randomize asteroid size
         Color asteroidColor = (prefabIndex == 0) ? Color.red : Color.yellow;
         MeshRenderer renderer = asteroidT.GetComponentInChildren<MeshRenderer>();
-        if (renderer != null)
-        {
-            if (prefabIndex == 1) {
-            renderer.material = goldMaterial; //apply the gold material
-            } else {
-                renderer.material.color = Color.red;  
-                    }
-        }
 
         //random rotation
         spawnVec = Random.insideUnitSphere * 360f;
