@@ -39,7 +39,7 @@ public class ShipCollision : MonoBehaviour
         {
            // Debug.Log("Ship hit by asteroid");
             Debug.Log("Asteroid collision detected with tag: " + other.gameObject.tag);
-            RockDestroyer rockDestroyer = other.gameObject.GetComponent<RockDestroyer>();
+            RockDestroyer rockDestroyer = other.transform.parent.GetComponent<RockDestroyer>();
             if (rockDestroyer != null)
             {
                 Debug.Log("RockDestroyer component found.");
