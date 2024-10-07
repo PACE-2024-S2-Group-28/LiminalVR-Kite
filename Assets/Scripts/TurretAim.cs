@@ -21,7 +21,7 @@ public class TurretAim : MonoBehaviour
     // SFX
     [SerializeField] private SoundScripObj turretFireSFX;
     [SerializeField] private SoundScripObj chargeSFX;
-    [SerializeField] private AudioSource chargeAudioSource;
+    [SerializeField] private AudioSource fireAudioSource;
 
     void Awake()
     {
@@ -116,9 +116,18 @@ public class TurretAim : MonoBehaviour
 
 
     private bool charging = false;
+
+    //temp sound timing vars
+    private float lastFiredTime;
+    private float fireSoundInterval = .2f;
+
     private void Fire()
     {
-        turretFireSFX.Play();
+        //triggering sound on interval instead of every frame
+        if (Time.time - lastFiredTime >= fireSoundInterval) {
+            turretFireSFX.Play(audioSourceParam: fireAudioSource, wPos: transform.position);
+            lastFiredTime = Time.time;
+        }
 
         beamTimer -= Time.deltaTime;
         if ((beamTimer > 0) && (target.gameObject.activeSelf == true))
@@ -129,15 +138,15 @@ public class TurretAim : MonoBehaviour
 
             if (charging)
             {
-                chargeSFX.Play();
+                //chargeSFX.Play();
                 charging = false;
             }
         }
         else
         { //destroy rock and disable beam
             // turretFireSFX.Play(wPos: target.position);
-            chargeSFX.Stop();
-            turretFireSFX.Play();
+            //chargeSFX.Stop();
+            //turretFireSFX.Play();
             charging = true;
 
             beam.enabled = false;

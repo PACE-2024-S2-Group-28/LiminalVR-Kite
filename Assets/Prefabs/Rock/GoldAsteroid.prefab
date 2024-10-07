@@ -405,6 +405,16 @@ PrefabInstance:
       propertyPath: ShapeModule.m_Scale.z
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6029738691253726782, guid: 5a0288aba622ca6458a07e4584520c26,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6029738691253726782, guid: 5a0288aba622ca6458a07e4584520c26,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a0288aba622ca6458a07e4584520c26, type: 3}
 --- !u!1001 &6870746055344506839
@@ -414,6 +424,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5309100522183281565}
     m_Modifications:
+    - target: {fileID: 8774119488492757891, guid: 0019b5eb78179804b80917125cba710f,
+        type: 3}
+      propertyPath: m_Name
+      value: GoldAsteroidModel
+      objectReference: {fileID: 0}
     - target: {fileID: 5735535237029925264, guid: 0019b5eb78179804b80917125cba710f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -468,11 +483,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8774119488492757891, guid: 0019b5eb78179804b80917125cba710f,
-        type: 3}
-      propertyPath: m_Name
-      value: GoldAsteroidModel
       objectReference: {fileID: 0}
     - target: {fileID: -3772188322458282565, guid: 0019b5eb78179804b80917125cba710f,
         type: 3}

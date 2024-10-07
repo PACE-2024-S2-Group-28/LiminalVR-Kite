@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c2dad7835d4e04d8a376b5de7d2b2a, type: 3}
   m_Name: Turret
   m_EditorClassIdentifier: 
-  mixGroup: {fileID: 0}
+  mixGroup: {fileID: 8781418876680147640, guid: 1040c02797a1975429124a69cb02059d,
+    type: 2}
   clips:
   - {fileID: 8300000, guid: a4da0bb8989c44b4e88fcb119da5af0b, type: 3}
-  volumeSlider: {x: 0.7199032, y: 1}
+  volumeSlider: {x: 0.15832056, y: 0.34269315}
   playOrder: 2
   useSemitones: 1
   pitchSlider: {x: 0.56124717, y: 1.7817461}
