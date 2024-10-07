@@ -114,6 +114,8 @@ public class TurretAim : MonoBehaviour
 
     private void Fire()
     {
+        turretFireSFX.Play();
+
         beamTimer -= Time.deltaTime;
         if ((beamTimer > 0) && (target.gameObject.activeSelf == true))
         { //move the laser beam and rotate to face the rock
