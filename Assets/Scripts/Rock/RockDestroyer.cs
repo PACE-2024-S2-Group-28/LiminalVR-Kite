@@ -68,9 +68,15 @@ public class RockDestroyer : MonoBehaviour
     [Button]
     public void ChangeRock(Vector3? forceDir = null, float forceMag = 1f, Vector3? hitPos = null)
     {
+        AsteroidGameManager.Instance.HandleAsteroidDestruction(fracturedRock.CompareTag("GoldAsteroid"));
+
+        BreakRock(forceDir, forceMag, hitPos); //actually break the rock
+    }
+
+    public void BreakRock(Vector3? forceDir = null, float forceMag = 1f, Vector3? hitPos = null) {
         #if UNITY_EDITOR
             if (!Application.isPlaying) return;
-#endif
+        #endif
 
         rockBreakSFX?.Play(wPos: transform.position);
 
@@ -80,8 +86,6 @@ public class RockDestroyer : MonoBehaviour
         fracturedRock.transform.rotation = Quaternion.Euler(rock.transform.rotation.eulerAngles + Vector3.right*90f);
         rock.SetActive(false);
         fracturedRock.SetActive(true);
-
-        AsteroidGameManager.Instance.HandleAsteroidDestruction(fracturedRock.CompareTag("GoldAsteroid"));
         
         //force optional checks
         if (!forceDir.HasValue) forceDir = Vector3.zero;

@@ -37,16 +37,12 @@ public class ShipCollision : MonoBehaviour
 
         if (other.gameObject.tag == "GoldAsteroid" || other.gameObject.tag == "Rock")
         {
-           // Debug.Log("Ship hit by asteroid");
-            Debug.Log("Asteroid collision detected with tag: " + other.gameObject.tag);
             RockDestroyer rockDestroyer = other.transform.parent.GetComponent<RockDestroyer>();
             if (rockDestroyer != null)
             {
-                Debug.Log("RockDestroyer component found.");
-                rockDestroyer.ChangeRock();
+                rockDestroyer.BreakRock();
             }
-                Debug.Log("No RockDestroyer component found on the asteroid.");
-                OnShipHitByAsteroid.Invoke();
+            OnShipHitByAsteroid.Invoke();
            // Destroy(other.gameObject);
         }
     }
