@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 2}
   clips:
   - {fileID: 8300000, guid: a4da0bb8989c44b4e88fcb119da5af0b, type: 3}
-  volumeSlider: {x: 0.15832056, y: 0.34269315}
+  volumeSlider: {x: 0.05, y: 0.15}
   playOrder: 2
   useSemitones: 1
   pitchSlider: {x: 0.56124717, y: 1.7817461}
