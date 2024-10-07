@@ -68,41 +68,44 @@ public class Rock : MonoBehaviour
         }
     }
 
-void OnEnable()
-{
+    void OnEnable()
+    {
    
-    ShipCollision spaceship = FindObjectOfType<ShipCollision>();  //enable to the event on the spaceship
-    if (spaceship != null)
-    {
-        spaceship.OnShipHitByAsteroid.AddListener(ReduceSpeed);
+         ShipCollision spaceship = FindObjectOfType<ShipCollision>();  //enable to the event on the spaceship
+        if (spaceship != null)
+        {
+            spaceship.OnShipHitByAsteroid.AddListener(ReduceSpeed);
+        }
     }
-}
 
-void OnDisable()
-{
-    ShipCollision spaceship = FindObjectOfType<ShipCollision>();
-    if (spaceship != null)
+    void OnDisable()
     {
-        spaceship.OnShipHitByAsteroid.RemoveListener(ReduceSpeed);
+        ShipCollision spaceship = FindObjectOfType<ShipCollision>();
+        if (spaceship != null)
+        {
+            spaceship.OnShipHitByAsteroid.RemoveListener(ReduceSpeed);
+        }
     }
-}
 
 
-    void OnCollisionEnter (Collision other) {
+    void OnCollisionEnter (Collision other) 
+    {
+        Debug.Log($"Collision detected with: {other.gameObject.name}");
         if (other.gameObject.tag == "Bullet"){
             hitpoints.Damage();
         }
 
-       else if (other.gameObject.CompareTag("Player"))
-    {    
+       else if (other.gameObject.tag =="Player")
+        {    
         //onDeath();
-        hitpoints.Damage();
-        ReplaceRock();
-    }
-    else if (other.gameObject.CompareTag("Enemy"))
-    {
-        ReplaceRock();
-    }
+            Debug.Log("Collision with Player detected");
+            hitpoints.Damage();
+            ReplaceRock();
+        }
+        else if (other.gameObject.tag =="Enemy")
+        {
+            ReplaceRock();
+        }
     }
 
     void ReplaceRock () {

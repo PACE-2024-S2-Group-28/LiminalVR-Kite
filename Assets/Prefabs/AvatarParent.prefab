@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 1301535996661013070}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 995429870759517987}
   m_Layer: 0
   m_Name: MiningShipParent
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

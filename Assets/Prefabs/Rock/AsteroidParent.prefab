@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5309100522183281565}
   - component: {fileID: 4517755761974437932}
   - component: {fileID: -7447546660915199106}
+  - component: {fileID: -6723790573830733339}
   m_Layer: 8
   m_Name: AsteroidParent
   m_TagString: Rock
@@ -117,6 +118,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &-6723790573830733339
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134788589252300270}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1820020344
 Rigidbody:
   m_ObjectHideFlags: 0
