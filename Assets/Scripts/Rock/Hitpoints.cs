@@ -10,7 +10,7 @@ public class Hitpoints : MonoBehaviour
     private float totalHp;
 
     [SerializeField]
-    private UnityEvent onDeath;
+    public UnityEvent onDeath;
 
     public UnityEvent<float> event_UpdateHealth;
 

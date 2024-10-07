@@ -75,13 +75,14 @@ void OnDisable()
         }
 
        else if (other.gameObject.CompareTag("Player"))
-    {
-        // 撞到玩家时，销毁小行星
-        Destroy(gameObject); // 销毁小行星
+    {    
+        //onDeath();
+        ReplaceRock();
     }
     else if (other.gameObject.CompareTag("Enemy"))
     {
-        ReplaceRock(); // 撞到敌人时替换小行星
+        hitpoints.Damage();
+        ReplaceRock();
     }
     }
 

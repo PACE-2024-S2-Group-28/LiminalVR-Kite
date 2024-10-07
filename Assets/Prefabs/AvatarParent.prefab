@@ -136,6 +136,11 @@ MonoBehaviour:
     m_Bits: 256
   spaceshipNoise: {fileID: 8806359126968354492}
   sfxShipHit: {fileID: 11400000, guid: d7c40d8f94c8d0346a25b3b8568be4dc, type: 2}
+  OnShipHitByAsteroid:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!64 &5345490728490512636
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -534,7 +539,7 @@ GameObject:
   - component: {fileID: 8806359126968354492}
   m_Layer: 0
   m_Name: AvatarParent
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

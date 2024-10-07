@@ -39,7 +39,7 @@ public class ShipCollision : MonoBehaviour
         {
             Debug.Log("Ship hit by asteroid");
             OnShipHitByAsteroid.Invoke();
-            Destroy(other.gameObject);
+           // Destroy(other.gameObject);
         }
     }
 }
