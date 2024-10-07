@@ -7779,7 +7779,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   totalGameTime: 300
-  minMaxSpawnRate: {x: 1, y: 8}
+  minMaxSpawnRate: {x: 0.5, y: 8}
   spawnCurve:
     serializedVersion: 2
     m_Curve:
@@ -8221,12 +8221,27 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5603225727851548762, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4572938930697396724, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 8418004891059579695, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8124006882787523231, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570995886979204421, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -8234,7 +8249,7 @@ PrefabInstance:
     - target: {fileID: 5237680453714193062, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}

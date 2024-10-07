@@ -154,6 +154,7 @@ public class TurretAim : MonoBehaviour
             if (target.gameObject.activeSelf == true)
             { //if the gun shot it already, don't try destroying it again
                 target.parent.gameObject.GetComponent<RockDestroyer>().ChangeRock(forceDir: transform.forward, hitPos: target.position);
+                AsteroidGameManager.Instance.HandleAsteroidDestruction(target.gameObject.CompareTag("GoldAsteroid"));
             }
             target = null;
             rotateTimer = 0;
