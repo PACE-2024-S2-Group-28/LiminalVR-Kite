@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Planets/Materials.meta
 guid: b8138858abcc4f347a74059ef68d36a7
+========
+guid: 67653bff6d43adf4db038425dd3cedf2
+>>>>>>>> damianmvp:Assets/Textures/Gun.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

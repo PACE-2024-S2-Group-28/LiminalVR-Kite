@@ -14,6 +14,7 @@ public class ShipCollision : MonoBehaviour
 
     [SerializeField]
     private SpaceshipNoiseMovement spaceshipNoise;
+    [SerializeField] private GameObject collisionParticles;
 
     [SerializeField]
     private SoundScripObj sfxShipHit;
@@ -28,9 +29,10 @@ public class ShipCollision : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject != null && traumaLayers == (traumaLayers | (1 << other.gameObject.layer))) {
+        if (other.gameObject != null && traumaLayers == (traumaLayers | (1 << other.gameObject.layer)))
+        {
             spaceshipNoise.AddTrauma(collisionTraumaAmount);
-            
+
             //sfx
             sfxShipHit?.Play(wPos: other.transform.position);
         }
@@ -42,8 +44,14 @@ public class ShipCollision : MonoBehaviour
             {
                 rockDestroyer.BreakRock();
             }
+        }
             OnShipHitByAsteroid.Invoke();
            // Destroy(other.gameObject);
+        // Collision particlses
+        if (collisionParticles != null)
+        {
+            ContactPoint contact = other.contacts[0];
+            Instantiate(collisionParticles, contact.point, Quaternion.identity);
         }
     }
 }

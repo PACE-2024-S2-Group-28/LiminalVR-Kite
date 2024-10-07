@@ -29,6 +29,8 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private Vector3 localFirePos = Vector3.zero;
 
+    private MeterController meter;
+
 
     [Header("Multi-Bullet Upgrade Properties")]
     private bool multiBulletUpgradeActive = false;
@@ -45,7 +47,7 @@ public class Gun : MonoBehaviour
     public UnityEvent<Gun> event_outOfAmmo;
     //public UnityEvent<Gun> event_missFire;
 
-
+    private Animator gunAnimator;
 
 
     void Start()
@@ -54,6 +56,8 @@ public class Gun : MonoBehaviour
         inputDevice = (controllerHand == InputHand.Primary) ? VRDevice.Device?.PrimaryInputDevice : VRDevice.Device?.SecondaryInputDevice;
 
         totalBullets = Mathf.CeilToInt(bulletLife / shootCooldown) + 1;
+        gunAnimator = GetComponent<Animator>();
+        meter = GetComponent<MeterController>();
 
         InitializeBullets(totalBullets);
     }
@@ -82,6 +86,7 @@ public class Gun : MonoBehaviour
 
 
         rechargeTimer -= Time.deltaTime;
+        meter.UpdateMeter(rechargeTimer/shootCooldown);
         if (inputDevice.GetButtonDown(VRButton.One) && rechargeTimer <= 0)
         {
             TryFire();
@@ -105,7 +110,7 @@ public class Gun : MonoBehaviour
 
         rechargeTimer = shootCooldown;
 
-
+        gunAnimator.SetTrigger("Fire");
 
         Debug.Log(multiBulletUpgradeActive);
         if (multiBulletUpgradeActive)

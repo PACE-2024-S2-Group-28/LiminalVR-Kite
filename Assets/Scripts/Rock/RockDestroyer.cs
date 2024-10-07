@@ -87,7 +87,7 @@ public class RockDestroyer : MonoBehaviour
         rock.SetActive(false);
         fracturedRock.SetActive(true);
         
-        //force optional checks
+        //force optional 
         if (!forceDir.HasValue) forceDir = Vector3.zero;
         if (!hitPos.HasValue) hitPos = transform.position;
         forceDir = forceDir.Value.normalized;
