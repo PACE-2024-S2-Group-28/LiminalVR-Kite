@@ -86,7 +86,7 @@ MonoBehaviour:
   localFirePos: {x: 0, y: 0.0535, z: 0.135}
   bulletCount: 1
   sfxSource: {fileID: 3445868166736892858}
-  fireSFX: {fileID: 11400000, guid: d5be7fe2aa50a4140ab4317be3949e54, type: 2}
+  fireSFX: {fileID: 11400000, guid: 4548afa9964b9b54f9701779f3903369, type: 2}
 --- !u!82 &3445868166736892858
 AudioSource:
   m_ObjectHideFlags: 0
