@@ -37,7 +37,9 @@ public class ShipCollision : MonoBehaviour
 
         if (other.gameObject.tag == "GoldAsteroid" || other.gameObject.tag == "Rock")
         {
+            Debug.Log("Ship hit by asteroid");
             OnShipHitByAsteroid.Invoke();
+            Destroy(other.gameObject);
         }
     }
 }

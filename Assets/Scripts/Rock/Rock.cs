@@ -34,18 +34,19 @@ void Update()
         currentSpeed = Mathf.Min(currentSpeed, AsteroidGameManager.Instance.Spawner.maxSpeed); //clamp to the maxSpeed
     }
 
-    Debug.Log($"Current spawning speed: {currentSpeed}");
     Rigidbody rb = GetComponent<Rigidbody>();
     if (rb != null)
     {
         Vector3 direction = rb.velocity.normalized;
         rb.velocity = direction * currentSpeed;
     }
+    Debug.Log($"Asteroid current speed: {currentSpeed}");
 }
 
 public void ReduceSpeed()
 {   
     currentSpeed = Mathf.Max(currentSpeed - AsteroidGameManager.Instance.Spawner.slowAmount, AsteroidGameManager.Instance.Spawner.minSpeed); //decrease the speed by slowAmount but not below minSpeed
+    Debug.Log($"Asteroid current speed after reduction: {currentSpeed}");
 }
 
 void OnEnable()
@@ -73,9 +74,15 @@ void OnDisable()
             hitpoints.Damage();
         }
 
-        else if(other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy") {
-        ReplaceRock();   
-        }
+       else if (other.gameObject.CompareTag("Player"))
+    {
+        // 撞到玩家时，销毁小行星
+        Destroy(gameObject); // 销毁小行星
+    }
+    else if (other.gameObject.CompareTag("Enemy"))
+    {
+        ReplaceRock(); // 撞到敌人时替换小行星
+    }
     }
 
     public void ReplaceRock () {

@@ -12599,7 +12599,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   totalGameTime: 300
-  minMaxSpawnRate: {x: 1, y: 8}
+  minMaxSpawnRate: {x: 3.0652175, y: 10.065218}
   spawnCurve:
     serializedVersion: 2
     m_Curve:
@@ -13005,6 +13005,16 @@ PrefabInstance:
       propertyPath: m_AnchorAttachments.Array.data[0]
       value: 
       objectReference: {fileID: 4464225964493584865}
+    - target: {fileID: 8230613432329020050, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396951061233648226, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}
 --- !u!1 &2137536386 stripped
