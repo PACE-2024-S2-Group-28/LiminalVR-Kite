@@ -64,6 +64,7 @@ public class TurretAim : MonoBehaviour
         else
         { //rotate back to face forward
             headPivot.rotation = Quaternion.Slerp(startHeadRotation, toHeadRotation, rotateTimer / timeToRotate);
+            basePivot.rotation = Quaternion.Slerp(startBaseRotation, toBaseRotation, rotateTimer / timeToRotate);
             rotateTimer += Time.deltaTime;
         }
     }
@@ -97,8 +98,10 @@ public class TurretAim : MonoBehaviour
         { //if you found something to shoot, remember it and the turret's current facing
             target = closestTarget.transform;
             startHeadRotation = headPivot.rotation;
+            startBaseRotation = basePivot.rotation;
             targetPoint = target.position + (closestSpeed * timeToRotate); //position asteroid moves to while turret rotates
-            toHeadRotation = Quaternion.LookRotation(targetPoint - headPivot.position, Vector3.up); //direction to point to asteroid
+            toHeadRotation = Quaternion.LookRotation(new Vector3(headPivot.position.x, targetPoint.y, targetPoint.z) - headPivot.position, Vector3.up); //direction to point to asteroid
+            toBaseRotation = Quaternion.LookRotation(new Vector3(targetPoint.x, basePivot.localPosition.y, targetPoint.z) - basePivot.position, Vector3.forward); //direction to point to asteroid
             rotateTimer = 0;
         }
         else
@@ -111,6 +114,7 @@ public class TurretAim : MonoBehaviour
     private void FaceTarget()
     {
         headPivot.rotation = Quaternion.Slerp(startHeadRotation, toHeadRotation, rotateTimer / timeToRotate);
+        basePivot.rotation = Quaternion.Slerp(startBaseRotation, toBaseRotation, rotateTimer / timeToRotate);
         rotateTimer += Time.deltaTime;
         if (rotateTimer >= timeToRotate)
         { //activate beam when facing asteroid
@@ -137,7 +141,8 @@ public class TurretAim : MonoBehaviour
         beamTimer -= Time.deltaTime;
         if ((beamTimer > 0) && (target.gameObject.activeSelf == true))
         { //move the laser beam and rotate to face the rock
-            headPivot.rotation = Quaternion.LookRotation(target.position - headPivot.position, Vector3.up);
+            headPivot.rotation = Quaternion.LookRotation(new Vector3(headPivot.position.x, target.position.y, target.position.z) - headPivot.position, Vector3.up);
+            basePivot.rotation = Quaternion.LookRotation(new Vector3(target.position.x, basePivot.localPosition.y, target.position.z ) - basePivot.position, Vector3.forward);
             beam.SetPosition(0, laserStartPoint.position);
             beam.SetPosition(1, target.position);
 
@@ -164,7 +169,9 @@ public class TurretAim : MonoBehaviour
             target = null;
             rotateTimer = 0;
             startHeadRotation = headPivot.rotation;
-            toHeadRotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
+            toHeadRotation = Quaternion.LookRotation(new Vector3(headPivot.position.x, headPivot.position.y, headPivot.position.z + 1) - headPivot.position, Vector3.up);
+            startBaseRotation = basePivot.rotation;
+            toBaseRotation = Quaternion.LookRotation(Vector3.up, Vector3.right);
         }
     }
 
