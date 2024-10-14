@@ -166,7 +166,6 @@ MonoBehaviour:
   spawnTickRate: 30
   goldenAsteroidSpawningTime: 10
   goldenAsteroidFixedPosition: {x: 0, y: 5, z: 0}
-  goldMaterial: {fileID: 0}
 --- !u!4 &9427852
 Transform:
   m_ObjectHideFlags: 0
@@ -12959,8 +12958,14 @@ PrefabInstance:
         type: 3}
       propertyPath: sfxShipHit
       value: 
-      objectReference: {fileID: 11400000, guid: d7c40d8f94c8d0346a25b3b8568be4dc,
+      objectReference: {fileID: 11400000, guid: 48ec497aa32b4e84191cd9fe7daf0f75,
         type: 2}
+    - target: {fileID: 6516840330291437644, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: collisionParticles
+      value: 
+      objectReference: {fileID: 6882774427324749779, guid: 95fafc9492bb86940ad59d4df6ebc134,
+        type: 3}
     - target: {fileID: 6402759439501327819, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: upgradesRequired
@@ -12970,6 +12975,11 @@ PrefabInstance:
         type: 3}
       propertyPath: upgradesRequired
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124006882787523231, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2181611450399967858, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
@@ -13001,11 +13011,12 @@ PrefabInstance:
       propertyPath: m_AnchorAttachments.Array.data[0]
       value: 
       objectReference: {fileID: 4464225964493584865}
-    - target: {fileID: 8124006882787523231, guid: 21ca05847bc51dc49a9129aca110bda1,
+    - target: {fileID: 983195315472167487, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: chargeSFX
+      value: 
+      objectReference: {fileID: 11400000, guid: 8bcd412f8517b034380df589ecf59ef0,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}
 --- !u!1 &2137536386 stripped

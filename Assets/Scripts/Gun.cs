@@ -144,6 +144,15 @@ public class Gun : MonoBehaviour
         bulletsShot.Push(shotBullet);
     }
 
+    [SerializeField]
+    private ParticleSystem bulletSparks;
+
+    public void TriggerSparks(Vector3 worldPos)
+    {
+        bulletSparks.transform.position = worldPos;
+        bulletSparks.Play();
+    }
+
     private void FireMultipleBullets()
     {
         float angleStep = 360f / bulletCount; // Full circle divided by number of bullets

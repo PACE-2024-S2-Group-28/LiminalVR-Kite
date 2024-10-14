@@ -66,8 +66,11 @@ public class Bullet : MonoBehaviour
             //if(rockScript==null && collision.transform.parent!=null) {
             //    rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
             //}
+            gun.TriggerSparks(transform.position);
+
             if (rockScript != null) {
                 rockScript.ChangeRock(forceDir: transform.forward, hitPos: transform.position);
+                AsteroidGameManager.Instance.HandleAsteroidDestruction(other.gameObject.CompareTag("GoldAsteroid"));
                 //only collide with rocks. Pass through ship (otherwise turret bullets collide with the turret)
 
             }
@@ -78,28 +81,29 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!firedBy.IsChildOf(collision.transform))
-        { //don't collide with what fired you
-            //play some particle effect, and destroy meteors
-            var rockScript = collision.collider.transform.parent.GetComponent<RockDestroyer>();
-            //if(rockScript==null && collision.transform.parent!=null) {
-            //    rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
-            //}
-            if (rockScript != null)
-            {
-                rockScript.ChangeRock(forceDir: transform.forward, forceMag: collision.impulse.magnitude * hitForceMagnitude, hitPos: transform.position);
-                //only collide with rocks. Pass through ship (otherwise turret bullets collide with the turret)
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (!firedBy.IsChildOf(collision.transform))
+    //    { //don't collide with what fired you
+    //        //play some particle effect, and destroy meteors
 
-            }
+    //        var rockScript = collision.collider.transform.parent.GetComponent<RockDestroyer>();
+    //        //if(rockScript==null && collision.transform.parent!=null) {
+    //        //    rockScript = collision.transform.parent.GetComponent<RockDestroyer>();
+    //        //}
+    //        if (rockScript != null)
+    //        {
+    //            rockScript.ChangeRock(forceDir: transform.forward, forceMag: collision.impulse.magnitude * hitForceMagnitude, hitPos: transform.position);
+    //            //only collide with rocks. Pass through ship (otherwise turret bullets collide with the turret)
 
-            if (gun != null)
-            {
-                ReturnToGun();
-            }
-        }
-    }
+    //        }
+
+    //        if (gun != null)
+    //        {
+    //            ReturnToGun();
+    //        }
+    //    }
+    //}
 
     private void ReturnToGun()
     {

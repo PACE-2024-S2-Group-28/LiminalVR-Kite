@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c2dad7835d4e04d8a376b5de7d2b2a, type: 3}
+  m_Name: Fire
+  m_EditorClassIdentifier: 
+  mixGroup: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: 55ecabdf6c159474bbc814ac160f6d66, type: 3}
+  volumeSlider: {x: 0.5399684, y: 1}
+  playOrder: 2
+  useSemitones: 0
+  pitchSlider: {x: 0.5736842, y: 3}
+  semitoneMin: -10
+  semitoneMax: 19
+  rolloffMode: 1
+  rolloffDistance: {x: 1, y: 500}
