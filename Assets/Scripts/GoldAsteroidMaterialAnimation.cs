@@ -5,14 +5,27 @@ using UnityEngine;
 public class GoldAsteroidMaterialAnimation : MonoBehaviour
 {
     [SerializeField]
-    private Renderer meterRenderer;
+    private Renderer rockRenderer;
+    private Material instanceMat;
 
+    private float offset;
 
     [SerializeField]
-    private float meterOffsetMax;
+    private float shineSpeed;
 
     public void Update()
     {
-        meterRenderer.material.SetTextureOffset("_MainTex", new Vector2(0.5f, osY));
+        GetMat();
+        offset += Time.deltaTime * shineSpeed;
+        instanceMat.SetTextureOffset("_MainTex", new Vector2(offset, 0));
     }
+
+    public void GetMat()
+    {
+        if(rockRenderer != null && instanceMat == null)
+        {
+            instanceMat = rockRenderer.material;
+        }
+    }
+
 }

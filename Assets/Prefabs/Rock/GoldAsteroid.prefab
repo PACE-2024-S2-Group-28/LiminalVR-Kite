@@ -26,6 +26,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237a10e13c543cc48950240defa2d02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rockRenderer: {fileID: 4514561890493042824}
+  shineSpeed: 1
 --- !u!1 &3134788589252300270
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,9 +241,9 @@ Rigidbody:
     type: 3}
   m_PrefabInstance: {fileID: 3792897469712980444}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &1816907697232818383 stripped
+--- !u!54 &1816907698733987492 stripped
 Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3284786365329598739, guid: ce8bd979de1b47b4da2d1d9c001d3323,
+  m_CorrespondingSourceObject: {fileID: 3284786365976178552, guid: ce8bd979de1b47b4da2d1d9c001d3323,
     type: 3}
   m_PrefabInstance: {fileID: 3792897469712980444}
   m_PrefabAsset: {fileID: 0}
@@ -329,9 +331,9 @@ Rigidbody:
     type: 3}
   m_PrefabInstance: {fileID: 3792897469712980444}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &1816907698733987492 stripped
+--- !u!54 &1816907697232818383 stripped
 Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3284786365976178552, guid: ce8bd979de1b47b4da2d1d9c001d3323,
+  m_CorrespondingSourceObject: {fileID: 3284786365329598739, guid: ce8bd979de1b47b4da2d1d9c001d3323,
     type: 3}
   m_PrefabInstance: {fileID: 3792897469712980444}
   m_PrefabAsset: {fileID: 0}
@@ -436,11 +438,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5309100522183281565}
     m_Modifications:
-    - target: {fileID: 8774119488492757891, guid: 0019b5eb78179804b80917125cba710f,
-        type: 3}
-      propertyPath: m_Name
-      value: GoldAsteroidModel
-      objectReference: {fileID: 0}
     - target: {fileID: 5735535237029925264, guid: 0019b5eb78179804b80917125cba710f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -496,6 +493,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8774119488492757891, guid: 0019b5eb78179804b80917125cba710f,
+        type: 3}
+      propertyPath: m_Name
+      value: GoldAsteroidModel
+      objectReference: {fileID: 0}
     - target: {fileID: -3772188322458282565, guid: 0019b5eb78179804b80917125cba710f,
         type: 3}
       propertyPath: m_Drag
@@ -527,6 +529,12 @@ GameObject:
 --- !u!4 &1207384484289074759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5735535237029925264, guid: 0019b5eb78179804b80917125cba710f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6870746055344506839}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4514561890493042824 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7061425673652623199, guid: 0019b5eb78179804b80917125cba710f,
     type: 3}
   m_PrefabInstance: {fileID: 6870746055344506839}
   m_PrefabAsset: {fileID: 0}
