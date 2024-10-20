@@ -129,31 +129,35 @@ public class RockDestroyer : MonoBehaviour
     private float fadeStartTime = 0;
     private IEnumerator RockFadingSinking()
     {
-        int count = rockRbs.Length;
-        // foreach (var rb in rockRbs)
-        // {
-        //     rb.transform.GetComponentInChildren<Collider>().enabled = false;
-        // }
+        var activeRockRbs = new List<Rigidbody>(rockRbs);
 
         while (true)
         {
             float t = (Time.time - fadeStartTime) / rockFadeTime;
 
-            //loop through all rock pieces
-            foreach (Rigidbody rb in rockRbs)
+            for (int i = activeRockRbs.Count - 1; i >= 0; i--)
             {
-                //if (rb == null || rb.isKinematic) continue;
+                Rigidbody rb = activeRockRbs[i];
+
+                if (rb == null || rb.gameObject == null)
+                {
+                    activeRockRbs.RemoveAt(i);
+                    continue;
+                }
+
                 rb.transform.localScale = Vector3.one * 100f * (1f - t);
             }
+
+            if (activeRockRbs.Count == 0) break;
 
             if (t >= 1f) break;
             yield return new WaitForSecondsRealtime(1f / (float)tickRate);
         }
 
         SEvent_RockDestroyed?.Invoke();
-        //calledDestroyEvent = true;
         GameObject.Destroy(this.gameObject);
     }
+
 
     public static UnityEvent SEvent_RockDestroyed = new UnityEvent();
 }

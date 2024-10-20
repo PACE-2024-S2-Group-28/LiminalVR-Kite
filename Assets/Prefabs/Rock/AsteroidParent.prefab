@@ -115,7 +115,7 @@ MonoBehaviour:
   rock: {fileID: 7268447682887004510}
   fadeSpeed: 1
   rockLifetime: 0.5
-  rockFadeTime: 0.5
+  rockFadeTime: 2
   rockRbs:
   - {fileID: 1524347580814565969}
   - {fileID: 1524347580765693832}
