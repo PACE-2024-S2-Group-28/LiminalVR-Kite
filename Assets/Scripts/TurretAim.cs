@@ -100,8 +100,9 @@ public class TurretAim : MonoBehaviour
             startHeadRotation = headPivot.rotation;
             startBaseRotation = basePivot.rotation;
             targetPoint = target.position + (closestSpeed * timeToRotate); //position asteroid moves to while turret rotates
-            toHeadRotation = Quaternion.LookRotation(new Vector3(headPivot.position.x, targetPoint.y, targetPoint.z) - headPivot.position, Vector3.up); //direction to point to asteroid
-            toBaseRotation = Quaternion.LookRotation(new Vector3(targetPoint.x, basePivot.localPosition.y, targetPoint.z) - basePivot.position, Vector3.forward); //direction to point to asteroid
+            Vector3 dir = targetPoint - transform.position;
+            toHeadRotation = Quaternion.LookRotation(new Vector3(0, dir.y, dir.z), Vector3.back); //direction to point to asteroid
+            toBaseRotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, 0) , transform.TransformDirection(Vector3.down)); //direction to point to asteroid
             rotateTimer = 0;
         }
         else
@@ -141,8 +142,9 @@ public class TurretAim : MonoBehaviour
         beamTimer -= Time.deltaTime;
         if ((beamTimer > 0) && (target.gameObject.activeSelf == true))
         { //move the laser beam and rotate to face the rock
-            headPivot.rotation = Quaternion.LookRotation(new Vector3(headPivot.position.x, target.position.y, target.position.z) - headPivot.position, Vector3.up);
-            basePivot.rotation = Quaternion.LookRotation(new Vector3(target.position.x, basePivot.localPosition.y, target.position.z ) - basePivot.position, Vector3.forward);
+            Vector3 dir = target.position - transform.position;
+            headPivot.rotation = Quaternion.LookRotation(new Vector3(0, dir.y, dir.z), Vector3.back); //direction to point to asteroid
+            basePivot.rotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, 0) , transform.TransformDirection(Vector3.down)); //direction to point to asteroid
             beam.SetPosition(0, laserStartPoint.position);
             beam.SetPosition(1, target.position);
 
@@ -168,6 +170,8 @@ public class TurretAim : MonoBehaviour
             }
             target = null;
             rotateTimer = 0;
+
+            //return to original positions. This works!
             startHeadRotation = headPivot.rotation;
             toHeadRotation = Quaternion.LookRotation(new Vector3(headPivot.position.x, headPivot.position.y, headPivot.position.z + 1) - headPivot.position, Vector3.up);
             startBaseRotation = basePivot.rotation;
