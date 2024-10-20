@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &4328373814047281837
 MonoBehaviour:
@@ -26,7 +25,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &5559598142660598926
 MonoBehaviour:
@@ -40,7 +38,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &4878089772018312975
 MonoBehaviour:
@@ -54,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &473645208508609619
 MonoBehaviour:
@@ -68,7 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!1 &3134788589252300270
 GameObject:
@@ -120,7 +115,7 @@ MonoBehaviour:
   rock: {fileID: 7268447682887004510}
   fadeSpeed: 1
   rockLifetime: 0.5
-  rockFadeTime: 20
+  rockFadeTime: 0.5
   rockRbs:
   - {fileID: 1524347580814565969}
   - {fileID: 1524347580765693832}
@@ -199,7 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &5561344954543080364
 MonoBehaviour:
@@ -213,7 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &1096890700768542330
 MonoBehaviour:
@@ -227,7 +220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &7694364681599670630
 MonoBehaviour:
@@ -241,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &7247447973719871312
 MonoBehaviour:
@@ -255,7 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &984187225691030574
 MonoBehaviour:
@@ -269,7 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &1565822068571233832
 MonoBehaviour:
@@ -283,7 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &909489407507204944
 MonoBehaviour:
@@ -297,7 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &7416042033318970439
 MonoBehaviour:
@@ -311,7 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &7445605379923695682
 MonoBehaviour:
@@ -325,7 +311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &2901584116740694751
 MonoBehaviour:
@@ -339,7 +324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &5351151187666081659
 MonoBehaviour:
@@ -353,7 +337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &5787917795709559755
 MonoBehaviour:
@@ -367,7 +350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &5460243356922594891
 MonoBehaviour:
@@ -381,7 +363,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &5137013713683576102
 MonoBehaviour:
@@ -395,7 +376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &9068575773095434645
 MonoBehaviour:
@@ -409,7 +389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &1455523249654778742
 MonoBehaviour:
@@ -423,7 +402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!54 &1820020344
 Rigidbody:
@@ -481,7 +459,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!114 &2036083462306222993
 MonoBehaviour:
@@ -495,7 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ac19654d59924bba5884e68dbe6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakEffectPrefab: {fileID: 0}
   destroyDelay: 0
 --- !u!1001 &277380217571490108
 PrefabInstance:
