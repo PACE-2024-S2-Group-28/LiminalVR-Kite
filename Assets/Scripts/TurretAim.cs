@@ -10,8 +10,8 @@ public class TurretAim : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float timeToRotate = 0.5f; //how many seconds it takes to rotate to face an asteroid before firing. Keep this lower than shootCooldown
     [SerializeField] private Transform laserStartPoint;
-    [SerializeField] private Transform headPivot; //can rotate around the x-axis (look up and down)
-    [SerializeField] private Transform basePivot; //can rotate around the z axis (look side to side)
+    [SerializeField] private Transform gunPitchPivot; //can rotate around the x-axis (look up and down)
+    [SerializeField] private Transform baseYawPivot; //can rotate around the z axis (look side to side)
     private float rotateTimer;
     private float rechargeTimer;
     private float beamTimer;
@@ -43,28 +43,19 @@ public class TurretAim : MonoBehaviour
     void Update()
     {
         rechargeTimer -= Time.deltaTime;
-        if (rechargeTimer <= 0)
-        {
-            if (target == null)
-            {
+
+        if (rechargeTimer <= 0) {
+            if (target == null) {
                 FindFiringSolution(); //pick a target to lock onto
-            }
-            else
-            { //rotate to face asteroid, then fire a beam at it
-                if (rotateTimer < timeToRotate)
-                {
+            } else { //rotate to face asteroid, then fire a beam at it
+                if (rotateTimer < timeToRotate) {
                     FaceTarget();
-                }
-                else
-                {
+                } else {
                     Fire();
                 }
             }
-        }
-        else
-        { //rotate back to face forward
-            headPivot.rotation = Quaternion.Slerp(startHeadRotation, toHeadRotation, rotateTimer / timeToRotate);
-            basePivot.rotation = Quaternion.Slerp(startBaseRotation, toBaseRotation, rotateTimer / timeToRotate);
+        } else { //rotate back to face forward
+            FaceTarget(Quaternion.Euler(Vector3.forward)); //resetting to face forward
             rotateTimer += Time.deltaTime;
         }
     }
@@ -97,12 +88,12 @@ public class TurretAim : MonoBehaviour
         if (closestTarget != null)
         { //if you found something to shoot, remember it and the turret's current facing
             target = closestTarget.transform;
-            startHeadRotation = headPivot.rotation;
-            startBaseRotation = basePivot.rotation;
-            targetPoint = target.position + (closestSpeed * timeToRotate); //position asteroid moves to while turret rotates
-            Vector3 dir = targetPoint - transform.position;
-            toHeadRotation = Quaternion.LookRotation(new Vector3(0, dir.y, dir.z), Vector3.back); //direction to point to asteroid
-            toBaseRotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, 0) , transform.TransformDirection(Vector3.down)); //direction to point to asteroid
+            //startHeadRotation = headPivot.rotation;
+            //startBaseRotation = basePivot.rotation;
+            //targetPoint = target.position + (closestSpeed * timeToRotate); //position asteroid moves to while turret rotates
+            //Vector3 dir = targetPoint - transform.position;
+            //toHeadRotation = Quaternion.LookRotation(new Vector3(0, dir.y, dir.z), Vector3.back); //direction to point to asteroid
+            //toBaseRotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, 0) , transform.TransformDirection(Vector3.down)); //direction to point to asteroid
             rotateTimer = 0;
         }
         else
@@ -112,10 +103,15 @@ public class TurretAim : MonoBehaviour
         }
     }
 
-    private void FaceTarget()
+    private void FaceTarget(Quaternion? overrideTargetQ = null)
     {
-        headPivot.rotation = Quaternion.Slerp(startHeadRotation, toHeadRotation, rotateTimer / timeToRotate);
-        basePivot.rotation = Quaternion.Slerp(startBaseRotation, toBaseRotation, rotateTimer / timeToRotate);
+        var targetRotQ = Quaternion.identity;
+        targetRotQ = overrideTargetQ.HasValue? overrideTargetQ.Value : Quaternion.LookRotation(target.position - gunPitchPivot.position);
+        var slerpedRotEuler = Quaternion.Slerp(Quaternion.Euler(new Vector3(gunPitchPivot.eulerAngles.x, gunPitchPivot.eulerAngles.y, 0)), targetRotQ, rotateTimer / timeToRotate).eulerAngles;
+
+        gunPitchPivot.eulerAngles = new Vector3(slerpedRotEuler.x, gunPitchPivot.eulerAngles.y, gunPitchPivot.eulerAngles.z); //pitch
+        baseYawPivot.eulerAngles = new Vector3(baseYawPivot.eulerAngles.x, slerpedRotEuler.y, baseYawPivot.eulerAngles.z); //yaw
+
         rotateTimer += Time.deltaTime;
         if (rotateTimer >= timeToRotate)
         { //activate beam when facing asteroid
@@ -143,13 +139,13 @@ public class TurretAim : MonoBehaviour
         if ((beamTimer > 0) && (target.gameObject.activeSelf == true))
         { //move the laser beam and rotate to face the rock
             Vector3 dir = target.position - transform.position;
-            headPivot.rotation = Quaternion.LookRotation(new Vector3(0, dir.y, dir.z), Vector3.back); //direction to point to asteroid
-            basePivot.rotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, 0) , transform.TransformDirection(Vector3.down)); //direction to point to asteroid
+            FaceTarget();
+            //headPivot.rotation = Quaternion.LookRotation(new Vector3(0, dir.y, dir.z), Vector3.back); //direction to point to asteroid
+            //basePivot.rotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, 0) , transform.TransformDirection(Vector3.down)); //direction to point to asteroid
             beam.SetPosition(0, laserStartPoint.position);
             beam.SetPosition(1, target.position);
 
-            if (charging)
-            {
+            if (charging) {
                 //chargeSFX.Play();
                 charging = false;
             }
@@ -172,9 +168,9 @@ public class TurretAim : MonoBehaviour
             rotateTimer = 0;
 
             //return to original positions. This works!
-            startHeadRotation = headPivot.rotation;
-            toHeadRotation = Quaternion.LookRotation(new Vector3(headPivot.position.x, headPivot.position.y, headPivot.position.z + 1) - headPivot.position, Vector3.up);
-            startBaseRotation = basePivot.rotation;
+            startHeadRotation = gunPitchPivot.rotation;
+            toHeadRotation = Quaternion.LookRotation(new Vector3(gunPitchPivot.position.x, gunPitchPivot.position.y, gunPitchPivot.position.z + 1) - gunPitchPivot.position, Vector3.up);
+            startBaseRotation = baseYawPivot.rotation;
             toBaseRotation = Quaternion.LookRotation(Vector3.up, Vector3.right);
         }
     }
