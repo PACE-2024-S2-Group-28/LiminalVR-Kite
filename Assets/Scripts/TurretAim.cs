@@ -16,12 +16,6 @@ public class TurretAim : MonoBehaviour
     private float rechargeTimer;
     private float beamTimer;
     private Transform target = null;
-    private Vector3 targetPoint; //where the asteroid will be when the turret finishes rotating
-    private Quaternion startHeadRotation; //rotation of the head before it started firing
-    private Quaternion toHeadRotation; //rotation of the head when facing the asteroid's future position
-    private Quaternion startBaseRotation; //rotation of the base before it started firing
-    private Quaternion toBaseRotation; //rotation of the base when facing the asteroid's future position
-
     private Quaternion startRotation;
 
     private LineRenderer beam; //the laser beam
@@ -99,13 +93,8 @@ public class TurretAim : MonoBehaviour
         if (closestTarget != null)
         { //if you found something to shoot, remember it and the turret's current facing
             target = closestTarget.transform;
-            //startHeadRotation = headPivot.rotation;
-            //startBaseRotation = basePivot.rotation;
-            targetPoint = target.position + (closestSpeed * timeToRotate); //position asteroid moves to while turret rotates
+            Vector3 targetPoint = target.position + (closestSpeed * timeToRotate); //position asteroid moves to while turret rotates
             startRotation = Quaternion.LookRotation(targetPoint - gunPitchPivot.position); //rotation to face the point the asteroid will be in
-            //Vector3 dir = targetPoint - transform.position;
-            //toHeadRotation = Quaternion.LookRotation(new Vector3(0, dir.y, dir.z), Vector3.back); //direction to point to asteroid
-            //toBaseRotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, 0) , transform.TransformDirection(Vector3.down)); //direction to point to asteroid
             rotateTimer = 0;
         }
         else
@@ -149,15 +138,11 @@ public class TurretAim : MonoBehaviour
             beam.SetPosition(1, target.position);
 
             if (charging) {
-                //chargeSFX.Play();
                 charging = false;
             }
         }
         else
         { //destroy rock and disable beam
-            // turretFireSFX.Play(wPos: target.position);
-            //chargeSFX.Stop();
-            //turretFireSFX.Play();
             charging = true;
 
             beam.enabled = false;
@@ -170,12 +155,6 @@ public class TurretAim : MonoBehaviour
             startRotation = Quaternion.LookRotation(target.position - gunPitchPivot.position); //get the rotation it was last pointing in
             target = null;
             rotateTimer = 0;
-
-            //return to original positions. This works!
-            startHeadRotation = gunPitchPivot.rotation;
-            toHeadRotation = Quaternion.LookRotation(new Vector3(gunPitchPivot.position.x, gunPitchPivot.position.y, gunPitchPivot.position.z + 1) - gunPitchPivot.position, Vector3.up);
-            startBaseRotation = baseYawPivot.rotation;
-            toBaseRotation = Quaternion.LookRotation(Vector3.up, Vector3.right);
         }
     }
 
