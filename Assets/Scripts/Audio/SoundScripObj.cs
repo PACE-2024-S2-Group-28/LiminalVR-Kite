@@ -43,7 +43,7 @@ namespace ScriptableObjects
 
         public AudioRolloffMode rolloffMode;
         
-        [MinMaxSlider(1f, 500f)]
+        [MinMaxSlider(1f, 1000f)]
         public Vector2 rolloffDistance = new Vector2(1,500);
 
         #endregion

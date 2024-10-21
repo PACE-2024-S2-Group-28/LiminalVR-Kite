@@ -22534,7 +22534,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  totalGameTime: 300
+  totalGameTime: 200
   minMaxSpawnRate: {x: 0, y: 7.9999995}
   spawnCurve:
     serializedVersion: 2

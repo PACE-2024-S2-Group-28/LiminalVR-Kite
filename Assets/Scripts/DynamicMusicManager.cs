@@ -69,7 +69,7 @@ public class DynamicMusicManager : MonoBehaviour
         }
 
         //overall audio volume
-        float volume = Mathf.Lerp(minMaxMusicVol.x, minMaxMusicVol.y, AsteroidGameManager.Instance.SampleDifficultyCurve());
+        float volume = Mathf.Lerp(minMaxMusicVol.x, minMaxMusicVol.y, AsteroidGameManager.Instance.SampleDifficultyCurve(AsteroidGameManager.Instance.GameProgress-.1f));
         mixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
     }
 

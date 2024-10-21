@@ -130,7 +130,7 @@ public class AsteroidSpawner : MonoBehaviour
         }
         else {
             Vector3 spawnVec = Random.insideUnitSphere;
-            spawnVec = Vector3.Scale(spawnVec, spawnBox);
+            spawnVec = Vector3.Scale(spawnVec, spawnBox*.5f);
             asteroidT.position = transform.position + spawnVec;
         }
 

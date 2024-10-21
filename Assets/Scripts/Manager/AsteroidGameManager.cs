@@ -34,7 +34,8 @@ public class AsteroidGameManager : MonoBehaviour
     [SerializeField]
     private float totalGameTime = 300;
     public float GameLength => totalGameTime;
-    public float GameProgress => Time.time / totalGameTime;
+    private float gameProgress;
+    public float GameProgress => gameProgress;
 
     [SerializeField]
     [MinMaxSlider(0f, 20f)]
@@ -74,7 +75,8 @@ public class AsteroidGameManager : MonoBehaviour
 
     private void Update()
     {
-        
+        gameProgress = Time.time / totalGameTime;
+
         float newSpawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, SampleDifficultyCurve());
         asteroidSpawner.AdjustSpawnRate(newSpawnRate);
 
@@ -83,19 +85,19 @@ public class AsteroidGameManager : MonoBehaviour
             asteroidSpawner.SpawnAsteroid(true, goldenAsteroidData[currGoldIdx++].position);
         }
 
-        if (GameProgress >= 1f) {
+        if (gameProgress >= 1f) {
             EndExperience();
         }
     }
 
-    public float SampleDifficultyCurve()
+    public float SampleDifficultyCurve(float? time01 = null)
     {
-        return spawnCurve.Evaluate(GameProgress);
+        time01 = time01.HasValue ? time01 : gameProgress;
+        return spawnCurve.Evaluate(time01.Value);
     }
 
     public void RecordGoldenAsteroidSpawn(Vector3 position)
     {
-        float gameProgress = Time.time / totalGameTime;
         goldenAsteroidData.Add(new GoldenAsteroidData(gameProgress, position));
         Debug.Log($"Golden Asteroid spawned at {position} - {gameProgress * 100}% through game.");
     }
