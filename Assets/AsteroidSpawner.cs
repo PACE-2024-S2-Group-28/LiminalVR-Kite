@@ -6,10 +6,12 @@ using NaughtyAttributes;
 public class AsteroidSpawner : MonoBehaviour
 {
     [SerializeField]
-    private Vector3 spawnBox = Vector3.one;
+    private GameObject
+        asteroidFab,
+        goldAsteroidFab;
 
     [SerializeField]
-    private GameObject[] asteroidFab;
+    private Vector3 spawnBox = Vector3.one;
 
     [SerializeField]
     private int maxAsteroids = 7;
@@ -17,48 +19,48 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField]
     private Vector3 startingDefaultVel = Vector3.zero;
 
-    [SerializeField, MinMaxSlider(0.1f, 10f)]
-    private Vector2 asteroidSizeRange = new Vector2(1f, 5f);
-    
+    [SerializeField, MinMaxSlider(0f, 1f)]
+    private Vector2 minMaxVelLerpToPlayer = new Vector2(.6f, .9f);
 
-    [SerializeField, MinMaxSlider(0f, 10f)]
-    private Vector2 asteroidSpeedRange = new Vector2(1f, 5f);
-    public Vector2 AsteroidSpeedRange { get => asteroidSpeedRange; set => asteroidSpeedRange = value; }
-
-    [SerializeField, MinMaxSlider(0f, 50f)]
-    private Vector2 spawnDistanceRange = new Vector2(10f, 20f);
-
-    [SerializeField]
-    private float
-        spawnChance = .2f,
-        spawnMinTime = .3f,
-        spawnMaxTime = 2f,
-        spawnRotationStrength = 5f,
-        spawnExtraVelocityStrength = 2f;
-
-    [SerializeField]
-    private float spawnTickRate = 30;
+    [SerializeField, MinMaxSlider(0f, 5f)]
+    private Vector2
+        minMaxSpawnTime = new Vector2(.3f, 2f),
+        minMaxRotationSpeed = new Vector2(1.2f, 2f),
+        minMaxAsteroidVelMult = new Vector2(.8f, 1.2f),
+        minMaxAsteroidSizeMult = new Vector2(1f, 4f);
+    private float getWithinMinMax(Vector2 range) => Random.Range(range.x, range.y);
+    public Vector2 MinMaxSpawnTime {
+        get { return minMaxSpawnTime; }
+        set { minMaxSpawnTime = value; }
+    }
 
     private float timer;
     private int activeAsteroids = 0;
     private int goldenAsteroidsCount = 0;
-    private float goldenTimer = 0;
-    [SerializeField] private float goldenAsteroidSpawningTime = 15;
-    [SerializeField] private Vector3 goldenAsteroidFixedPosition = new Vector3(0, 5, 0);
     private float gameTimer = 0;
 
     [SerializeField] public float maxSpeed = 10f;
     [SerializeField] public float minSpeed = 1f;
     [SerializeField] public float acceleration = 1f;
     [SerializeField] public float slowAmount = 2f;
-    
+
 
     private void Start()
     {
-        InvokeRepeating(nameof(TrySpawn), 0f, 1f / (float)spawnTickRate);
-        //UpdateSpawn();
+        StartCoroutine(AsteroidSpawnRoutine());
     }
 
+    private IEnumerator AsteroidSpawnRoutine()
+    {
+        yield return new WaitForSeconds(minMaxSpawnTime.y);
+
+        while (true) {
+            TrySpawnAsteroid();
+            yield return new WaitForSeconds(getWithinMinMax(minMaxSpawnTime));
+        }
+    }
+
+    #region subbing
     private void OnEnable()
     {
         RockDestroyer.SEvent_RockDestroyed.AddListener(CountRockDestroyed);
@@ -70,102 +72,84 @@ public class AsteroidSpawner : MonoBehaviour
     }
 
     private void CountRockDestroyed() { activeAsteroids--; }
+    #endregion
 
-    public void AdjustSpawnTickRate(float rate)
+    public void AdjustSpawnRate(float timeToSpawn, float variance = .2f)
     {
-        rate = Mathf.Max(Mathf.Epsilon, rate);
+        timeToSpawn = Mathf.Max(Mathf.Epsilon, timeToSpawn);
 
-        //spawnTickRate = Mathf.Clamp(rate, 1, 30); 
-        spawnMinTime = 1f / (rate*1.2f);
-        spawnMaxTime = 1f / (rate*.8f);
-        //UpdateSpawn();
+        minMaxSpawnTime.x = 1f / (timeToSpawn * (1 + variance));
+        minMaxSpawnTime.y = 1f / (timeToSpawn * (1 - variance));
     }
 
-    private void UpdateSpawn()
-    {
-        CancelInvoke(nameof(TrySpawn));
-        InvokeRepeating(nameof(TrySpawn), 0f, 1f / spawnTickRate);
-    }
     void Update()
     {
         timer += Time.deltaTime;
-        goldenTimer += Time.deltaTime;
     }
 
-    private void TrySpawn()
+    private void TrySpawnAsteroid()
     {
-         
+
         if (activeAsteroids >= maxAsteroids) {
             timer = 0;
             return;
         }
 
-        if (timer >= spawnMaxTime || (goldenTimer > goldenAsteroidSpawningTime && timer > spawnMinTime)) {
-            SpawnAsteroid();
-            return;
-        }
-        if (timer > spawnMinTime) {
-            if(Random.Range(0f, 1f)<=spawnChance) {
-                SpawnAsteroid();
-            }
-        }
+        SpawnAsteroid();
     }
 
     [Button]
-    private void SpawnAsteroid()
+    public void SpawnAsteroid(bool isGold = false, Vector3? manualPos = null)
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (!Application.isPlaying) return;
-        #endif
-        Vector3 spawnVec = Vector3.zero; 
-        int prefabIndex = (goldenTimer > goldenAsteroidSpawningTime) ? 1 : 0;
-        if (prefabIndex == 1){ 
-            goldenAsteroidsCount++;
-            goldenTimer = 0;
-            AsteroidGameManager.Instance.RecordGoldenAsteroidSpawn(spawnVec);
-        }
-        GameObject asteroid = asteroidFab[prefabIndex];
-        
-        activeAsteroids++;
+#endif
+
         timer = 0f;
-
-        //Vector3 spawnVec;
-        if (prefabIndex == 1) {
-            spawnVec = goldenAsteroidFixedPosition;
-        } else {
-            spawnVec = Random.insideUnitSphere;
-            spawnVec = Vector3.Scale(spawnVec, spawnBox);
+        //normal or gold asteroid
+        GameObject asteroidToSpawnFab;
+        if (isGold) {
+            goldenAsteroidsCount++;
+            asteroidToSpawnFab = goldAsteroidFab;
+        }
+        else {
+            activeAsteroids++;
+            asteroidToSpawnFab = asteroidFab;
         }
 
-        var asteroidT = GameObject.Instantiate(asteroidFab[prefabIndex]).transform;
+        //spawning
+        var asteroidT = GameObject.Instantiate(asteroidToSpawnFab).transform;
         asteroidT.parent = this.transform;
-        
-        
-        float spawnDistance = Random.Range(spawnDistanceRange.x, spawnDistanceRange.y);
-        asteroidT.position = transform.position + spawnVec;
-        //Calculate spawn distance from player
 
-        
-        float size = Random.Range(asteroidSizeRange.x, asteroidSizeRange.y);
-        asteroidT.localScale = Vector3.one * size;
+        //position
+        if (isGold) {
+            asteroidT.position = manualPos.Value;
+        }
+        else {
+            Vector3 spawnVec = Random.insideUnitSphere;
+            spawnVec = Vector3.Scale(spawnVec, spawnBox);
+            asteroidT.position = transform.position + spawnVec;
+        }
+
         //Randomize asteroid size
-        Color asteroidColor = (prefabIndex == 0) ? Color.red : Color.yellow;
-        MeshRenderer renderer = asteroidT.GetComponentInChildren<MeshRenderer>();
+        float sizeMult = getWithinMinMax(minMaxAsteroidSizeMult);
+        asteroidT.localScale = Vector3.one * sizeMult;
 
         //random rotation
-        spawnVec = Random.insideUnitSphere * 360f;
-        asteroidT.rotation = Quaternion.Euler(spawnVec);
+        Vector3 rotVec = Random.insideUnitSphere * 360f;
+        asteroidT.rotation = Quaternion.Euler(rotVec);
 
         //angular velocity random
         var rb = asteroidT.GetComponentInChildren<Rigidbody>();
-        spawnVec = Random.insideUnitSphere;
-        rb.angularVelocity = spawnVec * spawnRotationStrength;
+        rotVec = Random.insideUnitSphere;
+        rb.angularVelocity = rotVec * getWithinMinMax(minMaxRotationSpeed);
 
         //set starting velocity + random component based on speed range, lerped towards a direction to player
-        float speed = Random.Range(asteroidSpeedRange.x, asteroidSpeedRange.y);
-        Vector3 velToPlayer = -asteroidT.position.normalized * startingDefaultVel.magnitude;
-        Vector3 lerpedVel = Vector3.Lerp(startingDefaultVel, velToPlayer, .8f);
-        rb.velocity = lerpedVel + Random.insideUnitSphere.normalized * speed;
+        float speedMult = getWithinMinMax(minMaxAsteroidVelMult);
+        Vector3 vel = startingDefaultVel * speedMult;
+        Vector3 velToPlayer = -asteroidT.position.normalized * vel.magnitude;
+        Vector3 lerpedVel = Vector3.Lerp(vel, velToPlayer, getWithinMinMax(minMaxVelLerpToPlayer));
+        rb.velocity = lerpedVel;
     }
 
     public void DestroyAsteroid(bool isGoldAsteroid)

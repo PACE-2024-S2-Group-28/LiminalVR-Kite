@@ -58,7 +58,7 @@ public class Editor_AsteroidGameManager : Editor
             // Draw timed events as spikes
             Handles.color = Color.yellow;
             foreach (var spawn in targetManager.GoldSpawns) {
-                DrawSpike(curveRect, spawn.gameProgress, targetManager.GameLength, Color.yellow);
+                DrawSpike(curveRect, spawn.spawnTime, targetManager.GameLength, Color.yellow);
             }
         }
     }

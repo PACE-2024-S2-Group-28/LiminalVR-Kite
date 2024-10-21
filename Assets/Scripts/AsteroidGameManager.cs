@@ -45,11 +45,11 @@ public class AsteroidGameManager : MonoBehaviour
 
     [System.Serializable]
     public class GoldenAsteroidData {
-        public float gameProgress;
+        public float spawnTime;
         public Vector3 position;
 
         public GoldenAsteroidData(float progress, Vector3 pos) {
-            gameProgress = progress;
+            spawnTime = progress;
             position = pos;
         }
     }
@@ -69,11 +69,18 @@ public class AsteroidGameManager : MonoBehaviour
         }
     }
 
+    private int currGoldIdx = 0;
+
     private void Update()
     {
         float gameProgress = Time.time / totalGameTime;
-        float spawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, spawnCurve.Evaluate(gameProgress));
-        asteroidSpawner.AdjustSpawnTickRate(spawnRate);
+        float newSpawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, spawnCurve.Evaluate(gameProgress));
+        asteroidSpawner.AdjustSpawnRate(newSpawnRate);
+
+        if(Time.time >= goldenAsteroidData[currGoldIdx].spawnTime) {
+            Debug.Log(String.Format("Spawning idx {0} gold asteroid", currGoldIdx));
+            asteroidSpawner.SpawnAsteroid(true, goldenAsteroidData[currGoldIdx++].position);
+        }
     }
 
     public void RecordGoldenAsteroidSpawn(Vector3 position)
@@ -119,11 +126,6 @@ public class AsteroidGameManager : MonoBehaviour
         Action_IncrementUpgradeProgress?.Invoke((floatScore%floatThreshold)/floatThreshold);
     }
 
-    public void AdjustAsteroidSpeed(float multiplier)
-    {
-        asteroidSpawner.AsteroidSpeedRange = new Vector2(asteroidSpawner.AsteroidSpeedRange.x * multiplier, asteroidSpawner.AsteroidSpeedRange.y * multiplier);
-    }
-
     private void OnDrawGizmosSelected()
     {
         #if UNITY_EDITOR
@@ -138,7 +140,7 @@ public class AsteroidGameManager : MonoBehaviour
             Gizmos.color = Color.yellow;
             foreach (var spawn in goldenAsteroidData) {
                 Gizmos.DrawWireSphere(spawn.position, 3.5f);
-                Handles.Label(spawn.position, "" + spawn.gameProgress, style);
+                Handles.Label(spawn.position, "" + spawn.spawnTime, style);
             }
         #endif
     }

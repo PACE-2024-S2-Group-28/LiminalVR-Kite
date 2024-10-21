@@ -17,7 +17,7 @@ public class PD_GoldAsteroidSpawn : PropertyDrawer
         float smallWidth = (position.width - labelWidth*2f) - wideWidth;
 
         // Get properties
-        SerializedProperty timeProperty = property.FindPropertyRelative("gameProgress");
+        SerializedProperty timeProperty = property.FindPropertyRelative("spawnTime");
         SerializedProperty positionProperty = property.FindPropertyRelative("position");
 
         #region Old method without labels
