@@ -19,6 +19,10 @@ public class RadioCallouts : MonoBehaviour
         StartCoroutine(PlayVoiceline(voiceStart));
     }
 
+    public void PlayLine(AudioClip clip) {
+        StartCoroutine(PlayVoiceline(clip));
+    }
+
     private IEnumerator PlayVoiceline(AudioClip clip)
     {
         radioSource.Stop();

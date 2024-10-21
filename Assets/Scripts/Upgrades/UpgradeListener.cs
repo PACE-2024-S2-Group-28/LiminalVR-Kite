@@ -5,10 +5,13 @@ using UnityEngine;
 public abstract class UpgradeListener : MonoBehaviour
 {
     [SerializeField] private int upgradesRequired;
+    [SerializeField] private AudioClip voiceLine;
+    private RadioCallouts radio;
 
     void Start()
     {
         AsteroidGameManager.Instance.UpgradeUnlocked.AddListener(UpgradeHappened);
+        radio = FindObjectOfType<RadioCallouts>();
     }
 
     public virtual void UpgradeHappened() //count down until it's time to do an upgrade
@@ -16,6 +19,9 @@ public abstract class UpgradeListener : MonoBehaviour
         upgradesRequired--;
         if (upgradesRequired == 0) {
             DoUpgrade();
+            if (voiceLine != null) {
+                radio.PlayLine(voiceLine);
+            }
         }
     }
 
