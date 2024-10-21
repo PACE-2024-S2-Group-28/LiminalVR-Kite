@@ -74,6 +74,11 @@ public class AsteroidGameManager : MonoBehaviour
         float gameProgress = Time.time / totalGameTime;
         float spawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, spawnCurve.Evaluate(gameProgress));
         asteroidSpawner.AdjustSpawnTickRate(spawnRate);
+
+        if(gameProgress >= 1f)
+        {
+            EndExperience();
+        }
     }
 
     public void RecordGoldenAsteroidSpawn(Vector3 position)
