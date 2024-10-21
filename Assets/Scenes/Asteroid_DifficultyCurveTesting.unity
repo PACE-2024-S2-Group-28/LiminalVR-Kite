@@ -153,7 +153,7 @@ MonoBehaviour:
     type: 3}
   goldAsteroidFab: {fileID: 3134788589252300270, guid: 1de33675fe809a44ea78efe283ef95a2,
     type: 3}
-  spawnBox: {x: 500, y: 200, z: 140.8}
+  spawnBox: {x: 350, y: 150, z: 140.8}
   maxAsteroids: 35
   startingDefaultVel: {x: 0, y: 0, z: -50}
   minMaxVelLerpToPlayer: {x: 0.8, y: 0.99}
@@ -475,13 +475,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504278729}
-  m_LocalRotation: {x: -0, y: -0, z: -0.93969274, w: -0.34202003}
-  m_LocalPosition: {x: 0.00028733138, y: 0.00022961965, z: 0.00038200355}
-  m_LocalScale: {x: 2.970239, y: 2.9702404, z: 2.9702396}
-  m_Children:
-  - {fileID: 1682501379}
-  m_Father: {fileID: 1229149316}
-  m_RootOrder: 6
+  m_LocalRotation: {x: -0.6644631, y: -0.24184473, z: -0.24184473, w: 0.6644631}
+  m_LocalPosition: {x: -0.02873317, y: -1.01, z: 0.022961972}
+  m_LocalScale: {x: 297.02426, y: 297.02466, z: 297.0244}
+  m_Children: []
+  m_Father: {fileID: 2055080279}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -40}
 --- !u!1 &542795853
 GameObject:
@@ -21583,12 +21582,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682501378}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -0.00131}
-  m_LocalScale: {x: 0.7362839, y: 0.7362839, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.93969274, w: -0.34202006}
+  m_LocalPosition: {x: 0.00028733155, y: 0.0002296202, z: -0.0035090107}
+  m_LocalScale: {x: 2.1869414, y: 2.1869438, z: 2.9702425}
   m_Children: []
-  m_Father: {fileID: 504278732}
-  m_RootOrder: 0
+  m_Father: {fileID: 1229149316}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -40}
 --- !u!23 &1682501380
 MeshRenderer:
@@ -22403,6 +22402,12 @@ Transform:
   m_Father: {fileID: 651993451}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -14.129001, y: -119.741005, z: -6.248}
+--- !u!4 &2055080279 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 995429870759517987, guid: 21ca05847bc51dc49a9129aca110bda1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2118986110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2056290369
 GameObject:
   m_ObjectHideFlags: 0
@@ -22535,13 +22540,13 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   totalGameTime: 200
-  minMaxSpawnRate: {x: 0, y: 7.9999995}
+  minMaxSpawnRate: {x: 0, y: 11}
   spawnCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.0020038858
-      value: 0.058432605
+      time: 0.00054814667
+      value: 0.15566161
       inSlope: 2.1820934
       outSlope: 2.1820934
       tangentMode: 0

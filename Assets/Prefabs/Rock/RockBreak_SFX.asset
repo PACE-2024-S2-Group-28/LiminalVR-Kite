@@ -17,11 +17,11 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 671372377a9f529439e4e69fe521e744, type: 3}
   - {fileID: 8300000, guid: 009d099785185554f951cb015c96ab3e, type: 3}
-  volumeSlider: {x: 0.28602475, y: 0.4598796}
+  volumeSlider: {x: 0.7365135, y: 0.9103683}
   playOrder: 2
   useSemitones: 1
   pitchSlider: {x: 0.7937097, y: 1}
   semitoneMin: -4
   semitoneMax: 0
   rolloffMode: 1
-  rolloffDistance: {x: 1, y: 322.62415}
+  rolloffDistance: {x: 1, y: 1000}
