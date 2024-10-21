@@ -73,14 +73,20 @@ public class AsteroidGameManager : MonoBehaviour
 
     private void Update()
     {
-        float gameProgress = Time.time / totalGameTime;
-        float newSpawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, spawnCurve.Evaluate(gameProgress));
+        
+        float newSpawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, SampleDifficultyCurve());
         asteroidSpawner.AdjustSpawnRate(newSpawnRate);
 
         if(Time.time >= goldenAsteroidData[currGoldIdx].spawnTime) {
             Debug.Log(String.Format("Spawning idx {0} gold asteroid", currGoldIdx));
             asteroidSpawner.SpawnAsteroid(true, goldenAsteroidData[currGoldIdx++].position);
         }
+    }
+
+    public float SampleDifficultyCurve()
+    {
+        float gameProgress = Time.time / totalGameTime;
+        return spawnCurve.Evaluate(gameProgress);
     }
 
     public void RecordGoldenAsteroidSpawn(Vector3 position)

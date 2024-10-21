@@ -6,22 +6,21 @@ public class RockPiece : MonoBehaviour
     [SerializeField]
     private float destroyDelay = 0f;
 
-    private int bulletLayer;
+    private static int? bulletLayer = null;
 
     private void Start()
     {
-        bulletLayer = LayerMask.NameToLayer("Bullet");
+        if(bulletLayer==null) bulletLayer = LayerMask.NameToLayer("Bullet");
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == bulletLayer)
-        {
-            DestroyRockPiece();
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.layer == bulletLayer.Value) {
+    //        DestroyRockPiece();
+    //    }
+    //}
 
-    private void DestroyRockPiece()
+    public void DestroyRockPiece()
     {
         GetComponent<Collider>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;

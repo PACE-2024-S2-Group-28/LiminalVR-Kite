@@ -38,12 +38,9 @@ public class RockDestroyer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (rockRbs == null)
-        {
+        if (rockRbs == null) {
             GetRigidBodies();
         }
-
-        // AddRockPieceScriptToChildren();
     }
 
     [Button]
@@ -61,17 +58,6 @@ public class RockDestroyer : MonoBehaviour
 
         fracturedRock.SetActive(false);
     }
-
-    // private void AddRockPieceScriptToChildren()
-    // {
-    //     foreach (Transform child in fracturedRock.transform)
-    //     {
-    //         if (child.gameObject.GetComponent<RockPiece>() == null)
-    //         {
-    //             child.gameObject.AddComponent<RockPiece>();
-    //         }
-    //     }
-    // }
 
     public void StartRockFade()
     {
@@ -115,9 +101,8 @@ public class RockDestroyer : MonoBehaviour
 
         if (rockBreakParticlesObj != null)
         {
-            Transform particles = GameObject.Instantiate(rockBreakParticlesObj).transform;
-            particles.position = transform.position;
-            particles.parent = transform;
+            Transform particles = GameObject.Instantiate(rockBreakParticlesObj, transform).transform;
+            particles.position = rock.transform.position;
         }
 
         //fadeOut = true;
@@ -131,16 +116,13 @@ public class RockDestroyer : MonoBehaviour
     {
         var activeRockRbs = new List<Rigidbody>(rockRbs);
 
-        while (true)
-        {
+        while (true) {
             float t = (Time.time - fadeStartTime) / rockFadeTime;
 
-            for (int i = activeRockRbs.Count - 1; i >= 0; i--)
-            {
+            for (int i = activeRockRbs.Count - 1; i >= 0; i--) {
                 Rigidbody rb = activeRockRbs[i];
 
-                if (rb == null || rb.gameObject == null)
-                {
+                if (rb == null || rb.gameObject == null) {
                     activeRockRbs.RemoveAt(i);
                     continue;
                 }

@@ -1,9 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+
+using NaughtyAttributes;
 
 public class DynamicMusicManager : MonoBehaviour
 {
+    [SerializeField]
+    private AudioMixer mixer;
+
+    [SerializeField]
+    [MinMaxSlider(0f, 1f)]
+    private Vector2 minMaxMusicVol = new Vector2(.4f, .8f);
+
     [SerializeField]
     private bool selfTimed;
     
@@ -57,6 +67,10 @@ public class DynamicMusicManager : MonoBehaviour
                 tracks[fadingTrack].volume = 0f;
             }
         }
+
+        //overall audio volume
+        float volume = Mathf.Lerp(minMaxMusicVol.x, minMaxMusicVol.y, AsteroidGameManager.Instance.SampleDifficultyCurve());
+        mixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
     }
 
     public void IncreaseIntensity()

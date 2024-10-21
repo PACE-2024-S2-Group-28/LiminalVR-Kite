@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c2dad7835d4e04d8a376b5de7d2b2a, type: 3}
+  m_Name: SFX_ForcefieldHit
+  m_EditorClassIdentifier: 
+  mixGroup: {fileID: 8781418876680147640, guid: 1040c02797a1975429124a69cb02059d,
+    type: 2}
+  clips:
+  - {fileID: 8300000, guid: 0b6aab109b3768949ba28117c117a4a5, type: 3}
+  - {fileID: 8300000, guid: e850e920404e36e46a0ef8b23de65646, type: 3}
+  volumeSlider: {x: 0.8045049, y: 1}
+  playOrder: 2
+  useSemitones: 1
+  pitchSlider: {x: 1.05946, y: 1.2599065}
+  semitoneMin: 1
+  semitoneMax: 4
+  rolloffMode: 0
+  rolloffDistance: {x: 1, y: 500}
