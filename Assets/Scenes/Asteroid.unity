@@ -6420,25 +6420,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecbc8adf1b4cf884eb91f8362ca94d5f, type: 3}
---- !u!1 &1114661990 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4572938930697396724, guid: 21ca05847bc51dc49a9129aca110bda1,
-    type: 3}
-  m_PrefabInstance: {fileID: 2118986110}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1114662000
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1114661990}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 100, y: 55, z: 100}
-  m_Center: {x: 0.7, y: 40, z: 15}
 --- !u!1 &1178091357
 GameObject:
   m_ObjectHideFlags: 0
@@ -12989,6 +12970,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6882774427324749779, guid: 95fafc9492bb86940ad59d4df6ebc134,
         type: 3}
+    - target: {fileID: 5345490728490512636, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6402759439501327819, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: upgradesRequired
@@ -13024,6 +13010,12 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 983195315472167487, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: chargeSFX
+      value: 
+      objectReference: {fileID: 11400000, guid: 8bcd412f8517b034380df589ecf59ef0,
+        type: 2}
     - target: {fileID: 7731140679889853283, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: m_AnchorAttachments.Array.data[0]
@@ -13034,17 +13026,6 @@ PrefabInstance:
       propertyPath: m_AnchorAttachments.Array.data[0]
       value: 
       objectReference: {fileID: 4464225964493584865}
-    - target: {fileID: 983195315472167487, guid: 21ca05847bc51dc49a9129aca110bda1,
-        type: 3}
-      propertyPath: chargeSFX
-      value: 
-      objectReference: {fileID: 11400000, guid: 8bcd412f8517b034380df589ecf59ef0,
-        type: 2}
-    - target: {fileID: 5345490728490512636, guid: 21ca05847bc51dc49a9129aca110bda1,
-        type: 3}
-      propertyPath: m_Convex
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}
 --- !u!1 &2137536386 stripped
