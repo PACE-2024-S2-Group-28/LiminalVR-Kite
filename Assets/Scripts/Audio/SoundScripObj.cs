@@ -114,6 +114,9 @@ namespace ScriptableObjects
         public AudioSource Play(Transform sParent = null, Vector3? wPos = null, AudioSource audioSourceParam = null, float volumeMul = 1, bool createNew = false)
         {
             //Debug.Log("Trying to play sound: " + this);
+#if UNITY_EDITOR
+            if (!Application.isPlaying) audioSourceParam = previewer;
+#endif
 
             //null check error
             if(clips.Length == 0)

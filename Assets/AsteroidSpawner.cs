@@ -50,13 +50,19 @@ public class AsteroidSpawner : MonoBehaviour
         StartCoroutine(AsteroidSpawnRoutine());
     }
 
+    private float timeLastSpawned;
+
     private IEnumerator AsteroidSpawnRoutine()
     {
         yield return new WaitForSeconds(minMaxSpawnTime.y);
 
         while (true) {
-            TrySpawnAsteroid();
-            yield return new WaitForSeconds(getWithinMinMax(minMaxSpawnTime));
+            //spawn if min time has passed
+            if(Time.time > timeLastSpawned+minMaxSpawnTime.x) TrySpawnAsteroid();
+
+            //min time to ensure not waiting infinity when asteroids arent spawning
+            float timeToWait = Mathf.Max(1f, getWithinMinMax(minMaxSpawnTime));
+            yield return new WaitForSeconds(timeToWait);
         }
     }
 
@@ -74,24 +80,19 @@ public class AsteroidSpawner : MonoBehaviour
     private void CountRockDestroyed() { activeAsteroids--; }
     #endregion
 
-    public void AdjustSpawnRate(float timeToSpawn, float variance = .2f)
-    {
-        timeToSpawn = Mathf.Max(Mathf.Epsilon, timeToSpawn);
+    const float minSpawnPerSecond = 1f / 10f;
 
-        minMaxSpawnTime.x = 1f / (timeToSpawn * (1 + variance));
-        minMaxSpawnTime.y = 1f / (timeToSpawn * (1 - variance));
-    }
-
-    void Update()
+    public void AdjustSpawnRate(float spawnsPerSecond, float variance = .2f)
     {
-        timer += Time.deltaTime;
+        spawnsPerSecond = Mathf.Max(.1f, spawnsPerSecond);
+
+        minMaxSpawnTime.x = 1f / (spawnsPerSecond * (1 + variance));
+        minMaxSpawnTime.y = 1f / (spawnsPerSecond * (1 - variance));
     }
 
     private void TrySpawnAsteroid()
     {
-
         if (activeAsteroids >= maxAsteroids) {
-            timer = 0;
             return;
         }
 
@@ -102,10 +103,11 @@ public class AsteroidSpawner : MonoBehaviour
     public void SpawnAsteroid(bool isGold = false, Vector3? manualPos = null)
     {
 #if UNITY_EDITOR
-        if (!Application.isPlaying) return;
+        if (!Application.isPlaying) {
+            Debug.LogWarning("not meant to be used during editor mode, only in play mode");
+            return;
+        }
 #endif
-
-        timer = 0f;
         //normal or gold asteroid
         GameObject asteroidToSpawnFab;
         if (isGold) {
@@ -115,6 +117,7 @@ public class AsteroidSpawner : MonoBehaviour
         else {
             activeAsteroids++;
             asteroidToSpawnFab = asteroidFab;
+            timeLastSpawned = Time.time;
         }
 
         //spawning
