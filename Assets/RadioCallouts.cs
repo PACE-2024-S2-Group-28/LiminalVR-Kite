@@ -16,10 +16,11 @@ public class RadioCallouts : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(PlayVoiceline(voiceStart));
+        PlayLine(voiceStart);
     }
 
     public void PlayLine(AudioClip clip) {
+        StopAllCoroutines();
         StartCoroutine(PlayVoiceline(clip));
     }
 

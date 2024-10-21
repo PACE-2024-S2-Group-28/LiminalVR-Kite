@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 504278731}
   - component: {fileID: 504278730}
   m_Layer: 0
-  m_Name: baseinner
+  m_Name: platform outer rims
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -475,13 +475,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504278729}
-  m_LocalRotation: {x: -0.66446304, y: -0.24184473, z: -0.24184473, w: 0.66446304}
-  m_LocalPosition: {x: -0.028733155, y: -1.01, z: 0.022961976}
-  m_LocalScale: {x: 297.02402, y: 297.0241, z: 297.0241}
+  m_LocalRotation: {x: -0, y: -0, z: -0.93969274, w: -0.34202003}
+  m_LocalPosition: {x: 0.00028733138, y: 0.00022961965, z: 0.00038200355}
+  m_LocalScale: {x: 2.970239, y: 2.9702404, z: 2.9702396}
   m_Children:
   - {fileID: 1682501379}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1229149316}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -40}
 --- !u!1 &542795853
 GameObject:
@@ -789,7 +789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &651993451
 Transform:
   m_ObjectHideFlags: 0
@@ -16268,6 +16268,12 @@ Transform:
   m_Father: {fileID: 651993451}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1229149316 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8137057982200539402, guid: 21ca05847bc51dc49a9129aca110bda1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2118986110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1258129383
 GameObject:
   m_ObjectHideFlags: 0
@@ -21371,7 +21377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &1488926879
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -21442,7 +21448,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1664490292
 GameObject:
@@ -21564,7 +21570,7 @@ GameObject:
   - component: {fileID: 1682501381}
   - component: {fileID: 1682501380}
   m_Layer: 0
-  m_Name: baseinner (1)
+  m_Name: platform inner rims
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23019,6 +23025,11 @@ PrefabInstance:
     - target: {fileID: 7613721756014741787, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7565848619836743262, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1905370642397578, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}
