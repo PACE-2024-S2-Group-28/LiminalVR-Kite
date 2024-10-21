@@ -149,23 +149,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e476427a0f87f6418930751d06a7ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  asteroidFab: {fileID: 3134788589252300270, guid: ecbc8adf1b4cf884eb91f8362ca94d5f,
+    type: 3}
+  goldAsteroidFab: {fileID: 3134788589252300270, guid: 1de33675fe809a44ea78efe283ef95a2,
+    type: 3}
   spawnBox: {x: 270.4, y: 117.28, z: 140.8}
-  asteroidFab:
-  - {fileID: 3134788589252300270, guid: ecbc8adf1b4cf884eb91f8362ca94d5f, type: 3}
-  - {fileID: 3134788589252300270, guid: 1de33675fe809a44ea78efe283ef95a2, type: 3}
   maxAsteroids: 35
   startingDefaultVel: {x: 0, y: 0, z: -30}
-  asteroidSizeRange: {x: 1, y: 4}
-  asteroidSpeedRange: {x: 0.45305377, y: 2.493163}
-  spawnDistanceRange: {x: 10, y: 20}
-  spawnChance: 0.2
-  spawnMinTime: 0.3
-  spawnMaxTime: 2
-  spawnRotationStrength: 1.5
-  spawnExtraVelocityStrength: 2
-  spawnTickRate: 30
-  goldenAsteroidSpawningTime: 10
-  goldenAsteroidFixedPosition: {x: 0, y: 5, z: 0}
+  minMaxVelLerpToPlayer: {x: 0.6, y: 0.9}
+  minMaxSpawnTime: {x: 0.3, y: 2}
+  minMaxRotationSpeed: {x: 1.2, y: 2}
+  minMaxAsteroidVelMult: {x: 0.8, y: 1.2}
+  minMaxAsteroidSizeMult: {x: 1, y: 4}
+  maxSpeed: 10
+  minSpeed: 1
+  acceleration: 1
+  slowAmount: 2
 --- !u!4 &9427852
 Transform:
   m_ObjectHideFlags: 0
@@ -546,6 +545,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &565494260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 565494261}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &565494261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565494260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 415853434}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &638610144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,7 +1224,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 100
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1364,7 +1393,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 6000
+      scalar: 4000
       minScalar: 400
       maxCurve:
         serializedVersion: 2
@@ -1945,7 +1974,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -2051,7 +2080,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -2063,21 +2092,39 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 1
+          inSlope: 0.048378523
+          outSlope: 0.048378523
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.7928312
+        - serializedVersion: 3
+          time: 0.27718544
+          value: 0.984848
+          inSlope: 0.050966356
+          outSlope: 0.050966356
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.49139807
         - serializedVersion: 3
-          time: 1
+          time: 0.771978
           value: 1
-          inSlope: 1
+          inSlope: -0.05514972
+          outSlope: -0.05514972
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.27777785
+        - serializedVersion: 3
+          time: 0.99450547
+          value: 0
+          inSlope: 0
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0.3833333
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -2674,7 +2721,7 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -200
+      scalar: -50
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -12614,6 +12661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2060294907}
+  - component: {fileID: 2060294909}
   - component: {fileID: 2060294908}
   m_Layer: 0
   m_Name: AsteroidManager
@@ -12764,20 +12812,33 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   goldenAsteroidData:
-  - gameProgress: 10
-    position: {x: -13.5, y: 1.35, z: 99.41}
-  - gameProgress: 25
-    position: {x: 26.18, y: 2.34, z: 103.38}
-  - gameProgress: 30
-    position: {x: -35.27, y: 11.55, z: 125.22}
-  - gameProgress: 190
-    position: {x: 8.64, y: 14.52, z: 138.47}
-  - gameProgress: 200
-    position: {x: 0, y: 14.24, z: 179.89}
-  - gameProgress: 235
-    position: {x: -13.42, y: 17.53, z: 133.29}
-  - gameProgress: 250
-    position: {x: -23.3, y: 7.86, z: 139.22}
+  - spawnTime: 8.1
+    position: {x: -13.5, y: 16.27, z: 99.41}
+  - spawnTime: 24.82
+    position: {x: 26.18, y: 24.64, z: 103.38}
+  - spawnTime: 55.03
+    position: {x: -35.27, y: 18.57, z: 125.22}
+  - spawnTime: 87.85
+    position: {x: 8.64, y: 30.8, z: 138.47}
+  - spawnTime: 109
+    position: {x: 0, y: 38.5, z: 179.89}
+  - spawnTime: 140
+    position: {x: -13.42, y: 35.3, z: 133.29}
+  - spawnTime: 170
+    position: {x: -23.3, y: 24.9, z: 139.22}
+--- !u!114 &2060294909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060294906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927671ba919cdf84b956ba91471e76fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventNamesSO: {fileID: 11400000, guid: 31647076cc1d8774abcd179f9802b005, type: 2}
 --- !u!1 &2065533816
 GameObject:
   m_ObjectHideFlags: 0
@@ -13119,15 +13180,27 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1905370642397578, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 1905370642397578, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 1905370642397578, guid: 21ca05847bc51dc49a9129aca110bda1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.73
+      objectReference: {fileID: 0}
     - target: {fileID: 7613721756014741786, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8806359125915789049, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6516840330291437644, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
@@ -13141,15 +13214,35 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6882774427324749779, guid: 95fafc9492bb86940ad59d4df6ebc134,
         type: 3}
+    - target: {fileID: 2456824468035465120, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999017425118473877, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.09
+      objectReference: {fileID: 0}
     - target: {fileID: 6402759439501327819, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: upgradesRequired
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6570995886979204421, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5423473766696456744, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
       propertyPath: upgradesRequired
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237680453714193062, guid: 21ca05847bc51dc49a9129aca110bda1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8124006882787523231, guid: 21ca05847bc51dc49a9129aca110bda1,
         type: 3}
