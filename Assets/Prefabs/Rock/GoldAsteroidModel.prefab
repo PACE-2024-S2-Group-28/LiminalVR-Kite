@@ -16,6 +16,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-724145116795201508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8774119488492757891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 237a10e13c543cc48950240defa2d02b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rockRenderer: {fileID: 7061425673652623199}
+  shineSpeed: 1
 --- !u!1001 &784191649201666698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23,21 +37,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32,
-        type: 3}
-      propertyPath: m_TagString
-      value: GoldAsteroid
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32,
-        type: 3}
-      propertyPath: m_Name
-      value: Rock_Mode2
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 434500c8232750246b90641a73e0bc32,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -72,6 +71,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32,
+        type: 3}
+      propertyPath: m_TagString
+      value: GoldAsteroid
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32,
+        type: 3}
+      propertyPath: m_Name
+      value: GoldAsteroidModel
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 434500c8232750246b90641a73e0bc32,
         type: 3}
@@ -163,6 +177,12 @@ PrefabInstance:
 --- !u!1 &8774119488492757891 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 434500c8232750246b90641a73e0bc32,
+    type: 3}
+  m_PrefabInstance: {fileID: 784191649201666698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7061425673652623199 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 434500c8232750246b90641a73e0bc32,
     type: 3}
   m_PrefabInstance: {fileID: 784191649201666698}
   m_PrefabAsset: {fileID: 0}

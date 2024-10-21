@@ -34,6 +34,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: OuterPanels.001
     second: {fileID: 2100000, guid: 932c254a6ee7ccd498050b4d16b0f0b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RearPanels
+    second: {fileID: 2100000, guid: 27107497fc73f934eba13da6cf23fee3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: b44fd0bb1eb4caa4293cf06aba7d5c54, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

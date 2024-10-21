@@ -20,7 +20,7 @@ public class RockDestroyer : MonoBehaviour
     private bool fadeOut = false;
 
     [SerializeField]
-    private float 
+    private float
         rockLifetime = 3,
         rockFadeTime = 6;
 
@@ -38,7 +38,12 @@ public class RockDestroyer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (rockRbs == null) GetRigidBodies();
+        if (rockRbs == null)
+        {
+            GetRigidBodies();
+        }
+
+        // AddRockPieceScriptToChildren();
     }
 
     [Button]
@@ -48,13 +53,25 @@ public class RockDestroyer : MonoBehaviour
         fracturedRock.SetActive(true);
 
         var rockRBList = new List<Rigidbody>();
-        foreach (Transform t in fracturedRock.transform) {
+        foreach (Transform t in fracturedRock.transform)
+        {
             rockRBList.Add(t.GetComponent<Rigidbody>());
         }
         rockRbs = rockRBList.ToArray();
 
         fracturedRock.SetActive(false);
     }
+
+    // private void AddRockPieceScriptToChildren()
+    // {
+    //     foreach (Transform child in fracturedRock.transform)
+    //     {
+    //         if (child.gameObject.GetComponent<RockPiece>() == null)
+    //         {
+    //             child.gameObject.AddComponent<RockPiece>();
+    //         }
+    //     }
+    // }
 
     public void StartRockFade()
     {
@@ -68,32 +85,27 @@ public class RockDestroyer : MonoBehaviour
     [Button]
     public void ChangeRock(Vector3? forceDir = null, float forceMag = 1f, Vector3? hitPos = null)
     {
-        AsteroidGameManager.Instance.HandleAsteroidDestruction(fracturedRock.CompareTag("GoldAsteroid"));
-
-        BreakRock(forceDir, forceMag, hitPos); //actually break the rock
-    }
-
-    public void BreakRock(Vector3? forceDir = null, float forceMag = 1f, Vector3? hitPos = null) {
-        #if UNITY_EDITOR
-            if (!Application.isPlaying) return;
-        #endif
+#if UNITY_EDITOR
+        if (!Application.isPlaying) return;
+#endif
 
         rockBreakSFX?.Play(wPos: transform.position);
 
         var ogRB = rock.GetComponent<Rigidbody>();
 
         fracturedRock.transform.position = rock.transform.position;
-        fracturedRock.transform.rotation = Quaternion.Euler(rock.transform.rotation.eulerAngles + Vector3.right*90f);
+        fracturedRock.transform.rotation = Quaternion.Euler(rock.transform.rotation.eulerAngles + Vector3.right * 90f);
         rock.SetActive(false);
         fracturedRock.SetActive(true);
-        
+
         //force optional 
         if (!forceDir.HasValue) forceDir = Vector3.zero;
         if (!hitPos.HasValue) hitPos = transform.position;
         forceDir = forceDir.Value.normalized;
 
         //apply force
-        foreach(var rb in rockRbs) {
+        foreach (var rb in rockRbs)
+        {
             Vector3 finalForce = ogRB.velocity;
             //finalForce += forceDir.Value * forceMag * Vector3.Dot(forceDir.Value, rb.transform.position - hitPos.Value);
             finalForce += (rb.transform.position - fracturedRock.transform.position).normalized * outwardBreakForce;
@@ -101,7 +113,8 @@ public class RockDestroyer : MonoBehaviour
             rb.AddForce(finalForce, ForceMode.Impulse);
         }
 
-        if (rockBreakParticlesObj != null) {
+        if (rockBreakParticlesObj != null)
+        {
             Transform particles = GameObject.Instantiate(rockBreakParticlesObj).transform;
             particles.position = transform.position;
             particles.parent = transform;
@@ -116,30 +129,35 @@ public class RockDestroyer : MonoBehaviour
     private float fadeStartTime = 0;
     private IEnumerator RockFadingSinking()
     {
-        int count = rockRbs.Length;
-        foreach(var rb in rockRbs) {
-            rb.transform.GetComponentInChildren<Collider>().enabled = false;
-        }
+        var activeRockRbs = new List<Rigidbody>(rockRbs);
 
         while (true)
         {
             float t = (Time.time - fadeStartTime) / rockFadeTime;
 
-            //loop through all rock pieces
-            foreach (Rigidbody rb in rockRbs)
+            for (int i = activeRockRbs.Count - 1; i >= 0; i--)
             {
-                //if (rb == null || rb.isKinematic) continue;
+                Rigidbody rb = activeRockRbs[i];
+
+                if (rb == null || rb.gameObject == null)
+                {
+                    activeRockRbs.RemoveAt(i);
+                    continue;
+                }
+
                 rb.transform.localScale = Vector3.one * 100f * (1f - t);
             }
 
+            if (activeRockRbs.Count == 0) break;
+
             if (t >= 1f) break;
-            yield return new WaitForSecondsRealtime(1f/(float)tickRate);
+            yield return new WaitForSecondsRealtime(1f / (float)tickRate);
         }
 
         SEvent_RockDestroyed?.Invoke();
-        //calledDestroyEvent = true;
         GameObject.Destroy(this.gameObject);
     }
+
 
     public static UnityEvent SEvent_RockDestroyed = new UnityEvent();
 }

@@ -21,7 +21,7 @@ public class TurretAim : MonoBehaviour
     // SFX
     [SerializeField] private SoundScripObj turretFireSFX;
     [SerializeField] private SoundScripObj chargeSFX;
-    [SerializeField] private AudioSource chargeAudioSource;
+    [SerializeField] private AudioSource fireAudioSource;
 
     void Awake()
     {
@@ -74,9 +74,8 @@ public class TurretAim : MonoBehaviour
         //want to work out the future closest asteroid. The time in the future we're looking at is the time when an asteroid would be getting destroyed by the beam. This makes them seem like they're looking ahead
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.gameObject.CompareTag("Rock") || hitCollider.gameObject.CompareTag("GoldAsteroid"))
+            if (hitCollider.gameObject.CompareTag("Rock"))
             { //only target rocks
-                if (hitCollider.attachedRigidbody == null) break;
                 Vector3 targetSpeed = hitCollider.attachedRigidbody.velocity; //speed of asteroid
                 Vector3 rotateTargetPoint = hitCollider.transform.position + (targetSpeed * (timeToRotate + beamTime)); //position asteroid moves to during that time
                 distanceToThis = Vector3.Distance(transform.position, rotateTargetPoint);
@@ -117,9 +116,18 @@ public class TurretAim : MonoBehaviour
 
 
     private bool charging = false;
+
+    //temp sound timing vars
+    private float lastFiredTime;
+    private float fireSoundInterval = .2f;
+
     private void Fire()
     {
-        turretFireSFX.Play();
+        //triggering sound on interval instead of every frame
+        if (Time.time - lastFiredTime >= fireSoundInterval) {
+            turretFireSFX.Play(audioSourceParam: fireAudioSource, wPos: transform.position);
+            lastFiredTime = Time.time;
+        }
 
         beamTimer -= Time.deltaTime;
         if ((beamTimer > 0) && (target.gameObject.activeSelf == true))
@@ -130,7 +138,7 @@ public class TurretAim : MonoBehaviour
 
             if (charging)
             {
-                chargeSFX.Play();
+                //chargeSFX.Play();
                 charging = false;
             }
         }
@@ -138,7 +146,7 @@ public class TurretAim : MonoBehaviour
         { //destroy rock and disable beam
             // turretFireSFX.Play(wPos: target.position);
             //chargeSFX.Stop();
-            turretFireSFX.Play();
+            //turretFireSFX.Play();
             charging = true;
 
             beam.enabled = false;
@@ -146,6 +154,7 @@ public class TurretAim : MonoBehaviour
             if (target.gameObject.activeSelf == true)
             { //if the gun shot it already, don't try destroying it again
                 target.parent.gameObject.GetComponent<RockDestroyer>().ChangeRock(forceDir: transform.forward, hitPos: target.position);
+                AsteroidGameManager.Instance.HandleAsteroidDestruction(target.gameObject.CompareTag("GoldAsteroid"));
             }
             target = null;
             rotateTimer = 0;
