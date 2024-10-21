@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8241877610429781314}
   - component: {fileID: 6516840330291437644}
   - component: {fileID: 5345490728490512636}
+  - component: {fileID: 5065795356894759175}
   m_Layer: 0
   m_Name: MiningShipCollisions
   m_TagString: Untagged
@@ -31,8 +32,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4572938930697396724}
-  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0.00000028088027}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -1, y: 0.00000028088027, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 995429870759517987}
@@ -50,7 +51,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.77, y: 2, z: 6.85}
-  m_Center: {x: -3.97, y: -0.7, z: 18.88}
+  m_Center: {x: -3.97, y: -0.7, z: 2}
 --- !u!65 &1159927006181147828
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63,7 +64,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.77, y: 2, z: 6.85}
-  m_Center: {x: 3.97, y: -0.7, z: 18.88}
+  m_Center: {x: 3.97, y: -0.7, z: 2}
 --- !u!65 &3453185373128967814
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -76,7 +77,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3.4, y: 2, z: 14}
-  m_Center: {x: 12.2, y: -1.4, z: 29.64}
+  m_Center: {x: 12.2, y: -1.4, z: -7.5}
 --- !u!65 &4843933900148902400
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -89,7 +90,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3.4, y: 2, z: 14}
-  m_Center: {x: -12.2, y: -1.4, z: 29.64}
+  m_Center: {x: -12.2, y: -1.4, z: -7.5}
 --- !u!136 &510548002229873569
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -103,7 +104,7 @@ CapsuleCollider:
   m_Radius: 6.26
   m_Height: 17
   m_Direction: 2
-  m_Center: {x: 25, y: -4.3, z: 18.29}
+  m_Center: {x: 25, y: -4.3, z: 27.14}
 --- !u!136 &8241877610429781314
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -117,7 +118,7 @@ CapsuleCollider:
   m_Radius: 6.26
   m_Height: 17
   m_Direction: 2
-  m_Center: {x: -25, y: -4.3, z: 18.29}
+  m_Center: {x: -25, y: -4.3, z: 27}
 --- !u!114 &6516840330291437644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +136,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   spaceshipNoise: {fileID: 8806359126968354492}
-  sfxShipHit: {fileID: 11400000, guid: d7c40d8f94c8d0346a25b3b8568be4dc, type: 2}
+  collisionParticles: {fileID: 6882774427324749779, guid: 95fafc9492bb86940ad59d4df6ebc134,
+    type: 3}
+  sfxShipHit: {fileID: 11400000, guid: 48ec497aa32b4e84191cd9fe7daf0f75, type: 2}
+  OnShipHitByAsteroid:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!64 &5345490728490512636
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -150,6 +158,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 2646046986559549231, guid: 15bd2c18a3557034aa54a9843433faaa, type: 3}
+--- !u!65 &5065795356894759175
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4572938930697396724}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 55, z: 100}
+  m_Center: {x: 0.7, y: 40, z: 15}
 --- !u!1 &4988563768475900738
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,7 +417,7 @@ GameObject:
   - component: {fileID: 1301535996661013070}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -486,6 +507,7 @@ MonoBehaviour:
   bulletCount: 1
   sfxSource: {fileID: 0}
   fireSFX: {fileID: 0}
+  bulletSparks: {fileID: 0}
 --- !u!1 &8230613432329020050
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +519,7 @@ GameObject:
   - component: {fileID: 995429870759517987}
   m_Layer: 0
   m_Name: MiningShipParent
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -535,7 +557,7 @@ GameObject:
   - component: {fileID: 8806359126968354492}
   m_Layer: 0
   m_Name: AvatarParent
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -571,8 +593,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotParent: {fileID: 995429870759517987}
   translateParent: {fileID: 8137057982200539402}
-  rotStrength: 3
-  moveStrength: 0.5
+  rotStrength: 1
+  moveStrength: 0.1
   perlinFrequency: 0.2
   shakeStrength: 6
   shakeFreq: 3
@@ -958,7 +980,7 @@ PrefabInstance:
     - target: {fileID: 6754408870054875021, guid: 37ac9586599653441956a8a26bbeb7bb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.2
+      value: -13.9
       objectReference: {fileID: 0}
     - target: {fileID: 6754408870054875021, guid: 37ac9586599653441956a8a26bbeb7bb,
         type: 3}
@@ -1232,15 +1254,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22276a8657744e04cba8ad0a2caf4195, type: 3}
---- !u!4 &7731140680407978280 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1260162969423114810, guid: 22276a8657744e04cba8ad0a2caf4195,
-    type: 3}
-  m_PrefabInstance: {fileID: 8806359125968216850}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7731140680423376119 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1260162969412560869, guid: 22276a8657744e04cba8ad0a2caf4195,
+    type: 3}
+  m_PrefabInstance: {fileID: 8806359125968216850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7731140680407978280 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1260162969423114810, guid: 22276a8657744e04cba8ad0a2caf4195,
     type: 3}
   m_PrefabInstance: {fileID: 8806359125968216850}
   m_PrefabAsset: {fileID: 0}
@@ -1355,11 +1377,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6754408870054875021, guid: 37ac9586599653441956a8a26bbeb7bb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 12.2
       objectReference: {fileID: 0}
     - target: {fileID: 6754408870054875021, guid: 37ac9586599653441956a8a26bbeb7bb,
         type: 3}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using UnityEngine.Events;
 
 public class SpaceshipNoiseMovement : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class SpaceshipNoiseMovement : MonoBehaviour
 
     private Vector3 startPos = Vector3.zero;
 
+    //public UnityEvent OnShipHitByAsteroid;
     private void Start()
     {
         startPos = translateParent.position;
