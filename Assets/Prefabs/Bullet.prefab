@@ -363,11 +363,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da8565bac6df9840835a3fb4cf79eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 60
+  speed: 175
   timeAlive: 10
   hitForceMagnitude: 0.3
   rb: {fileID: 1548282040500776201}
-  sparkParticles: {fileID: 2697501869223956292}
   trail: {fileID: 6012148905211664645}
   trailTime: 0.5
 --- !u!54 &1548282040500776201
@@ -597,11 +596,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9131105676937733309}
     m_Modifications:
-    - target: {fileID: 1122604196591278084, guid: d0126f5040625a6478e7aa5a62913782,
-        type: 3}
-      propertyPath: m_Name
-      value: LaserSparks
-      objectReference: {fileID: 0}
     - target: {fileID: 9007982909584361533, guid: d0126f5040625a6478e7aa5a62913782,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -657,17 +651,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1122604196591278084, guid: d0126f5040625a6478e7aa5a62913782,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserSparks
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0126f5040625a6478e7aa5a62913782, type: 3}
 --- !u!4 &5348008261570942284 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9007982909584361533, guid: d0126f5040625a6478e7aa5a62913782,
-    type: 3}
-  m_PrefabInstance: {fileID: 3978149166862474609}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2697501869223956292 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1322451076813771317, guid: d0126f5040625a6478e7aa5a62913782,
     type: 3}
   m_PrefabInstance: {fileID: 3978149166862474609}
   m_PrefabAsset: {fileID: 0}
