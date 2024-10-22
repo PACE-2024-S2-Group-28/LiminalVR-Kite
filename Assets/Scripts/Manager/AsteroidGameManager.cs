@@ -36,6 +36,7 @@ public class AsteroidGameManager : MonoBehaviour
     public float GameLength => totalGameTime;
     private float gameProgress;
     public float GameProgress => gameProgress;
+    private bool gameOver =  false;
 
     [SerializeField]
     [MinMaxSlider(0f, 20f)]
@@ -75,18 +76,22 @@ public class AsteroidGameManager : MonoBehaviour
 
     private void Update()
     {
-        gameProgress = Time.time / totalGameTime;
-
-        float newSpawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, SampleDifficultyCurve());
-        asteroidSpawner.AdjustSpawnRate(newSpawnRate);
-
-        if(Time.time >= goldenAsteroidData[currGoldIdx].spawnTime) {
-            Debug.Log(String.Format("Spawning idx {0} gold asteroid", currGoldIdx));
-            asteroidSpawner.SpawnAsteroid(true, goldenAsteroidData[currGoldIdx++].position);
+        if (gameProgress >= 1f) { //the less than 1000 is just so we can end the experience only once, intead of every frame
+            if (!gameOver) {
+                EndExperience();
+                gameOver = true;
+            }            
         }
+        else {
+            gameProgress = Time.time / totalGameTime;
 
-        if (gameProgress >= 1f) {
-            EndExperience();
+            float newSpawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, SampleDifficultyCurve());
+            asteroidSpawner.AdjustSpawnRate(newSpawnRate);
+
+            if(Time.time >= goldenAsteroidData[currGoldIdx].spawnTime) {
+                Debug.Log(String.Format("Spawning idx {0} gold asteroid", currGoldIdx));
+                asteroidSpawner.SpawnAsteroid(true, goldenAsteroidData[currGoldIdx++].position);
+            }
         }
     }
 
@@ -161,6 +166,7 @@ public class AsteroidGameManager : MonoBehaviour
     {
         var fader = ScreenFader.Instance;
         fader.FadeTo(Color.black, 2f); // fade to "black out" after 2 sec
+        print("ended the game");
         ExperienceApp.End();
     }
 }
