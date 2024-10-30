@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using ScriptableObjects;
 
 public class AsteroidSpawner : MonoBehaviour
 {
@@ -93,11 +94,15 @@ public class AsteroidSpawner : MonoBehaviour
     private void TrySpawnAsteroid()
     {
         if (activeAsteroids >= maxAsteroids) {
+            Debug.Log("failed to spawn asteroid, too many active");
             return;
         }
 
         SpawnAsteroid();
     }
+
+    [SerializeField]
+    private SoundScripObj goldSpawnSFX;
 
     [Button]
     public void SpawnAsteroid(bool isGold = false, Vector3? manualPos = null)
@@ -127,6 +132,7 @@ public class AsteroidSpawner : MonoBehaviour
         //position
         if (isGold) {
             asteroidT.position = manualPos.Value;
+            goldSpawnSFX?.Play(wPos: asteroidT.position);
         }
         else {
             Vector3 spawnVec = Random.insideUnitSphere;
@@ -137,6 +143,7 @@ public class AsteroidSpawner : MonoBehaviour
         //Randomize asteroid size
         float sizeMult = getWithinMinMax(minMaxAsteroidSizeMult);
         asteroidT.localScale = Vector3.one * sizeMult;
+        if (isGold) asteroidT.localScale *= .7f;
 
         //random rotation
         Vector3 rotVec = Random.insideUnitSphere * 360f;
@@ -150,9 +157,12 @@ public class AsteroidSpawner : MonoBehaviour
         //set starting velocity + random component based on speed range, lerped towards a direction to player
         float speedMult = getWithinMinMax(minMaxAsteroidVelMult);
         Vector3 vel = startingDefaultVel * speedMult;
-        Vector3 velToPlayer = -asteroidT.position.normalized * vel.magnitude;
-        Vector3 lerpedVel = Vector3.Lerp(vel, velToPlayer, getWithinMinMax(minMaxVelLerpToPlayer));
-        rb.velocity = lerpedVel;
+        if (!isGold) {
+            Vector3 velToPlayer = -asteroidT.position.normalized * vel.magnitude;
+            Vector3 lerpedVel = Vector3.Lerp(vel, velToPlayer, getWithinMinMax(minMaxVelLerpToPlayer));
+            rb.velocity = lerpedVel;
+        }
+        else rb.velocity = vel * 1.3f;
     }
 
     public void DestroyAsteroid(bool isGoldAsteroid)

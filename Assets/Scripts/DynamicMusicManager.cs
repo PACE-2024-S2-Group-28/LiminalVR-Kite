@@ -31,15 +31,62 @@ public class DynamicMusicManager : MonoBehaviour
     private float trackLength;
     private float timer;
 
+    bool musicOn = false;
+
     void Start()
     {
         foreach(AudioSource track in tracks){
+            track.Stop();
             track.volume = 0;
         }
         tracks[0].volume = 1f;
 
         crossfadeSpeed = 1f/crossfadeTime;
+
+        DynamicEvents.Instance.eventDict[MUSIC_START] += MusicStart;
+
+        foreach (var e in WAVE_START) {
+            DynamicEvents.Instance.eventDict[e] += VolumeUp;
+        }
+        foreach (var e in WAVE_END) {
+            DynamicEvents.Instance.eventDict[e] += VolumeDown;
+        }
     }
+
+    const string MUSIC_START = "musicStart";
+    private string[] WAVE_START = new string[] {
+        //"wave1start",
+        "wave2start",
+        "wave3start"
+    };
+    private string[] WAVE_END = new string[] {
+        "wave1end",
+        "wave2end",
+        "wave3end"
+    };
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void MusicStart(float useless)
+    {
+        foreach (AudioSource track in tracks) {
+            track.Play();
+        }
+    }
+
+    private void VolumeUp(float ignore)
+    {
+        internalVolumMul = 1f;
+    }
+    private void VolumeDown(float ignore)
+    {
+        internalVolumMul = .3f;
+    }
+
+    private float internalVolumMul = .5f;
 
     void Update()
     {
@@ -70,7 +117,7 @@ public class DynamicMusicManager : MonoBehaviour
 
         //overall audio volume
         float volume = Mathf.Lerp(minMaxMusicVol.x, minMaxMusicVol.y, AsteroidGameManager.Instance.SampleDifficultyCurve(AsteroidGameManager.Instance.GameProgress-.1f));
-        mixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
+        mixer.SetFloat("MusicVolume", Mathf.Log10(volume * internalVolumMul) * 20);
     }
 
     public void IncreaseIntensity()

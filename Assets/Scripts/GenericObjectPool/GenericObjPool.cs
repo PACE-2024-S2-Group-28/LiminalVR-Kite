@@ -87,7 +87,7 @@ public class GenericObjPool : MonoBehaviour
         nextObjID += 1;
         nextObjID %= numObjects;
         
-        return obj.GetComponent<T>();
+        return obj.GetComponentInChildren<T>();
     }
 
     //private void OnValidate()

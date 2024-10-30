@@ -13,6 +13,8 @@ public class AsteroidGameManager : MonoBehaviour
     private static AsteroidGameManager instance;
     public static AsteroidGameManager Instance => instance;
 
+    public int numActiveAsteroids;
+
     private static int score;
     public static int Score => score;
 
@@ -39,12 +41,13 @@ public class AsteroidGameManager : MonoBehaviour
     private bool gameOver =  false;
 
     [SerializeField]
-    [MinMaxSlider(0f, 20f)]
+    [MinMaxSlider(0f, 50f)]
     private Vector2 minMaxSpawnRate;
 
     [SerializeField]
     private AnimationCurve spawnCurve;
     public AnimationCurve DifficultyCurve => spawnCurve;
+
 
     [System.Serializable]
     public class GoldenAsteroidData {
@@ -61,11 +64,50 @@ public class AsteroidGameManager : MonoBehaviour
     private List<GoldenAsteroidData> goldenAsteroidData = new List<GoldenAsteroidData>();
     public GoldenAsteroidData[] GoldSpawns => goldenAsteroidData.ToArray();
 
+    #region timeline events and voicelines
+    private int currentEventIdx = 0;
+
+    [SerializeField]
+    private DynamicEvents eventsScipt;
+
+    [HideInInspector]
+    [SerializeField]
+    private List<string> eventNames = new List<string>();
+
+    [HideInInspector]
+    [SerializeField]
+    private List<float> eventTimes = new List<float>();
+
+    [HideInInspector]
+    [SerializeField]
+    private List<AudioClip> eventVoicelines = new List<AudioClip>();
+
+    [Button]
+    public void ClearEvents()
+    {
+        eventNames.Clear();
+        eventTimes.Clear();
+        eventVoicelines.Clear();
+    }
+    [Button]
+    public void GetEvents()
+    {
+        var newEvents = eventsScipt.GetEventNames(eventNames.ToArray());
+        if (newEvents == null || newEvents.Length <= 0) return;
+
+        eventNames.AddRange(newEvents);
+        foreach(var e in newEvents) {
+            eventTimes.Add(0f);
+            eventVoicelines.Add(null);
+        }
+    }
+    #endregion
+
     void Awake()
     {
         if (instance == null) {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else {
             Destroy(gameObject);
@@ -88,10 +130,20 @@ public class AsteroidGameManager : MonoBehaviour
             float newSpawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, SampleDifficultyCurve());
             asteroidSpawner.AdjustSpawnRate(newSpawnRate);
 
-            if(Time.time >= goldenAsteroidData[currGoldIdx].spawnTime) {
+            if(currGoldIdx<goldenAsteroidData.Count && Time.time >= goldenAsteroidData[currGoldIdx].spawnTime) {
                 Debug.Log(String.Format("Spawning idx {0} gold asteroid", currGoldIdx));
                 asteroidSpawner.SpawnAsteroid(true, goldenAsteroidData[currGoldIdx++].position);
             }
+
+            if(Time.time >= eventTimes[currentEventIdx]) {
+                if(eventVoicelines[currentEventIdx]!=null) {
+                    RadioCallouts.PlayVO(eventVoicelines[currentEventIdx]);
+                }
+                eventsScipt.InvokeEventByName(eventNames[currentEventIdx]);
+                eventTimes[currentEventIdx] += 10000;
+            }
+            currentEventIdx++;
+            currentEventIdx = currentEventIdx % eventNames.Count;
         }
     }
 

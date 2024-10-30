@@ -5,6 +5,9 @@ using ScriptableObjects;
 
 public class RadioCallouts : MonoBehaviour
 {
+    private static RadioCallouts instance;
+    public static RadioCallouts Instance => instance;
+
     [SerializeField]
     private AudioSource radioSource;
 
@@ -14,6 +17,15 @@ public class RadioCallouts : MonoBehaviour
     [SerializeField]
     private SoundScripObj sfxRadioStatic;
 
+    private void Awake()
+    {
+        if(instance!=null) {
+            GameObject.Destroy(this);
+            return;
+        }
+        instance = this;
+    }
+
     void Start()
     {
         PlayLine(voiceStart);
@@ -22,6 +34,11 @@ public class RadioCallouts : MonoBehaviour
     public void PlayLine(AudioClip clip) {
         StopAllCoroutines();
         StartCoroutine(PlayVoiceline(clip));
+    }
+
+    public static void PlayVO(AudioClip line)
+    {
+        instance.PlayLine(line);
     }
 
     private IEnumerator PlayVoiceline(AudioClip clip)

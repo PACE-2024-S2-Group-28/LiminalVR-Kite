@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strings:
   - wave1start
+  - musicStart
+  - wave1end
   - wave2start
+  - wave2end
   - wave3start
+  - wave3end

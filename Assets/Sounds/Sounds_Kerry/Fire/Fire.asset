@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c2dad7835d4e04d8a376b5de7d2b2a, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: 
-  mixGroup: {fileID: 0}
+  mixGroup: {fileID: 8781418876680147640, guid: 1040c02797a1975429124a69cb02059d,
+    type: 2}
   clips:
   - {fileID: 8300000, guid: 55ecabdf6c159474bbc814ac160f6d66, type: 3}
-  volumeSlider: {x: 0.5399684, y: 1}
+  volumeSlider: {x: 0.73092085, y: 1}
   playOrder: 2
-  useSemitones: 0
-  pitchSlider: {x: 0.5736842, y: 3}
-  semitoneMin: -10
-  semitoneMax: 19
+  useSemitones: 1
+  pitchSlider: {x: 0.89090383, y: 1.3348206}
+  semitoneMin: -2
+  semitoneMax: 5
   rolloffMode: 1
   rolloffDistance: {x: 1, y: 500}

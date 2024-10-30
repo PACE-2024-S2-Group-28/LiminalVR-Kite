@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c2dad7835d4e04d8a376b5de7d2b2a, type: 3}
   m_Name: Impact
   m_EditorClassIdentifier: 
-  mixGroup: {fileID: 0}
+  mixGroup: {fileID: -4108567216477369883, guid: 1040c02797a1975429124a69cb02059d,
+    type: 2}
   clips:
   - {fileID: 8300000, guid: 8375257c69990484fa3c48e966afe02e, type: 3}
   - {fileID: 8300000, guid: 2de528521b910e1478f8a3d59a1205e5, type: 3}

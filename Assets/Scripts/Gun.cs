@@ -6,6 +6,8 @@ using Liminal.SDK.VR.Input;
 using NaughtyAttributes;
 using UnityEngine.Events;
 using ScriptableObjects;
+using Liminal.SDK.VR.Utils;
+using Liminal.SDK.VR.Avatars;
 
 public class Gun : MonoBehaviour
 {
@@ -49,11 +51,17 @@ public class Gun : MonoBehaviour
 
     private Animator gunAnimator;
 
+    [SerializeField]
+    private ParticleSystem pSys_FireFlash;
+
 
     void Start()
     {
         //Get the primaryInput        
         inputDevice = (controllerHand == InputHand.Primary) ? VRDevice.Device?.PrimaryInputDevice : VRDevice.Device?.SecondaryInputDevice;
+        var hand = (controllerHand == InputHand.Primary) ? VRAvatar.Active.PrimaryHand : VRAvatar.Active.SecondaryHand;
+        hand.SetControllerVisibility(false);
+        inputDevice.Pointer?.Deactivate();
 
         totalBullets = Mathf.CeilToInt(bulletLife / shootCooldown) + 1;
         gunAnimator = GetComponent<Animator>();
@@ -112,6 +120,9 @@ public class Gun : MonoBehaviour
 
         gunAnimator.SetTrigger("Fire");
 
+        pSys_FireFlash.Play();
+        inputDevice.SendInputHaptics(frequency: .5f, amplitude: 1f, duration: 0.15f);
+
         Debug.Log(multiBulletUpgradeActive);
         if (multiBulletUpgradeActive)
         {
@@ -153,10 +164,13 @@ public class Gun : MonoBehaviour
         bulletSparks.Play();
     }
 
+    [SerializeField]
+    private float extraBulletRadius = .25f;
+
     private void FireMultipleBullets()
     {
         float angleStep = 360f / bulletCount; // Full circle divided by number of bullets
-        float radius = 1f; // Distance from the center of the circular pattern
+        //float extraBulletRadius = 1f; // Distance from the center of the circular pattern
 
         for (int i = 0; i < bulletCount; i++)
         {
@@ -168,8 +182,8 @@ public class Gun : MonoBehaviour
             float angleRad = Mathf.Deg2Rad * currentAngle;
 
             Vector3 offset = new Vector3(
-                Mathf.Cos(angleRad) * radius,  // x
-                Mathf.Sin(angleRad) * radius,  // y 
+                Mathf.Cos(angleRad) * extraBulletRadius,  // x
+                Mathf.Sin(angleRad) * extraBulletRadius,  // y 
                 0                             // z 
             );
 

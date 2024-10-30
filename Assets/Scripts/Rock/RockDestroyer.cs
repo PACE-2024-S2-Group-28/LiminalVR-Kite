@@ -99,11 +99,12 @@ public class RockDestroyer : MonoBehaviour
             rb.AddForce(finalForce, ForceMode.Impulse);
         }
 
-        if (rockBreakParticlesObj != null)
-        {
-            Transform particles = GameObject.Instantiate(rockBreakParticlesObj, transform).transform;
-            particles.position = rock.transform.position;
-        }
+        //if (rockBreakParticlesObj != null)
+        //{
+        //    Transform particles = GameObject.Instantiate(rockBreakParticlesObj, transform).transform;
+        //    particles.position = rock.transform.position;
+        //}
+        RockParticleManager.PlayRockParticlesAt(rock.transform.position);
 
         //fadeOut = true;
         Invoke(nameof(StartRockFade), rockLifetime);

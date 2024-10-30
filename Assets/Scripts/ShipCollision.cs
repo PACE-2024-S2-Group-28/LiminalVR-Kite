@@ -44,10 +44,13 @@ public class ShipCollision : MonoBehaviour
         }
         OnShipHitByAsteroid.Invoke();
         // Destroy(other.gameObject);
-        // Collision particlses
-        if (collisionParticles != null) {
-            ContactPoint contact = other.contacts[0];
-            Instantiate(collisionParticles, contact.point, Quaternion.identity);
-        }
+
+        //// Collision particlses
+        //if (collisionParticles != null) {
+        //    ContactPoint contact = other.contacts[0];
+        //    Instantiate(collisionParticles, contact.point, Quaternion.identity);
+        //}
+
+        RockParticleManager.PlayRockParticlesAt(other.contacts[0].point);
     }
 }

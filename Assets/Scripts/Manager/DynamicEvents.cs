@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+using System.Linq;
 using UnityEngine.Events;
 using NaughtyAttributes;
 
 public class DynamicEvents : MonoBehaviour
 {
-    private static DynamicEvents instance;
+    private static DynamicEvents instance = null;
     public static DynamicEvents Instance { get { return instance; } }
 
     [SerializeField]
@@ -20,20 +21,17 @@ public class DynamicEvents : MonoBehaviour
 
     private void Awake()
     {
+        if(instance!=null) {
+            Destroy(this);
+            return;
+        }
+        instance = this;
+
         eventDict = new Dictionary<string, Action<float>>();
 
         foreach(string eventName in EventNames) {
             eventDict.Add(eventName, (float value) => { });
         }
-    }
-
-    private void Start()
-    {
-        if (instance != null) {
-            GameObject.Destroy(gameObject);
-            return;
-        }
-        instance = this;
     }
 
     /// <summary>
@@ -47,6 +45,12 @@ public class DynamicEvents : MonoBehaviour
         eventDict[eventName]?.Invoke(volumeMult);
     }
 
+    public void SubToEventByName(string eventName, Action<float> action)
+    {
+        if (!eventDict.ContainsKey(eventName)) return;
+        eventDict[eventName] += action;
+    }
+
     [Button]
     public void InvokeEvents()
     {
@@ -58,6 +62,14 @@ public class DynamicEvents : MonoBehaviour
 
     public String[] GetEventNames(string[] currentNames = null)
     {
-        return null;
+        List<string> eventNames = EventNames.ToList();
+
+        if (currentNames != null && currentNames.Length > 0) {
+            foreach (var n in currentNames) {
+                eventNames.Remove(n);
+            }
+        }
+
+        return eventNames.ToArray();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [ExecuteInEditMode]
 public class UpgradeBarController : MonoBehaviour
@@ -13,16 +14,20 @@ public class UpgradeBarController : MonoBehaviour
     [SerializeField]
     private Transform barFillTransform;
 
+    [SerializeField]
+    private Slider upgradeSlider;
+
     void Start()
     {
-        AsteroidGameManager.Instance.Action_IncrementUpgradeProgress = UpdateBarFill;
-
+        AsteroidGameManager.Instance.Action_IncrementUpgradeProgress += UpdateBarFill;
         UpdateBarFill(0);
     }
     public void UpdateBarFill(float fill)
     {
         fillAmount = Mathf.Clamp01(fill);
-        fillV3 = new Vector3(fillAmount, 1, 1);
-        barFillTransform.localScale = fillV3;
+        upgradeSlider.value = fillAmount;
+
+        //fillV3 = new Vector3(fillAmount, 1, 1);
+        //barFillTransform.localScale = fillV3;
     }
 }

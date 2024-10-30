@@ -24,4 +24,4 @@ MonoBehaviour:
   semitoneMin: 1
   semitoneMax: 4
   rolloffMode: 0
-  rolloffDistance: {x: 1, y: 500}
+  rolloffDistance: {x: 1, y: 1000}
