@@ -44,6 +44,7 @@ public class TurretAim : MonoBehaviour
     private float timeStartedCharging;
     const float chargeTime = 1.2f;
     private float timeLastFired;
+    private float timeTargetAcquired;
 
     // Update is called once per frame
     void Update()
@@ -61,18 +62,22 @@ public class TurretAim : MonoBehaviour
                 }
                 break;
             case TurretState.cooldown:
+                //FaceTarget(Quaternion.LookRotation(Vector3.forward, Vector3.up));
                 if(Time.time >= timeLastFired + shootCooldown) {
                     state = TurretState.charging;
                     timeStartedCharging = Time.time;
                 }
                 break;
             case TurretState.charging:
-                if (target == null) GetTargets();
+                if (target == null) {
+                    GetTargets();
+                    timeTargetAcquired = Time.time;
+                }
                 if (target == null) return;
 
                 rotateTimer += Time.deltaTime;
                 FaceTarget();
-                if (Time.time >= timeStartedCharging + chargeTime) {
+                if (Time.time >= timeStartedCharging + chargeTime && Time.time > timeTargetAcquired + timeToRotate*1.5f) {
                     Fire();
                     timeLastFired = Time.time;
                     state = TurretState.cooldown;
@@ -168,8 +173,7 @@ public class TurretAim : MonoBehaviour
     {
         Debug.Log("trying to face target");
 
-        var targetRotQ = Quaternion.identity;
-        targetRotQ = overrideTargetQ.HasValue? overrideTargetQ.Value : Quaternion.LookRotation(target.position - gunPitchPivot.position);
+        Quaternion targetRotQ = overrideTargetQ.HasValue? overrideTargetQ.Value : Quaternion.LookRotation(target.position - gunPitchPivot.position);
         var slerpedRotEuler = Quaternion.Slerp(Quaternion.Euler(new Vector3(gunPitchPivot.eulerAngles.x, gunPitchPivot.eulerAngles.y, 0)), targetRotQ, rotateTimer / timeToRotate).eulerAngles;
 
         gunPitchPivot.eulerAngles = new Vector3(slerpedRotEuler.x, gunPitchPivot.eulerAngles.y, gunPitchPivot.eulerAngles.z); //pitch
