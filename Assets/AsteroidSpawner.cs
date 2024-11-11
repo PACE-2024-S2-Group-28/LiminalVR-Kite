@@ -23,9 +23,12 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField, MinMaxSlider(0f, 1f)]
     private Vector2 minMaxVelLerpToPlayer = new Vector2(.6f, .9f);
 
+    [Header("Overriden by Game Manager")]
+    [SerializeField, MinMaxSlider(0f, 5f)]
+    private Vector2 minMaxSpawnTime = new Vector2(.3f, 2f);
+
     [SerializeField, MinMaxSlider(0f, 5f)]
     private Vector2
-        minMaxSpawnTime = new Vector2(.3f, 2f),
         minMaxRotationSpeed = new Vector2(1.2f, 2f),
         minMaxAsteroidVelMult = new Vector2(.8f, 1.2f),
         minMaxAsteroidSizeMult = new Vector2(1f, 4f);
@@ -35,16 +38,19 @@ public class AsteroidSpawner : MonoBehaviour
         set { minMaxSpawnTime = value; }
     }
 
+
     private float timer;
     private int activeAsteroids = 0;
     private int goldenAsteroidsCount = 0;
     private float gameTimer = 0;
 
-    [SerializeField] public float maxSpeed = 10f;
-    [SerializeField] public float minSpeed = 1f;
-    [SerializeField] public float acceleration = 1f;
-    [SerializeField] public float slowAmount = 2f;
+    //[SerializeField] public float maxSpeed = 10f;
+    //[SerializeField] public float minSpeed = 1f;
+    //[SerializeField] public float acceleration = 1f;
+    //[SerializeField] public float slowAmount = 2f;
 
+    [Header("Difficulty Speed Multiplier")]
+    public float difficultySpeedMult = 1f;
 
     private void Start()
     {
@@ -156,7 +162,7 @@ public class AsteroidSpawner : MonoBehaviour
 
         //set starting velocity + random component based on speed range, lerped towards a direction to player
         float speedMult = getWithinMinMax(minMaxAsteroidVelMult);
-        Vector3 vel = startingDefaultVel * speedMult;
+        Vector3 vel = startingDefaultVel * speedMult * difficultySpeedMult;
         if (!isGold) {
             Vector3 velToPlayer = -asteroidT.position.normalized * vel.magnitude;
             Vector3 lerpedVel = Vector3.Lerp(vel, velToPlayer, getWithinMinMax(minMaxVelLerpToPlayer));

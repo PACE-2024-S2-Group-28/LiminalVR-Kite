@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b483cb62c9c6640b45361ff99e2674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fracturedRock: {fileID: 1582903381884534951}
-  rock: {fileID: 2781575381508465748}
+  rockPiecesParentGO: {fileID: 1582903381884534951}
+  wholeRockGO: {fileID: 2781575381508465748}
   fadeSpeed: 1
   rockLifetime: 3
   rockFadeTime: 1

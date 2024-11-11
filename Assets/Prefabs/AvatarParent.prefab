@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c40fd5885bbd804988fc753867c0540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   collisionTraumaAmount: 0.25
   traumaLayers:
     serializedVersion: 2
@@ -1121,11 +1122,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8137057982200539402}
     m_Modifications:
-    - target: {fileID: 9083063109698938334, guid: 7a9df6f0a58abb949bee6632e5009af7,
-        type: 3}
-      propertyPath: m_Name
-      value: UIPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 790810950067927340, guid: 7a9df6f0a58abb949bee6632e5009af7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1190,6 +1186,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1043026
+      objectReference: {fileID: 0}
+    - target: {fileID: 9083063109698938334, guid: 7a9df6f0a58abb949bee6632e5009af7,
+        type: 3}
+      propertyPath: m_Name
+      value: UIPanel
       objectReference: {fileID: 0}
     - target: {fileID: 8283308963045604183, guid: 7a9df6f0a58abb949bee6632e5009af7,
         type: 3}
@@ -1391,11 +1392,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 995429870759517987}
     m_Modifications:
-    - target: {fileID: 8929543085917095383, guid: 37ac9586599653441956a8a26bbeb7bb,
-        type: 3}
-      propertyPath: m_Name
-      value: BoosterParticles_R
-      objectReference: {fileID: 0}
     - target: {fileID: 6754408870054875021, guid: 37ac9586599653441956a8a26bbeb7bb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1451,6 +1447,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8929543085917095383, guid: 37ac9586599653441956a8a26bbeb7bb,
+        type: 3}
+      propertyPath: m_Name
+      value: BoosterParticles_R
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ac9586599653441956a8a26bbeb7bb, type: 3}
 --- !u!4 &4309941647118890561 stripped
@@ -1466,11 +1467,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 995429870759517987}
     m_Modifications:
-    - target: {fileID: 1413892163976906541, guid: 9df9af185da3f2649a1c4d5a31e65261,
-        type: 3}
-      propertyPath: m_Name
-      value: Turret
-      objectReference: {fileID: 0}
     - target: {fileID: 1413892163976906540, guid: 9df9af185da3f2649a1c4d5a31e65261,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1525,6 +1521,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413892163976906541, guid: 9df9af185da3f2649a1c4d5a31e65261,
+        type: 3}
+      propertyPath: m_Name
+      value: Turret
       objectReference: {fileID: 0}
     - target: {fileID: 2516759296291648508, guid: 9df9af185da3f2649a1c4d5a31e65261,
         type: 3}
@@ -1697,11 +1698,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 995429870759517987}
     m_Modifications:
-    - target: {fileID: 1413892163976906541, guid: 9df9af185da3f2649a1c4d5a31e65261,
-        type: 3}
-      propertyPath: m_Name
-      value: Turret (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 1413892163976906540, guid: 9df9af185da3f2649a1c4d5a31e65261,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1757,20 +1753,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3646088760275592337, guid: 9df9af185da3f2649a1c4d5a31e65261,
+    - target: {fileID: 1413892163976906541, guid: 9df9af185da3f2649a1c4d5a31e65261,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Name
+      value: Turret (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2516759296291648508, guid: 9df9af185da3f2649a1c4d5a31e65261,
         type: 3}
       propertyPath: upgradesRequired
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8508642104126364920, guid: 9df9af185da3f2649a1c4d5a31e65261,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1413892164871016696, guid: 9df9af185da3f2649a1c4d5a31e65261,
         type: 3}
@@ -1787,6 +1778,16 @@ PrefabInstance:
       propertyPath: shootCooldown
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3646088760275592337, guid: 9df9af185da3f2649a1c4d5a31e65261,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508642104126364920, guid: 9df9af185da3f2649a1c4d5a31e65261,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9df9af185da3f2649a1c4d5a31e65261, type: 3}
 --- !u!4 &7613721756014741787 stripped
@@ -1802,11 +1803,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 995429870759517987}
     m_Modifications:
-    - target: {fileID: 8929543085917095383, guid: 37ac9586599653441956a8a26bbeb7bb,
-        type: 3}
-      propertyPath: m_Name
-      value: BoosterParticles_L
-      objectReference: {fileID: 0}
     - target: {fileID: 6754408870054875021, guid: 37ac9586599653441956a8a26bbeb7bb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1857,6 +1853,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8929543085917095383, guid: 37ac9586599653441956a8a26bbeb7bb,
+        type: 3}
+      propertyPath: m_Name
+      value: BoosterParticles_L
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ac9586599653441956a8a26bbeb7bb, type: 3}
 --- !u!4 &2562799179105237855 stripped
@@ -1872,11 +1873,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6714742508352529092}
     m_Modifications:
-    - target: {fileID: 5258273703722274204, guid: 52ce0aabce70fbb4ab9d76f7c10d1282,
-        type: 3}
-      propertyPath: m_Name
-      value: LaserSparks Variant
-      objectReference: {fileID: 0}
     - target: {fileID: 4210766942633172389, guid: 52ce0aabce70fbb4ab9d76f7c10d1282,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1931,6 +1927,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5258273703722274204, guid: 52ce0aabce70fbb4ab9d76f7c10d1282,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserSparks Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52ce0aabce70fbb4ab9d76f7c10d1282, type: 3}

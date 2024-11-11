@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TurretAim : MonoBehaviour
 {
+    [SerializeField] private float timeToRise = 1.5f;
     [SerializeField] private float shootCooldown = 2; //how long between each shot. Keep this higher than time to rotate
     [SerializeField] private float beamTime = 2; //how many seconds it takes to destroy an asteroid
     [SerializeField] private float range;
@@ -28,16 +29,17 @@ public class TurretAim : MonoBehaviour
     enum TurretState { off, cooldown, charging, firing}
     TurretState state = TurretState.cooldown;
 
-    void Awake()
-    {
-        rechargeTimer = shootCooldown;
-    }
-
     private void Start()
     {
         beam = GetComponent<LineRenderer>();
         beam.enabled = false;
+
+        state = TurretState.off;
+        rechargeTimer = shootCooldown;
+        timeActivated = Time.time;
     }
+
+    private float timeActivated;
 
     private float timeStartedCharging;
     const float chargeTime = 1.2f;
@@ -48,7 +50,15 @@ public class TurretAim : MonoBehaviour
     {
         switch(state){
             case TurretState.off:
-
+                if(Time.time <= timeActivated + timeToRise) {
+                    float t = (Time.time - timeActivated) / timeToRise;
+                    float y = Mathf.Lerp(-7f, 0f, easeInOutQuad(t));
+                    transform.localPosition = Vector3.up * y;
+                } else {
+                    transform.localPosition = Vector3.zero;
+                    lastFiredTime = Time.time;
+                    state = TurretState.cooldown;
+                }
                 break;
             case TurretState.cooldown:
                 if(Time.time >= timeLastFired + shootCooldown) {
@@ -72,31 +82,6 @@ public class TurretAim : MonoBehaviour
             case TurretState.firing:
                 break;
         }
-
-        //rechargeTimer -= Time.deltaTime;
-
-        //if (rechargeTimer <= 0) {
-        //    if (target == null) {
-        //        FindFiringSolution(); //pick a target to lock onto
-        //    } else { //rotate to face asteroid, then fire a beam at it
-        //        if (rotateTimer < timeToRotate) {
-        //            Quaternion midRotation = Quaternion.Slerp(Quaternion.Euler(Vector3.forward), startRotation, rotateTimer / timeToRotate);
-        //            FaceTarget(midRotation);
-        //            rotateTimer += Time.deltaTime;
-        //            if (rotateTimer >= timeToRotate)
-        //            { //activate beam when facing asteroid
-        //                beamTimer = beamTime;
-        //                beam.enabled = true;
-        //            }
-        //        } else {
-        //            Fire();
-        //        }
-        //    }
-        //} else { //rotate back to face forward
-        //    Quaternion midRotation = Quaternion.Slerp(startRotation, Quaternion.Euler(Vector3.forward), rotateTimer / timeToRotate);
-        //    FaceTarget(midRotation); //resetting to face forward
-        //    rotateTimer += Time.deltaTime;
-        //}
     }
 
     [SerializeField]
@@ -227,4 +212,14 @@ public class TurretAim : MonoBehaviour
         beam.enabled = false;
     }
 
+
+    //attempted easing function
+    const float c4 = (2 * Mathf.PI) / 3;
+    private float easeOutElastic(float t){
+        return t == 0 ? 0 : t == 1 ? 1 : Mathf.Pow(2, -30 * t) * Mathf.Sin((t * 16f - 0.75f) * c4) + 1f;
+    }
+
+    private float easeInOutQuad(float x) {
+        return x < 0.5 ? 2 * x* x : 1 - Mathf.Pow(-2 * x + 2, 2) / 2;
+    }
 }

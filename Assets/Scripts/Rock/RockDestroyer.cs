@@ -1,4 +1,3 @@
-using DG.Tweening;
 using ScriptableObjects;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,15 +5,16 @@ using UnityEngine;
 using NaughtyAttributes;
 using UnityEngine.Events;
 
+/// <summary>
+/// script that handles the destruction of rock asteroids. Switching from whole to pieces and fading the pieces out.
+/// </summary>
 public class RockDestroyer : MonoBehaviour
 {
     [SerializeField]
-    private GameObject fracturedRock;
-
-    private GameObject fractRock;
+    private GameObject rockPiecesParentGO;
 
     [SerializeField]
-    private GameObject rock;
+    private GameObject wholeRockGO;
 
     public float fadeSpeed = 1.0f;
     private bool fadeOut = false;
@@ -41,22 +41,44 @@ public class RockDestroyer : MonoBehaviour
         if (rockRbs == null) {
             GetRigidBodies();
         }
+
+        StartCoroutine(FadeInScale());
+    }
+
+    float scaleInTime = 1f;
+
+    private float easeInOutQuad(float x) {
+        return x < 0.5 ? 2 * x * x : 1 - Mathf.Pow(-2 * x + 2, 2) / 2;
+    }
+
+    private IEnumerator FadeInScale()
+    {
+        Vector3 startScale = wholeRockGO.transform.localScale;
+
+        float timer = 0f;
+        while (timer <= scaleInTime) {
+            wholeRockGO.transform.localScale = Vector3.Lerp(Vector3.zero, startScale, easeInOutQuad(timer/scaleInTime));
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        wholeRockGO.transform.localScale = startScale;
     }
 
     [Button]
     private void GetRigidBodies()
     {
         //loop through rock pieces, build list of rigidbodies so i dont have to get them more than once
-        fracturedRock.SetActive(true);
+        rockPiecesParentGO.SetActive(true);
 
         var rockRBList = new List<Rigidbody>();
-        foreach (Transform t in fracturedRock.transform)
+        foreach (Transform t in rockPiecesParentGO.transform)
         {
             rockRBList.Add(t.GetComponent<Rigidbody>());
         }
         rockRbs = rockRBList.ToArray();
 
-        fracturedRock.SetActive(false);
+        rockPiecesParentGO.SetActive(false);
     }
 
     public void StartRockFade()
@@ -77,12 +99,12 @@ public class RockDestroyer : MonoBehaviour
 
         rockBreakSFX?.Play(wPos: transform.position);
 
-        var ogRB = rock.GetComponent<Rigidbody>();
+        var ogRB = wholeRockGO.GetComponent<Rigidbody>();
 
-        fracturedRock.transform.position = rock.transform.position;
-        fracturedRock.transform.rotation = Quaternion.Euler(rock.transform.rotation.eulerAngles + Vector3.right * 90f);
-        rock.SetActive(false);
-        fracturedRock.SetActive(true);
+        rockPiecesParentGO.transform.position = wholeRockGO.transform.position;
+        rockPiecesParentGO.transform.rotation = Quaternion.Euler(wholeRockGO.transform.rotation.eulerAngles + Vector3.right * 90f);
+        wholeRockGO.SetActive(false);
+        rockPiecesParentGO.SetActive(true);
 
         //force optional 
         if (!forceDir.HasValue) forceDir = Vector3.zero;
@@ -93,20 +115,12 @@ public class RockDestroyer : MonoBehaviour
         foreach (var rb in rockRbs)
         {
             Vector3 finalForce = ogRB.velocity;
-            //finalForce += forceDir.Value * forceMag * Vector3.Dot(forceDir.Value, rb.transform.position - hitPos.Value);
-            finalForce += (rb.transform.position - fracturedRock.transform.position).normalized * outwardBreakForce;
-            //finalForce += (rb.transform.position - hitPos.Value).normalized * outwardBreakForce;
+            finalForce += (rb.transform.position - rockPiecesParentGO.transform.position).normalized * outwardBreakForce;
             rb.AddForce(finalForce, ForceMode.Impulse);
         }
 
-        //if (rockBreakParticlesObj != null)
-        //{
-        //    Transform particles = GameObject.Instantiate(rockBreakParticlesObj, transform).transform;
-        //    particles.position = rock.transform.position;
-        //}
-        RockParticleManager.PlayRockParticlesAt(rock.transform.position);
+        RockParticleManager.PlayRockParticlesAt(wholeRockGO.transform.position);
 
-        //fadeOut = true;
         Invoke(nameof(StartRockFade), rockLifetime);
     }
 
@@ -134,7 +148,8 @@ public class RockDestroyer : MonoBehaviour
             if (activeRockRbs.Count == 0) break;
 
             if (t >= 1f) break;
-            yield return new WaitForSecondsRealtime(1f / (float)tickRate);
+            //yield return new WaitForSecondsRealtime(1f / (float)tickRate);
+            yield return null;
         }
 
         SEvent_RockDestroyed?.Invoke();

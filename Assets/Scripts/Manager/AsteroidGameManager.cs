@@ -44,6 +44,13 @@ public class AsteroidGameManager : MonoBehaviour
     [MinMaxSlider(0f, 50f)]
     private Vector2 minMaxSpawnRate;
 
+    [SerializeField, Range(0f, 1f)]
+    private float minDifficultySpeedMult = .5f;
+    [SerializeField]
+    private int numAsteroidsHitShipToMinDifficulty = 4; 
+    [SerializeField]
+    private float timeForDifficultyToReset = 5f;
+
     [SerializeField]
     private AnimationCurve spawnCurve;
     public AnimationCurve DifficultyCurve => spawnCurve;
@@ -130,12 +137,12 @@ public class AsteroidGameManager : MonoBehaviour
             float newSpawnRate = Mathf.Lerp(minMaxSpawnRate.x, minMaxSpawnRate.y, SampleDifficultyCurve());
             asteroidSpawner.AdjustSpawnRate(newSpawnRate);
 
-            if(currGoldIdx<goldenAsteroidData.Count && Time.time >= goldenAsteroidData[currGoldIdx].spawnTime) {
+            if(currGoldIdx<goldenAsteroidData.Count && gameProgress >= goldenAsteroidData[currGoldIdx].spawnTime) {
                 Debug.Log(String.Format("Spawning idx {0} gold asteroid", currGoldIdx));
                 asteroidSpawner.SpawnAsteroid(true, goldenAsteroidData[currGoldIdx++].position);
             }
 
-            if(Time.time >= eventTimes[currentEventIdx]) {
+            if(gameProgress >= eventTimes[currentEventIdx]) {
                 if(eventVoicelines[currentEventIdx]!=null) {
                     RadioCallouts.PlayVO(eventVoicelines[currentEventIdx]);
                 }
@@ -145,6 +152,14 @@ public class AsteroidGameManager : MonoBehaviour
             currentEventIdx++;
             currentEventIdx = currentEventIdx % eventNames.Count;
         }
+
+        //dynamic difficulty
+        asteroidSpawner.difficultySpeedMult = Mathf.Clamp01(asteroidSpawner.difficultySpeedMult + (1 - minDifficultySpeedMult) / timeForDifficultyToReset * Time.deltaTime);
+    }
+
+    public void AsteroidTriggerDyanmicDifficulty()
+    {
+        asteroidSpawner.difficultySpeedMult = Mathf.Max(minDifficultySpeedMult, asteroidSpawner.difficultySpeedMult - (1 - minDifficultySpeedMult) / numAsteroidsHitShipToMinDifficulty);
     }
 
     public float SampleDifficultyCurve(float? time01 = null)
@@ -168,8 +183,7 @@ public class AsteroidGameManager : MonoBehaviour
     {
         if (isGoldAsteroid) {
             UpdateScore(90);
-        }
-        else {
+        } else {
             UpdateScore(5);
         }
     }

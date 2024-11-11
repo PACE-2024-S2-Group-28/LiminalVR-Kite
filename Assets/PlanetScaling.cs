@@ -1,23 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class PlanetScaling : MonoBehaviour
 {
-    //[SerializeField]
-    private float totalGameTime = 300;
+    float totalGameTime => AsteroidGameManager.Instance.GameLength;
+    
     [SerializeField]
     private float 
         minScale = .2f,
         maxScale = 1.2f;
 
-
-    void Start()
+    private void Update()
     {
-        totalGameTime = AsteroidGameManager.Instance.GameLength;
-
-        transform.localScale = Vector3.one * minScale;
-        transform.DOScale(maxScale, totalGameTime);
+        float gameProgress = Mathf.Clamp01(Time.time / totalGameTime);
+        transform.localScale = Vector3.one * Mathf.Lerp(minScale, maxScale, gameProgress);
     }
 }

@@ -49,37 +49,41 @@ public class Editor_AsteroidGameManager : Editor
                 EditorGUILayout.HelpBox("List<float> `eventNames` and List<float> `eventTimes` must have the same length.", MessageType.Error);
             }
             else {
+                float currWidth = EditorGUIUtility.currentViewWidth - EditorGUIUtility.standardVerticalSpacing * 3f;
+                GUIContent timeLabel = new GUIContent("time");
+                GUIContent voiceLabel = new GUIContent("radio");
                 for (int i = 0; i < prop_eventNames.arraySize; i++) {
                     EditorGUILayout.BeginHorizontal();
 
                     // Display the string element as a label
                     string eventName = prop_eventNames.GetArrayElementAtIndex(i).stringValue;
-                    EditorGUILayout.LabelField(eventName, GUILayout.Width(100));
+                    EditorGUILayout.LabelField(eventName, GUILayout.Width(currWidth * .3f));
+
+                    //display real time in seconds as label, calculated from 01 time and gamelength
+                    timeLabel = new GUIContent("" + (float)((int)(prop_eventTimes.GetArrayElementAtIndex(i).floatValue * targetManager.GameLength*10f))/10f);
+                    EditorGUIUtility.labelWidth = currWidth * .1f;
+                    EditorGUILayout.PropertyField(prop_eventTimes.GetArrayElementAtIndex(i), timeLabel, GUILayout.Width(currWidth * .25f));
                     //voiceline audio clip
-                    EditorGUILayout.PropertyField(prop_eventVO.GetArrayElementAtIndex(i), GUIContent.none);
+                    EditorGUILayout.PropertyField(prop_eventVO.GetArrayElementAtIndex(i), voiceLabel, GUILayout.Width(currWidth * .35f));
 
-                    EditorGUILayout.EndHorizontal();
-
-                    // Display the float element as an editable field
-                    EditorGUILayout.BeginHorizontal();
-                    //EditorGUILayout.PropertyField(prop_eventTimes.GetArrayElementAtIndex(i), GUIContent.none);
-                    //Rect floatRect = GUILayoutUtility.GetRect(30, EditorGUIUtility.singleLineHeight);
-                    //EditorGUI.DelayedFloatField(floatRect, prop_eventTimes.GetArrayElementAtIndex(i).floatValue);
-                    prop_eventTimes.GetArrayElementAtIndex(i).floatValue = EditorGUILayout.FloatField(eventName + " time", prop_eventTimes.GetArrayElementAtIndex(i).floatValue);
                     EditorGUILayout.EndHorizontal();
                 }
             }
-            
+            EditorGUIUtility.labelWidth = 0f;
+
+
             serializedObject.ApplyModifiedProperties();
 
             if (GUILayout.Button("Clear Events")) {
                 targetManager.ClearEvents();
             }
-
-            // Add button for GetEvents
             if (GUILayout.Button("Get Events")) {
                 targetManager.GetEvents();
             }
+            //if (GUILayout.Button("ConvertEventTimeTo01")) {
+            //    targetManager.ConvertEventTimeTo01();
+            //}
+            
 
         }
 
@@ -107,14 +111,14 @@ public class Editor_AsteroidGameManager : Editor
             //yellow for gold asteroid spawns
             Handles.color = Color.yellow;
             foreach (var spawn in targetManager.GoldSpawns) {
-                DrawSpike(curveRect, spawn.spawnTime, targetManager.GameLength, Color.yellow);
+                DrawSpike(curveRect, spawn.spawnTime, 1f, Color.yellow);
             }
 
             //blue for custom events with voicelines
             Handles.color = Color.blue;
             for (int i = 0; i < prop_eventTimes.arraySize; i++) {
                 SerializedProperty element = prop_eventTimes.GetArrayElementAtIndex(i);
-                DrawSpike(curveRect, element.floatValue, targetManager.GameLength, Color.blue);
+                DrawSpike(curveRect, element.floatValue, 1f, Color.blue);
             }
 
             // red to Draw the current time spike

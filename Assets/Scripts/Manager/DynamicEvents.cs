@@ -60,6 +60,11 @@ public class DynamicEvents : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Get a string array of all event names
+    /// </summary>
+    /// <param name="currentNames">pass an array of current event names to only get new ones</param>
+    /// <returns></returns>
     public String[] GetEventNames(string[] currentNames = null)
     {
         List<string> eventNames = EventNames.ToList();

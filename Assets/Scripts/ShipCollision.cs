@@ -7,6 +7,9 @@ using UnityEngine.Events;
 public class ShipCollision : MonoBehaviour
 {
     [SerializeField]
+    AsteroidGameManager gameManager;
+
+    [SerializeField]
     private float collisionTraumaAmount;
 
     [SerializeField]
@@ -41,15 +44,11 @@ public class ShipCollision : MonoBehaviour
             if (rockDestroyer != null) {
                 rockDestroyer.ChangeRock();
             }
+
+            //trigger difficulty
+            gameManager.AsteroidTriggerDyanmicDifficulty();
         }
         OnShipHitByAsteroid.Invoke();
-        // Destroy(other.gameObject);
-
-        //// Collision particlses
-        //if (collisionParticles != null) {
-        //    ContactPoint contact = other.contacts[0];
-        //    Instantiate(collisionParticles, contact.point, Quaternion.identity);
-        //}
 
         RockParticleManager.PlayRockParticlesAt(other.contacts[0].point);
     }
