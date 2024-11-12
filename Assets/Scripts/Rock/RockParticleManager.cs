@@ -30,7 +30,6 @@ public class RockParticleManager : MonoBehaviour, GenericObjPoolUserI
 
     public static void PlayRockParticlesAt(Vector3 worldPos)
     {
-        Debug.Log("breakj");
         var pSys = instance.GetRockBreakParticleFromPool();
         pSys.transform.parent.position = worldPos;
         pSys.Play();

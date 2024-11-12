@@ -125,14 +125,12 @@ public class Gun : MonoBehaviour
         pSys_FireFlash.Play();
         inputDevice.SendInputHaptics(frequency: .5f, amplitude: 1f, duration: 0.15f);
 
-        Debug.Log(multiBulletUpgradeActive);
         if (multiBulletUpgradeActive)
         {
             FireMultipleBullets();
         }
         else
         {
-            Debug.Log("FireSingleBullet");
 
             fireSFX?.Play(audioSourceParam: sfxSource);
             FireSingleBullet();

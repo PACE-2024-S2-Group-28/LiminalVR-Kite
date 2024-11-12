@@ -18,7 +18,6 @@ public class TriggerDestroy : MonoBehaviour
         //}
 
         if(FakeTag.CheckTags(other.gameObject, FakeTag.AllAsteroidTags)){
-            Debug.Log("destroying a stroid");
             RockDestroyer.SEvent_RockDestroyed?.Invoke();
         }
         
