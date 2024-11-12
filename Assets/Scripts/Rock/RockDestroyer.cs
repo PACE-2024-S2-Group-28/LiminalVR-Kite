@@ -41,7 +41,7 @@ public class RockDestroyer : MonoBehaviour
         if (rockRbs == null) {
             GetRigidBodies();
         }
-
+        
         StartCoroutine(FadeInScale());
     }
 
@@ -151,8 +151,9 @@ public class RockDestroyer : MonoBehaviour
             //yield return new WaitForSecondsRealtime(1f / (float)tickRate);
             yield return null;
         }
-
+    
         SEvent_RockDestroyed?.Invoke();
+
         GameObject.Destroy(this.gameObject);
     }
 

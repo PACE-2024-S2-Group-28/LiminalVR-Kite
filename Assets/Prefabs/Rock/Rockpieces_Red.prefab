@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 1657010043432173645}
   - component: {fileID: 1657010043432173682}
   - component: {fileID: 8259105543778441267}
-  m_Layer: 11
+  - component: {fileID: 7792315295787319493}
+  m_Layer: 0
   m_Name: Icosphere_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,6 +124,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.005
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7792315295787319493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412131869308896648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &796869857527615547
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +151,8 @@ GameObject:
   - component: {fileID: 1657010042638081673}
   - component: {fileID: 1657010042638081678}
   - component: {fileID: 5303532033521091574}
-  m_Layer: 11
+  - component: {fileID: 8776549283084153373}
+  m_Layer: 0
   m_Name: Icosphere_cell.043
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,6 +261,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.011330163
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8776549283084153373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796869857527615547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &1372649300214220189
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +288,8 @@ GameObject:
   - component: {fileID: 1657010042162818648}
   - component: {fileID: 1657010042162818649}
   - component: {fileID: 8543350815400438937}
-  m_Layer: 11
+  - component: {fileID: 1865910071518902892}
+  m_Layer: 0
   m_Name: Icosphere_cell.031
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,6 +398,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.008
   m_Center: {x: 0.002, y: 0.0035, z: 0}
+--- !u!114 &1865910071518902892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372649300214220189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &1891379949519674387
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1257727672656250537}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Rockpieces_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +479,8 @@ GameObject:
   - component: {fileID: 1657010042306069414}
   - component: {fileID: 1657010042306069415}
   - component: {fileID: 3455786123375986928}
-  m_Layer: 11
+  - component: {fileID: 4117928895805618197}
+  m_Layer: 0
   m_Name: Icosphere_cell.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,6 +589,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.004
   m_Center: {x: 0.0005, y: 0.001, z: 0}
+--- !u!114 &4117928895805618197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036411864274279551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &2613706800792602935
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +616,8 @@ GameObject:
   - component: {fileID: 1657010043353478826}
   - component: {fileID: 1657010043353478827}
   - component: {fileID: 3977606321730815456}
-  m_Layer: 11
+  - component: {fileID: 5534395154333971642}
+  m_Layer: 0
   m_Name: Icosphere_cell.057
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,6 +726,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.008
   m_Center: {x: -0.003, y: 0.001, z: 0}
+--- !u!114 &5534395154333971642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613706800792602935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &3263806614573866407
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +753,8 @@ GameObject:
   - component: {fileID: 1657010041871176985}
   - component: {fileID: 1657010041871176990}
   - component: {fileID: 722072214920174963}
-  m_Layer: 11
+  - component: {fileID: 5147490778399349754}
+  m_Layer: 0
   m_Name: Icosphere_cell.067
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,6 +863,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.00983118
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5147490778399349754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263806614573866407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &3471867863105771995
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +890,8 @@ GameObject:
   - component: {fileID: 1657010042366516821}
   - component: {fileID: 1657010042366516826}
   - component: {fileID: 1100577118625545364}
-  m_Layer: 11
+  - component: {fileID: 5837957075923780437}
+  m_Layer: 0
   m_Name: Icosphere_cell.029
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,6 +1000,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.01105817
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5837957075923780437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471867863105771995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &3702694010807572198
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,7 +1027,8 @@ GameObject:
   - component: {fileID: 1657010042983265015}
   - component: {fileID: 1657010042983265012}
   - component: {fileID: 970401268500697725}
-  m_Layer: 11
+  - component: {fileID: 5807133491894121517}
+  m_Layer: 0
   m_Name: Icosphere_cell.053
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1038,6 +1137,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.007
   m_Center: {x: 0.003, y: 0, z: 0}
+--- !u!114 &5807133491894121517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3702694010807572198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &3757880155093727661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1164,8 @@ GameObject:
   - component: {fileID: 1657010043116662297}
   - component: {fileID: 1657010043116662302}
   - component: {fileID: 17344428022889306}
-  m_Layer: 11
+  - component: {fileID: 2241989996087467192}
+  m_Layer: 0
   m_Name: Icosphere_cell.068
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,6 +1274,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0063488553
   m_Center: {x: -0.0008488524, y: 0.0035, z: 3.330666e-18}
+--- !u!114 &2241989996087467192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3757880155093727661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &3812300059472507779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,7 +1301,8 @@ GameObject:
   - component: {fileID: 1657010042561538576}
   - component: {fileID: 1657010042561538577}
   - component: {fileID: 1792586559975971206}
-  m_Layer: 11
+  - component: {fileID: 2380595822292829455}
+  m_Layer: 0
   m_Name: Icosphere_cell.021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1284,6 +1411,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.005
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2380595822292829455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812300059472507779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &3833818125775600122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1438,8 @@ GameObject:
   - component: {fileID: 1657010042712083031}
   - component: {fileID: 1657010042712083028}
   - component: {fileID: 5482797697582188741}
-  m_Layer: 11
+  - component: {fileID: 6909108684252723422}
+  m_Layer: 0
   m_Name: Icosphere_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1407,6 +1548,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.007865497
   m_Center: {x: 0, y: -0.0011345005, z: -3.7137e-18}
+--- !u!114 &6909108684252723422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3833818125775600122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &3950338610831209308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,7 +1575,8 @@ GameObject:
   - component: {fileID: 1657010042063372503}
   - component: {fileID: 1657010042063372500}
   - component: {fileID: 8552960842150409217}
-  m_Layer: 11
+  - component: {fileID: 357489357196637300}
+  m_Layer: 0
   m_Name: Icosphere_cell.046
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1530,6 +1685,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.008344071
   m_Center: {x: -0.0039999997, y: 0.0010000003, z: -0.0026559352}
+--- !u!114 &357489357196637300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3950338610831209308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &4505842953867955839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,7 +1712,8 @@ GameObject:
   - component: {fileID: 1657010043578227565}
   - component: {fileID: 1657010043578227858}
   - component: {fileID: 1655704599998288385}
-  m_Layer: 11
+  - component: {fileID: 6746195571382765383}
+  m_Layer: 0
   m_Name: Icosphere_cell.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1653,6 +1822,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.005681155
   m_Center: {x: 0, y: 0.002, z: 0}
+--- !u!114 &6746195571382765383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4505842953867955839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &4560947021708864615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,7 +1849,8 @@ GameObject:
   - component: {fileID: 1657010041775760342}
   - component: {fileID: 1657010041775760343}
   - component: {fileID: 9133480592618085544}
-  m_Layer: 11
+  - component: {fileID: 551840031125799040}
+  m_Layer: 0
   m_Name: Icosphere_cell.054
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1776,6 +1959,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.009
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &551840031125799040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560947021708864615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &4640257470350579949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,7 +1986,8 @@ GameObject:
   - component: {fileID: 1657010042285108347}
   - component: {fileID: 1657010042285108344}
   - component: {fileID: 2106384908728001013}
-  m_Layer: 11
+  - component: {fileID: 500679250522806843}
+  m_Layer: 0
   m_Name: Icosphere_cell.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1899,6 +2096,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.007
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &500679250522806843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4640257470350579949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &4661108880762650185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1913,7 +2123,8 @@ GameObject:
   - component: {fileID: 1657010043119191211}
   - component: {fileID: 1657010043119191208}
   - component: {fileID: 4597631345736535967}
-  m_Layer: 11
+  - component: {fileID: 8487567157446048264}
+  m_Layer: 0
   m_Name: Icosphere_cell.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2022,6 +2233,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.005
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8487567157446048264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4661108880762650185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &4699183121838343384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2036,7 +2260,8 @@ GameObject:
   - component: {fileID: 1657010042418381128}
   - component: {fileID: 1657010042418381129}
   - component: {fileID: 5444701562216448471}
-  m_Layer: 11
+  - component: {fileID: 603851856786324920}
+  m_Layer: 0
   m_Name: Icosphere_cell.072
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2145,6 +2370,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.007
   m_Center: {x: -0.0005, y: 0.004, z: 0}
+--- !u!114 &603851856786324920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4699183121838343384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &4892329137754796155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,7 +2397,8 @@ GameObject:
   - component: {fileID: 1657010043234535384}
   - component: {fileID: 1657010043234535385}
   - component: {fileID: 5846263083056754128}
-  m_Layer: 11
+  - component: {fileID: 8317980937460952147}
+  m_Layer: 0
   m_Name: Icosphere_cell.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2268,6 +2507,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.006
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8317980937460952147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892329137754796155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &5071559567914661541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,7 +2534,8 @@ GameObject:
   - component: {fileID: 1657010042251691351}
   - component: {fileID: 1657010042251691348}
   - component: {fileID: 7875533647803222836}
-  m_Layer: 11
+  - component: {fileID: 467309700204117187}
+  m_Layer: 0
   m_Name: Icosphere_cell.040
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2391,6 +2644,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.014704264
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &467309700204117187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5071559567914661541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &5336854324476892529
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,7 +2671,8 @@ GameObject:
   - component: {fileID: 1657010042938707176}
   - component: {fileID: 1657010042938707177}
   - component: {fileID: 8311930127976047987}
-  m_Layer: 11
+  - component: {fileID: 7056546057302998220}
+  m_Layer: 0
   m_Name: Icosphere_cell.071
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2514,6 +2781,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.007
   m_Center: {x: 0.002, y: 0, z: 0}
+--- !u!114 &7056546057302998220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5336854324476892529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &5649610200662845808
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,7 +2808,8 @@ GameObject:
   - component: {fileID: 1657010042753432159}
   - component: {fileID: 1657010042753432156}
   - component: {fileID: 5340829223316653691}
-  m_Layer: 11
+  - component: {fileID: 414341455326922778}
+  m_Layer: 0
   m_Name: Icosphere_cell.024
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2637,6 +2918,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.005
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &414341455326922778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5649610200662845808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &6934622022704458083
 GameObject:
   m_ObjectHideFlags: 0
@@ -2651,7 +2945,8 @@ GameObject:
   - component: {fileID: 1657010043554898633}
   - component: {fileID: 1657010043554898638}
   - component: {fileID: 4373070013272489919}
-  m_Layer: 11
+  - component: {fileID: 2150286344008246437}
+  m_Layer: 0
   m_Name: Icosphere_cell.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2760,6 +3055,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.005149096
   m_Center: {x: 0, y: 5.6515296e-19, z: -0.00085090456}
+--- !u!114 &2150286344008246437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934622022704458083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &7581232845812660475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2774,7 +3082,8 @@ GameObject:
   - component: {fileID: 1657010043523338725}
   - component: {fileID: 1657010043523338730}
   - component: {fileID: 3546001207067638646}
-  m_Layer: 11
+  - component: {fileID: 4924334858184906907}
+  m_Layer: 0
   m_Name: Icosphere_cell.044
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2883,6 +3192,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4924334858184906907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581232845812660475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4
 --- !u!1 &8587687211628808576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2897,7 +3219,8 @@ GameObject:
   - component: {fileID: 1657010043529354932}
   - component: {fileID: 1657010043529354933}
   - component: {fileID: 4866208180022502104}
-  m_Layer: 11
+  - component: {fileID: 1802332447349831539}
+  m_Layer: 0
   m_Name: Icosphere_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3006,3 +3329,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.006759144
   m_Center: {x: -0.0012108898, y: -0.000029965639, z: -5.5129623e-20}
+--- !u!114 &1802332447349831539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8587687211628808576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967538ced56e7734e9244754a536750d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 4

@@ -11,7 +11,7 @@ using Liminal.SDK.VR.Avatars;
 
 public class Gun : MonoBehaviour
 {
-    static private GameObject bulletParent = null;
+    private GameObject bulletParent = null;
 
     [SerializeField] private Bullet bullet;
     [SerializeField] private float shootCooldown = 2; //how long between each shot

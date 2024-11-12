@@ -18,15 +18,21 @@ public class Forcefield : MonoBehaviour
         rend = GetComponent<Renderer>();
     }
 
+    private Tag[] collisionTags = {Tag.Asteroid, Tag.AsteroidPieces};
+
     private void OnCollisionEnter(Collision collision)
     {
-        Vector3 hitPos = collision.GetContact(0).point;
+        if(FakeTag.CheckTags(collision.collider.gameObject, collisionTags))
+        {
+            Vector3 hitPos = collision.GetContact(0).point;
 
-        rend.material.SetFloat("_HitTime", Time.time);
-        rend.material.SetVector("_HitPos", hitPos);
+            rend.material.SetFloat("_HitTime", Time.time);
+            rend.material.SetVector("_HitPos", hitPos);
 
-        hitSFX?.Play(wPos: collision.transform.position);
-        hitPSys.transform.position = hitPos;
-        hitPSys.Play();
+            hitSFX?.Play(wPos: collision.transform.position);
+            hitPSys.transform.position = hitPos;
+            hitPSys.Play();
+        }
+        
     }
 }

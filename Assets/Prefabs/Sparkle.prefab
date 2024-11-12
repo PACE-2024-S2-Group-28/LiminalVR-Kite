@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6029738691253726776}
   - component: {fileID: 6029738691253726782}
   - component: {fileID: 6029738691253726783}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Sparkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

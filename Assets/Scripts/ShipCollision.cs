@@ -13,9 +13,6 @@ public class ShipCollision : MonoBehaviour
     private float collisionTraumaAmount;
 
     [SerializeField]
-    private LayerMask traumaLayers;
-
-    [SerializeField]
     private SpaceshipNoiseMovement spaceshipNoise;
     [SerializeField] private GameObject collisionParticles;
 
@@ -23,6 +20,7 @@ public class ShipCollision : MonoBehaviour
     private SoundScripObj sfxShipHit;
 
     public UnityEvent OnShipHitByAsteroid;
+    
 
     void Start()
     {
@@ -32,14 +30,12 @@ public class ShipCollision : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject != null && traumaLayers == (traumaLayers | (1 << other.gameObject.layer))) {
+        if (other.gameObject != null && FakeTag.CheckTags(other.collider.gameObject, FakeTag.AllAsteroidTags)) {
             spaceshipNoise.AddTrauma(collisionTraumaAmount);
 
             //sfx
             sfxShipHit?.Play(wPos: other.transform.position);
-        }
 
-        if (other.gameObject.tag == "GoldAsteroid" || other.gameObject.tag == "Rock") {
             RockDestroyer rockDestroyer = other.transform.parent.GetComponent<RockDestroyer>();
             if (rockDestroyer != null) {
                 rockDestroyer.ChangeRock();
@@ -47,9 +43,11 @@ public class ShipCollision : MonoBehaviour
 
             //trigger difficulty
             gameManager.AsteroidTriggerDyanmicDifficulty();
-        }
-        OnShipHitByAsteroid.Invoke();
+            OnShipHitByAsteroid.Invoke();
 
-        RockParticleManager.PlayRockParticlesAt(other.contacts[0].point);
+            RockParticleManager.PlayRockParticlesAt(other.contacts[0].point);
+            
+        }
+        
     }
 }

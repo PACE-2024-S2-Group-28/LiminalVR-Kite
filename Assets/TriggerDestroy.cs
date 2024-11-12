@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TriggerDestroy : MonoBehaviour
 {
+
+    public void Start()
+    {
+        Debug.Log("TRIGGER DESTROY IS ON " + gameObject.name);
+    }
     private void OnTriggerEnter(Collider other)
     {
         //var otherT = other.transform;
@@ -12,7 +17,11 @@ public class TriggerDestroy : MonoBehaviour
         //    parentRockDestroyerS.event
         //}
 
-        if (other.CompareTag("Rock")) RockDestroyer.SEvent_RockDestroyed?.Invoke();
+        if(FakeTag.CheckTags(other.gameObject, FakeTag.AllAsteroidTags)){
+            Debug.Log("destroying a stroid");
+            RockDestroyer.SEvent_RockDestroyed?.Invoke();
+        }
+        
         GameObject.Destroy(other.gameObject);
     }
 }

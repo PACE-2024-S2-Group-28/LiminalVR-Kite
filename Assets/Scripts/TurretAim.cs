@@ -141,7 +141,7 @@ public class TurretAim : MonoBehaviour
         //want to work out the future closest asteroid. The time in the future we're looking at is the time when an asteroid would be getting destroyed by the beam. This makes them seem like they're looking ahead
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.gameObject.CompareTag("Rock"))
+            if (FakeTag.CheckTag(hitCollider.gameObject, Tag.Asteroid))
             { //only target rocks
                 Vector3 targetSpeed = hitCollider.attachedRigidbody.velocity; //speed of asteroid
                 Vector3 rotateTargetPoint = hitCollider.transform.position + (targetSpeed * (timeToRotate + beamTime)); //position asteroid moves to during that time

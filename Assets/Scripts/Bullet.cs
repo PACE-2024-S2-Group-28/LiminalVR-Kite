@@ -58,17 +58,18 @@ public class Bullet : MonoBehaviour
         timer = timeAlive;
     }
 
+    private Tag[] collisionTags = new Tag[]{Tag.Bullet, Tag.Forcefield};
     private void OnTriggerEnter(Collider other)
     {
-        if (!firedBy.IsChildOf(other.transform)) { //don't collide with what fired you
+
+        if (!firedBy.IsChildOf(other.transform) && !FakeTag.CheckTags(other.gameObject, collisionTags)) { //don't collide with what fired you
             //play some particle effect, and destroy meteors
             gun.TriggerSparks(transform.position);
-
             var rockScript = other.transform.parent.GetComponent<RockDestroyer>();
             if (rockScript != null) {
                 //is asteroid
                 rockScript.ChangeRock(forceDir: transform.forward, hitPos: transform.position);
-                AsteroidGameManager.Instance.HandleAsteroidDestruction(other.gameObject.CompareTag("GoldAsteroid"));
+                AsteroidGameManager.Instance.HandleAsteroidDestruction(FakeTag.CheckTag(other.gameObject, Tag.GoldAsteroid));
                 //only collide with rocks. Pass through ship (otherwise turret bullets collide with the turret)
 
             } else {
