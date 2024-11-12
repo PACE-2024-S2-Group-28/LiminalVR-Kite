@@ -28,7 +28,10 @@ public class GenericObjPool : MonoBehaviour
     private void Start()
     {
         if(FreeParent == null)
+        {
             FreeParent = new GameObject("Anti-clutter ObjectPool Parent").transform;
+            FreeParent.transform.parent = SceneRootGetter.GetRoot().transform;
+        }
     }
 
     private void InitialisePool()

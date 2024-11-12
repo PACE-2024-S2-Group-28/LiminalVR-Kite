@@ -17,7 +17,7 @@ public class AudioEventsGlobal : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
         }
         else GameObject.Destroy(this);
     }

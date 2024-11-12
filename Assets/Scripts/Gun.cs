@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Liminal.SDK.VR;
@@ -72,8 +72,10 @@ public class Gun : MonoBehaviour
 
     private void InitializeBullets(int bulletAmount)
     {
-        if (bulletParent == null)
+        if (bulletParent == null){
             bulletParent = new GameObject("Bullet_Parent"); // So the bullets don't flood the hierarchy
+            bulletParent.transform.parent = SceneRootGetter.GetRoot().transform;
+        }
 
         for (int i = 0; i < bulletAmount; i++)
         {

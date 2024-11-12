@@ -24,7 +24,7 @@ public class AudioManagerScript: MonoBehaviour, GenericObjPoolUserI
         //persist across scene loads
         if(instance==null) instance = this;
         else Destroy(this.gameObject);
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
 
         //GENERATE AUDIO SOURCES As CHILDREN
         foreach(Sound s in sounds)
