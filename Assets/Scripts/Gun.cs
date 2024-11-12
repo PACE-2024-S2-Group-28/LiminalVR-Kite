@@ -11,7 +11,6 @@ using Liminal.SDK.VR.Avatars;
 
 public class Gun : MonoBehaviour
 {
-    private GameObject bulletRoot;
     static private GameObject bulletParent = null;
 
     [SerializeField] private Bullet bullet;
@@ -67,10 +66,6 @@ public class Gun : MonoBehaviour
         totalBullets = Mathf.CeilToInt(bulletLife / shootCooldown) + 1;
         gunAnimator = GetComponent<Animator>();
         meter = GetComponent<MeterController>();
-
-        bulletRoot = SceneRootGetter.GetRoot();
-        Debug.Log("root is " + bulletRoot.name);
-
         InitializeBullets(totalBullets);
     }
 
@@ -78,7 +73,7 @@ public class Gun : MonoBehaviour
     {
         if (bulletParent == null){
             bulletParent = new GameObject("Bullet_Parent"); // So the bullets don't flood the hierarchy
-            bulletParent.transform.parent = bulletRoot.transform;
+            //bulletParent.transform.parent = bulletRoot.transform;
         }
 
         for (int i = 0; i < bulletAmount; i++)
