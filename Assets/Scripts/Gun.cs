@@ -14,22 +14,26 @@ public class Gun : MonoBehaviour
     static private GameObject bulletParent = null;
 
     [SerializeField] private Bullet bullet;
+    [SerializeField] private Transform bulletObjPoolParentT;
+
+    [Header("Gun Settings")]
     [SerializeField] private float shootCooldown = 2; //how long between each shot
     [SerializeField] private float bulletLife = 3; //how many seconds a bullet exists before it returns to the gun
+    [SerializeField] private float rechargeTimer;
+    [SerializeField]
+    private Vector3 localFirePos = Vector3.zero;
 
     private int totalBullets; //how many bullets to put into the stack of available bullets
     private Stack<Bullet> bulletsShot = new Stack<Bullet>();
     private Stack<Bullet> bulletsAvailable = new Stack<Bullet>();
 
-    [SerializeField] private float rechargeTimer;
 
     private enum InputHand { Primary, Secondary }
+    [Header("Hand")]
     [SerializeField]
     private InputHand controllerHand = InputHand.Primary;
     private IVRInputDevice inputDevice;
 
-    [SerializeField]
-    private Vector3 localFirePos = Vector3.zero;
 
     private MeterController meter;
 
@@ -38,6 +42,7 @@ public class Gun : MonoBehaviour
     private bool multiBulletUpgradeActive = false;
     [SerializeField] private int bulletCount = 1;
 
+    [Header("Effect Settings")]
     [SerializeField]
     private AudioSource sfxSource;
     [SerializeField]

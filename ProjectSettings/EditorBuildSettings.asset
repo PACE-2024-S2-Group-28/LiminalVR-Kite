@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Asteroid.unity
     guid: 410d999e8ce125645bd38d8087c90a34
   - enabled: 0
-    path: Assets/Scenes/Ryan_AsteroidTemp.unity
+    path: Assets/Scenes/TestScenes/Ryan_AsteroidTemp.unity
     guid: f025dce4af56a8f42baa169d3768a3d1
   - enabled: 0
-    path: Assets/Scenes/Asteroid_DifficultyCurveTesting.unity
+    path: Assets/Scenes/TestScenes/Asteroid_DifficultyCurveTesting.unity
     guid: e407ec7dc8c663c46ab1c5cb265c5ea1
   - enabled: 1
-    path: Assets/Scenes/Week13.unity
+    path: Assets/Scenes/TestScenes/Week13.unity
     guid: c77ba5381f702044094a89dc800637d6
   m_configObjects: {}
